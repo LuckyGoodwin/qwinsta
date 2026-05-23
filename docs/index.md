@@ -6,10 +6,10 @@ windows / network / vpn / terminal services / real ops
 
 ## разделы
 
-- [Windows](windows/index.md)
-- [MikroTik](mikrotik/index.md)
-- [VPN](vpn/index.md)
-- [Toolkit](toolkit/index.md)
+- [Windows]
+- [MikroTik]
+- [VPN](vpn/mtproxy-fake-tls.md)
+- [Toolkit]
 
 ---
 

@@ -1,0 +1,55 @@
+/* убрать содержание справа */
+.md-sidebar--secondary {
+  display: none !important;
+}
+
+/* расширить контент */
+.md-content {
+  max-width: none;
+}
+
+/* списки через дефис */
+.md-typeset ul {
+  list-style: none;
+  padding-left: 1.2em;
+}
+
+.md-typeset ul li {
+  margin: 0.08em 0;
+  line-height: 1.25;
+}
+
+.md-typeset ul li::marker {
+  content: "";
+}
+
+.md-typeset ul li::before {
+  content: "- ";
+  color: var(--md-default-fg-color--light);
+  margin-left: -1.2em;
+  position: absolute;
+}
+
+/* отступы между верхними разделами меню */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item {
+  margin-top: 0.7rem;
+}
+
+/* подпункты меню */
+.md-sidebar--primary .md-nav__item .md-nav__item {
+  margin-top: 0.15rem;
+  padding-left: 0.4rem;
+}
+
+/* активный пункт меню */
+.md-sidebar--primary .md-nav__link--active {
+  border-left: 2px solid var(--md-accent-fg-color);
+  padding-left: 0.5rem;
+}
+
+/* заголовки разделов меню */
+.md-sidebar--primary .md-nav__title {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}

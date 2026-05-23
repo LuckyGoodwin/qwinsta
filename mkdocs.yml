@@ -4,7 +4,6 @@ site_url: https://qwinsta.ru/
 theme:
   name: material
   language: ru
-  favicon: assets/favicon.png
 
   icon:
     logo: material/console
@@ -16,11 +15,14 @@ theme:
 
   features:
     - navigation.tabs
-    - navigation.sections
+    - navigation.tabs.sticky
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
+
+plugins:
+  - search
 
 markdown_extensions:
   - admonition
@@ -30,9 +32,18 @@ markdown_extensions:
   - tables
 
 extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/luckygoodwin/qwinsta
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
 
 nav:
-  - Главная: index.md
+  - "Главная": index.md
+
+  - "Docs":
+      - "GitHub Pages + MkDocs": github-pages-mkdocs.md
+
+  - "VPN":
+      - "MTProxy + Fake TLS + Sponsor Bot": vpn/mtproxy-fake-tls.md
+      - "Tinyproxy HTTP Proxy": vpn/tinyproxy.md
+      - "XRay + Reality + 3x-ui": vpn/xray-reality.md
