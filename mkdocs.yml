@@ -1,14 +1,19 @@
-site_name: QWINSTA
-site_description: windows / network / vpn / real ops
-site_url: https://qwinsta.ru
+site_name: "Q:\\>qwinsta_"
+site_url: https://qwinsta.ru/
 
 theme:
   name: material
   language: ru
+  favicon: assets/favicon.png
+
+  icon:
+    logo: material/console
+
   palette:
     scheme: slate
     primary: black
     accent: green
+
   features:
     - navigation.tabs
     - navigation.sections
@@ -16,13 +21,6 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
-
-nav:
-  - Главная: index.md
-  - Windows: windows/index.md
-  - MikroTik: mikrotik/index.md
-  - VPN: vpn/index.md
-  - Toolkit: toolkit/index.md
 
 markdown_extensions:
   - admonition
@@ -32,4 +30,9 @@ markdown_extensions:
   - tables
 
 extra:
-  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/luckygoodwin/qwinsta
+
+nav:
+  - Главная: index.md
