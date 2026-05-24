@@ -1,0 +1,1451 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://qwinsta.ru/mikrotik/wireguard-site-to-site/">
+      
+      
+        <link rel="prev" href="../../vpn/xray-reality/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>WireGuard Site-to-Site - Q:\>qwinsta_</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wireguard-site-to-site-vpn-mikrotik" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="../.." title="Q:\&gt;qwinsta_" class="md-header__button md-logo" aria-label="Q:\>qwinsta_" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Q:\>qwinsta_
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              WireGuard Site-to-Site
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../github-pages-mkdocs/" class="md-tabs__link">
+          
+  
+  
+  Docs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../vpn/mtproxy-fake-tls/" class="md-tabs__link">
+          
+  
+  
+  VPN
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  MikroTik
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Q:\&gt;qwinsta_" class="md-nav__button md-logo" aria-label="Q:\>qwinsta_" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg>
+
+    </a>
+    Q:\>qwinsta_
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-pages-mkdocs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Pages + MkDocs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VPN
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VPN
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vpn/mtproxy-fake-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MTProxy + Fake TLS + Sponsor Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vpn/tinyproxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tinyproxy HTTP Proxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vpn/xray-reality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XRay + Reality + 3x-ui
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MikroTik
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MikroTik
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard Site-to-Site
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard Site-to-Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#00" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        00. схема
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01. требования
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02. создание WireGuard интерфейсов
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03-tunnel-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03. tunnel IP адреса
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04-public-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04. public keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05. peer настройка
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06. firewall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07. проверка
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08. диагностика
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09. типовые проблемы
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="09. типовые проблемы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handshake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        handshake есть, но трафик не идет
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnel-reconnect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tunnel постоянно reconnect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnel-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        пингуется только tunnel IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handshake_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        не поднимается handshake
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fasttrack-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. FastTrack и WireGuard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. итог
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        полезные ссылки
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#00" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        00. схема
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01. требования
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02. создание WireGuard интерфейсов
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03-tunnel-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03. tunnel IP адреса
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04-public-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04. public keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05. peer настройка
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06. firewall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07. проверка
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08. диагностика
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09. типовые проблемы
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="09. типовые проблемы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handshake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        handshake есть, но трафик не идет
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnel-reconnect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tunnel постоянно reconnect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnel-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        пингуется только tunnel IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handshake_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        не поднимается handshake
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fasttrack-wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. FastTrack и WireGuard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. итог
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        полезные ссылки
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="wireguard-site-to-site-vpn-mikrotik">настройка WireGuard site-to-site VPN между MikroTik</h1>
+<p>WireGuard - современный VPN-протокол с простой настройкой и минимальным overhead.</p>
+<p>Начиная с RouterOS v7 WireGuard встроен в систему и сейчас это один из самых удобных способов связать филиалы через интернет. WireGuard быстро устанавливает защищенный VPN tunnel между peer-ами, нормально работает за NAT и обычно требует меньше отладки, чем многие классические VPN решения.</p>
+<p>WireGuard не требует сертификатов и PKI инфраструктуры.</p>
+<p>Безопасность WireGuard строится на современной криптографии: Curve25519, ChaCha20, Poly1305 и Noise Protocol Framework.</p>
+<p>WireGuard может автоматически обновлять endpoint удаленного peer-а после успешного handshake. Это удобно при динамических IP, CGNAT и резервных каналах.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>При изменении endpoint-address tunnel может продолжать работать до следующего handshake благодаря roaming механизму WireGuard.</p>
+</div>
+<p>WireGuard не использует TCP и работает только поверх UDP.</p>
+<p>Инструкция проверялась на RouterOS v7.</p>
+<p>По итогу получаем:</p>
+<ul>
+<li>постоянный site-to-site VPN</li>
+<li>маршрутизацию между филиалами</li>
+<li>доступ между LAN сетями</li>
+<li>минимальную нагрузку на роутеры</li>
+</ul>
+<h2 id="00">00. схема</h2>
+<p>Пример:</p>
+<div class="highlight"><pre><span></span><code>MikroTik-1
+LAN: 192.168.10.0/24
+
+MikroTik-2
+LAN: 192.168.20.0/24
+</code></pre></div>
+<p>Tunnel subnet:</p>
+<div class="highlight"><pre><span></span><code>10.0.0.0/30
+
+MikroTik-1
+10.0.0.1
+
+MikroTik-2
+10.0.0.2
+</code></pre></div>
+<p>Для point-to-point VPN tunnel обычно используют /30 или /31 subnet.</p>
+<h2 id="01">01. требования</h2>
+<p>Нужно:</p>
+<ul>
+<li>RouterOS v7 на обоих роутерах</li>
+<li>хотя бы один endpoint должен быть reachable из интернета</li>
+<li>доступность UDP порта WireGuard</li>
+<li>разные LAN подсети на филиалах</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ol>
+<li>Одинаковые LAN сети между филиалами использовать нельзя.</li>
+<li>Если оба peer находятся за CGNAT/NAT и ни один не имеет reachable endpoint, WireGuard tunnel не сможет установить handshake напрямую.</li>
+</ol>
+</div>
+<h2 id="02-wireguard">02. создание WireGuard интерфейсов</h2>
+<p>MikroTik-1:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard
+add name=wg-mikrotik-2 listen-port=51820 mtu=1420
+</code></pre></div>
+<p>MikroTik-2:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard
+add name=wg-mikrotik-1 listen-port=51820 mtu=1420
+</code></pre></div>
+<p>MTU 1420 обычно нормально работает через NAT, PPPoE и большинство провайдеров, но оптимальное значение зависит от сетевой схемы и провайдера.</p>
+<p>При проблемах с packet loss, нестабильным traffic или PPPoE может потребоваться уменьшение MTU.</p>
+<h2 id="03-tunnel-ip">03. tunnel IP адреса</h2>
+<p>MikroTik-1:</p>
+<div class="highlight"><pre><span></span><code>/ip address
+add address=10.0.0.1/30 interface=wg-mikrotik-2
+</code></pre></div>
+<p>MikroTik-2:</p>
+<div class="highlight"><pre><span></span><code>/ip address
+add address=10.0.0.2/30 interface=wg-mikrotik-1
+</code></pre></div>
+<h2 id="04-public-keys">04. public keys</h2>
+<p>WireGuard автоматически создает private-key и public-key. Public-key используется для подключения peer-ов друг к другу, а private-key остается только на своем роутере и используется для шифрования VPN tunnel.</p>
+<p>Посмотреть ключи:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard print detail
+</code></pre></div>
+<p>Нужен параметр <code>public-key</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Не используйте одинаковый private-key на нескольких роутерах.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>При изменении public-key peer-а tunnel перестанет работать до обновления peer configuration на противоположной стороне.</p>
+</div>
+<h2 id="05-peer">05. peer настройка</h2>
+<p><code>allowed-address</code> в WireGuard одновременно определяет допустимые source addresses peer-а и создает маршруты к этим сетям.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ol>
+<li>
+<p>Использование 0.0.0.0/0 в allowed-address изменяет routing behavior и обычно применяется только для full-tunnel VPN.</p>
+</li>
+<li>
+<p>WireGuard peer идентифицируется по public-key и allowed-address. Неправильные или пересекающиеся allowed-address могут приводить к выбору неправильного peer.</p>
+</li>
+<li>
+<p>endpoint-address должен быть доступен из интернета по UDP порту WireGuard.</p>
+</li>
+<li>
+<p>Если IP динамический - лучше использовать DDNS.</p>
+</li>
+<li>
+<p>allowed-address не должен пересекаться между разными peers.</p>
+</li>
+</ol>
+<p>endpoint-address поддерживает:</p>
+<ul>
+<li>IP адрес</li>
+<li>DNS имя</li>
+<li>MikroTik DDNS hostname</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>В RouterOS WireGuard peers обрабатываются сверху вниз. При пересекающихся allowed-address может использоваться первый подходящий peer.</p>
+</div>
+<p>MikroTik-1:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers
+add interface=wg-mikrotik-2 public-key=&quot;MIKROTIK_2_PUBLIC_KEY&quot; endpoint-address=MIKROTIK_2_IP endpoint-port=51820 allowed-address=10.0.0.2/32,192.168.20.0/24 persistent-keepalive=25s
+</code></pre></div>
+<p>MikroTik-2:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers
+add interface=wg-mikrotik-1 public-key=&quot;MIKROTIK_1_PUBLIC_KEY&quot; endpoint-address=MIKROTIK_1_IP endpoint-port=51820 allowed-address=10.0.0.1/32,192.168.10.0/24 persistent-keepalive=25s
+</code></pre></div>
+<p>persistent-keepalive=25s обычно используют для NAT traversal при NAT, CGNAT и динамических подключениях.</p>
+<p>Для peer-ов с публичным статическим IP без NAT persistent-keepalive обычно не нужен.</p>
+<p>Для динамических IP на MikroTik можно использовать встроенный DDNS:</p>
+<div class="highlight"><pre><span></span><code>/ip cloud set ddns-enabled=yes
+</code></pre></div>
+<p>Проверить адрес:</p>
+<div class="highlight"><pre><span></span><code>/ip cloud print
+</code></pre></div>
+<p>При использовании dynamic routing (OSPF/BGP) allowed-address обычно ограничивают только tunnel IP адресами.</p>
+<h2 id="06-firewall">06. firewall</h2>
+<p>Разрешаем входящий WireGuard:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall address-list
+add list=WG_PEERS address=X.X.X.X
+
+/ip firewall filter
+add chain=input action=accept protocol=udp dst-port=51820 src-address-list=WG_PEERS comment=&quot;WireGuard&quot;
+</code></pre></div>
+<p>Разрешаем трафик между филиалами:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall filter
+add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WG site-to-site&quot;
+
+add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WG site-to-site&quot;
+</code></pre></div>
+<p>Если используется default masquerade:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall nat
+add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WG bypass&quot;
+
+add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WG bypass&quot;
+</code></pre></div>
+<p>Эти правила нужны только если используется srcnat/masquerade.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Правила NAT bypass должны стоять выше masquerade.</p>
+</div>
+<p>RouterOS v7 обычно автоматически создает dynamic routes (динамические маршруты) через <code>allowed-address</code>, проверить можно так:</p>
+<div class="highlight"><pre><span></span><code>/ip route print
+</code></pre></div>
+<p>При multi-WAN конфигурациях может потребоваться policy routing или routing rules для WireGuard traffic.</p>
+<p>В сложных схемах с VRF, policy routing или multi-WAN может потребоваться ручная маршрутизация.</p>
+<h2 id="07">07. проверка</h2>
+<p>Проверяем peer:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers print
+</code></pre></div>
+<p>Если VPN tunnel поднялся - появится <code>last-handshake</code> и начнут увеличиваться <code>rx/tx counters</code>, например:</p>
+<div class="highlight"><pre><span></span><code>last-handshake: 10s ago
+rx: 12.3 MiB
+tx: 8.5 MiB
+</code></pre></div>
+<p>WireGuard peer не имеет отдельного <code>connected/disconnected</code> состояния.</p>
+<p>WireGuard интерфейс не имеет отдельного tunnel state, как IPsec/OpenVPN. Основной индикатор работы - успешный handshake и traffic counters.</p>
+<p>WireGuard не выполняет постоянную проверку доступности peer-а.</p>
+<p>Tunnel считается активным только при успешном обмене traffic между peer-ами.</p>
+<p>WireGuard инициирует handshake при наличии traffic или persistent-keepalive traffic. Отсутствие handshake при полном отсутствии traffic не всегда означает проблему.</p>
+<p>Проверяем ping между LAN.</p>
+<p>MikroTik-1 → MikroTik-2:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.20.1
+</code></pre></div>
+<p>MikroTik-2 → MikroTik-1:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.10.1
+</code></pre></div>
+<h2 id="08">08. диагностика</h2>
+<p>Подробный peer status:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers print detail
+</code></pre></div>
+<p>Мониторинг интерфейса:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard monitor wg-mikrotik-2
+</code></pre></div>
+<p><code>monitor</code> показывает current endpoint, latest handshake и rx/tx counters.</p>
+<p>Статистика peer:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers print stats
+</code></pre></div>
+<p>Счетчики обновляются только при наличии traffic.</p>
+<p>Логи:</p>
+<div class="highlight"><pre><span></span><code>/log print where topics~&quot;wireguard&quot;
+</code></pre></div>
+<p>Torch traffic capture:</p>
+<div class="highlight"><pre><span></span><code>/tool torch interface=wg-mikrotik-2
+</code></pre></div>
+<p>Torch может показывать не весь traffic при FastTrack или hardware offload.</p>
+<p>Hardware offload также может влиять на диагностику traffic и rx/tx counters.</p>
+<p>Альтернативно можно использовать sniffer:</p>
+<div class="highlight"><pre><span></span><code>/tool/sniffer quick interface=wg-mikrotik-2
+</code></pre></div>
+<p>Проверка tunnel IP:</p>
+<div class="highlight"><pre><span></span><code>/ping 10.0.0.2 interface=wg-mikrotik-2
+</code></pre></div>
+<p>Connections:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall connection print where dst-port=51820
+</code></pre></div>
+<p>Routes:</p>
+<div class="highlight"><pre><span></span><code>/ip route print
+</code></pre></div>
+<h2 id="09">09. типовые проблемы</h2>
+<h3 id="handshake">handshake есть, но трафик не идет</h3>
+<p>Причины:</p>
+<ul>
+<li>firewall режет forward</li>
+<li>отсутствует NAT bypass</li>
+<li>конфликт подсетей</li>
+<li>неправильный allowed-address</li>
+<li>проблемы маршрутизации</li>
+</ul>
+<h3 id="tunnel-reconnect">tunnel постоянно reconnect</h3>
+<p>Причины:</p>
+<ul>
+<li>CGNAT</li>
+<li>ISP filtering</li>
+<li>нестабильный интернет</li>
+<li>отсутствует persistent-keepalive</li>
+</ul>
+<h3 id="tunnel-ip">пингуется только tunnel IP</h3>
+<p>Причины:</p>
+<ul>
+<li>LAN сеть не входит в allowed-address</li>
+<li>firewall режет forward</li>
+<li>NAT masquerade ломает routing</li>
+<li>конфликт маршрутов</li>
+</ul>
+<h3 id="handshake_1">не поднимается handshake</h3>
+<p>Проверить:</p>
+<ul>
+<li>доступность UDP 51820</li>
+<li>внешний IP</li>
+<li>endpoint-address</li>
+<li>NAT/port-forward</li>
+<li>правильность public-key</li>
+</ul>
+<h2 id="10-fasttrack-wireguard">10. FastTrack и WireGuard</h2>
+<p>FastTrack обходит часть обработки firewall, connection tracking и queue processing.</p>
+<p>FastTrack может вызывать проблемы в VPN схемах, где используются:</p>
+<ul>
+<li>mangle</li>
+<li>policy routing</li>
+<li>queue tree</li>
+<li>traffic accounting</li>
+</ul>
+<p>Для диагностики VPN проблем FastTrack лучше временно отключить, либо исключить VPN traffic до FastTrack rules:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall filter
+add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 place-before=[find action=fasttrack-connection]
+
+add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 place-before=[find action=fasttrack-connection]
+</code></pre></div>
+<h2 id="11">11. итог</h2>
+<p>WireGuard в RouterOS v7 - простой и быстрый способ построить site-to-site VPN между филиалами.</p>
+<p>При правильной настройке VPN tunnel стабильно работает через NAT, динамические IP, резервные каналы и обычных интернет провайдеров.</p>
+<p>При этом WireGuard создает минимальную нагрузку на роутер, быстро устанавливает VPN tunnel, просто диагностируется и не требует сложной инфраструктуры.</p>
+<h2 id="_1">полезные ссылки</h2>
+<p><a href="https://www.wireguard.com/">WireGuard</a><br />
+https://www.wireguard.com/</p>
+<p><a href="https://help.mikrotik.com/docs/display/ROS/WireGuard">MikroTik WireGuard</a><br />
+https://help.mikrotik.com/docs/display/ROS/WireGuard</p>
+<p><a href="https://help.mikrotik.com/docs/display/ROS/Connection+tracking">MikroTik Connection Tracking</a><br />
+https://help.mikrotik.com/docs/display/ROS/Connection+tracking</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

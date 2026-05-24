@@ -236,6 +236,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mikrotik/wireguard-site-to-site/" class="md-tabs__link">
+          
+  
+  
+  MikroTik
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -520,10 +540,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#01" class="md-nav__link">
+  <a href="#01-ssh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. подключение
+        01. настройка SSH ключей
       
     </span>
   </a>
@@ -534,7 +554,7 @@
   <a href="#02" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. установка зависимостей
+        02. обновление системы
       
     </span>
   </a>
@@ -542,10 +562,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#03-mtproxy" class="md-nav__link">
+  <a href="#03-root-login" class="md-nav__link">
     <span class="md-ellipsis">
       
-        03. установка MTProxy
+        03. отключение root login
       
     </span>
   </a>
@@ -556,7 +576,7 @@
   <a href="#04" class="md-nav__link">
     <span class="md-ellipsis">
       
-        04. сборка
+        04. подключение
       
     </span>
   </a>
@@ -564,10 +584,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#05-telegram" class="md-nav__link">
+  <a href="#05" class="md-nav__link">
     <span class="md-ellipsis">
       
-        05. конфиги Telegram
+        05. установка зависимостей
       
     </span>
   </a>
@@ -575,10 +595,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#06-base-secret" class="md-nav__link">
+  <a href="#06-mtproxy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        06. генерация base secret
+        06. установка MTProxy
       
     </span>
   </a>
@@ -586,10 +606,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#07-fake-tls" class="md-nav__link">
+  <a href="#07" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. Fake TLS домен
+        07. сборка
       
     </span>
   </a>
@@ -597,10 +617,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#08" class="md-nav__link">
+  <a href="#08-telegram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        08. пробный запуск
+        08. конфиги Telegram
       
     </span>
   </a>
@@ -608,10 +628,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09-mtproxybot" class="md-nav__link">
+  <a href="#09-base-secret" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. регистрация прокси в MTProxyBot
+        09. генерация base secret
       
     </span>
   </a>
@@ -619,10 +639,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-sponsored-channel" class="md-nav__link">
+  <a href="#10-fake-tls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. sponsored channel
+        10. Fake TLS домен
       
     </span>
   </a>
@@ -630,10 +650,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-systemd" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. systemd сервис
+        11. пробный запуск
       
     </span>
   </a>
@@ -641,10 +661,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
+  <a href="#12-mtproxy-server-mtproxybot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. запуск
+        12. регистрация MTProxy server в MTProxyBot
       
     </span>
   </a>
@@ -652,10 +672,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-firewall" class="md-nav__link">
+  <a href="#13-telegram-sponsored-channel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13. firewall
+        13. Telegram sponsored channel
       
     </span>
   </a>
@@ -663,10 +683,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#14-fake-tls-secret" class="md-nav__link">
+  <a href="#14-systemd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        14. Fake TLS secret
+        14. systemd сервис
       
     </span>
   </a>
@@ -677,7 +697,7 @@
   <a href="#15" class="md-nav__link">
     <span class="md-ellipsis">
       
-        15. ссылка для пользователей
+        15. запуск
       
     </span>
   </a>
@@ -685,10 +705,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#16" class="md-nav__link">
+  <a href="#16-firewall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        16. диагностика
+        16. firewall
       
     </span>
   </a>
@@ -696,10 +716,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#17" class="md-nav__link">
+  <a href="#17-fake-tls-secret" class="md-nav__link">
     <span class="md-ellipsis">
       
-        17. как это работает
+        17. Fake TLS secret
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. ссылка для пользователей
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. диагностика
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. как это работает
       
     </span>
   </a>
@@ -789,6 +842,91 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MikroTik
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MikroTik
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mikrotik/wireguard-site-to-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard Site-to-Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -827,10 +965,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#01" class="md-nav__link">
+  <a href="#01-ssh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. подключение
+        01. настройка SSH ключей
       
     </span>
   </a>
@@ -841,7 +979,7 @@
   <a href="#02" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. установка зависимостей
+        02. обновление системы
       
     </span>
   </a>
@@ -849,10 +987,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#03-mtproxy" class="md-nav__link">
+  <a href="#03-root-login" class="md-nav__link">
     <span class="md-ellipsis">
       
-        03. установка MTProxy
+        03. отключение root login
       
     </span>
   </a>
@@ -863,7 +1001,7 @@
   <a href="#04" class="md-nav__link">
     <span class="md-ellipsis">
       
-        04. сборка
+        04. подключение
       
     </span>
   </a>
@@ -871,10 +1009,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#05-telegram" class="md-nav__link">
+  <a href="#05" class="md-nav__link">
     <span class="md-ellipsis">
       
-        05. конфиги Telegram
+        05. установка зависимостей
       
     </span>
   </a>
@@ -882,10 +1020,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#06-base-secret" class="md-nav__link">
+  <a href="#06-mtproxy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        06. генерация base secret
+        06. установка MTProxy
       
     </span>
   </a>
@@ -893,10 +1031,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#07-fake-tls" class="md-nav__link">
+  <a href="#07" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. Fake TLS домен
+        07. сборка
       
     </span>
   </a>
@@ -904,10 +1042,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#08" class="md-nav__link">
+  <a href="#08-telegram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        08. пробный запуск
+        08. конфиги Telegram
       
     </span>
   </a>
@@ -915,10 +1053,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09-mtproxybot" class="md-nav__link">
+  <a href="#09-base-secret" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. регистрация прокси в MTProxyBot
+        09. генерация base secret
       
     </span>
   </a>
@@ -926,10 +1064,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-sponsored-channel" class="md-nav__link">
+  <a href="#10-fake-tls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. sponsored channel
+        10. Fake TLS домен
       
     </span>
   </a>
@@ -937,10 +1075,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-systemd" class="md-nav__link">
+  <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. systemd сервис
+        11. пробный запуск
       
     </span>
   </a>
@@ -948,10 +1086,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
+  <a href="#12-mtproxy-server-mtproxybot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. запуск
+        12. регистрация MTProxy server в MTProxyBot
       
     </span>
   </a>
@@ -959,10 +1097,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-firewall" class="md-nav__link">
+  <a href="#13-telegram-sponsored-channel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13. firewall
+        13. Telegram sponsored channel
       
     </span>
   </a>
@@ -970,10 +1108,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#14-fake-tls-secret" class="md-nav__link">
+  <a href="#14-systemd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        14. Fake TLS secret
+        14. systemd сервис
       
     </span>
   </a>
@@ -984,7 +1122,7 @@
   <a href="#15" class="md-nav__link">
     <span class="md-ellipsis">
       
-        15. ссылка для пользователей
+        15. запуск
       
     </span>
   </a>
@@ -992,10 +1130,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#16" class="md-nav__link">
+  <a href="#16-firewall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        16. диагностика
+        16. firewall
       
     </span>
   </a>
@@ -1003,10 +1141,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#17" class="md-nav__link">
+  <a href="#17-fake-tls-secret" class="md-nav__link">
     <span class="md-ellipsis">
       
-        17. как это работает
+        17. Fake TLS secret
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. ссылка для пользователей
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. диагностика
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. как это работает
       
     </span>
   </a>
@@ -1042,12 +1213,13 @@
 
 
 <h1 id="mtproxy-ubuntu-2404">установка и настройка MTProxy на Ubuntu 24.04</h1>
+<p>MTProxy - lightweight proxy для Telegram с поддержкой Fake TLS camouflage. Прокси разрабатывается командой Telegram и используется как официальный proxy-протокол для Telegram clients. Работает только поверх TCP и предназначен только для Telegram clients.</p>
 <p>Инструкция собиралась и проверялась на Ubuntu 24.04.</p>
 <p>По итогу получаем:</p>
 <ul>
-<li>MTProxy для Telegram</li>
-<li>Fake TLS</li>
-<li>sponsored channel</li>
+<li>MTProxy server для Telegram</li>
+<li>Fake TLS camouflage</li>
+<li>Telegram sponsored channel</li>
 <li>systemd сервис</li>
 <li>автозапуск</li>
 </ul>
@@ -1061,63 +1233,102 @@
 <p>Даем sudo:</p>
 <div class="highlight"><pre><span></span><code>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>deployuser
 </code></pre></div>
-<p>Проверяем вход:</p>
+<h2 id="01-ssh">01. настройка SSH ключей</h2>
+<p>На локальном ПК:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen
+</code></pre></div>
+<p>Копируем ключ:</p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id<span class="w"> </span>deployuser@123.45.67.89
+</code></pre></div>
+<p>Проверяем вход без пароля:</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>deployuser@123.45.67.89
 </code></pre></div>
-<p>Обновляем систему:</p>
+<h2 id="02">02. обновление системы</h2>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>full-upgrade<span class="w"> </span>-y
 </code></pre></div>
 <p>Перезагружаем:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>reboot
 </code></pre></div>
-<p>Запрещаем root login:</p>
+<h2 id="03-root-login">03. отключение root login</h2>
+<p>Редактируем:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/ssh/sshd_config
 </code></pre></div>
 <p>Меняем:</p>
 <div class="highlight"><pre><span></span><code>PermitRootLogin no
 </code></pre></div>
+<p>Рекомендуется также отключить password authentication:</p>
+<div class="highlight"><pre><span></span><code>PasswordAuthentication no
+</code></pre></div>
 <p>Перезапускаем SSH:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
 </code></pre></div>
-<h2 id="01">01. подключение</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>На Ubuntu service может называться <code>ssh</code> или <code>sshd</code>.</p>
+</div>
+<h2 id="04">04. подключение</h2>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>deployuser@123.45.67.89
 sudo<span class="w"> </span>-i
 </code></pre></div>
-<h2 id="02">02. установка зависимостей</h2>
+<h2 id="05">05. установка зависимостей</h2>
 <div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>build-essential<span class="w"> </span>libssl-dev<span class="w"> </span>zlib1g-dev<span class="w"> </span>curl
 </code></pre></div>
-<h2 id="03-mtproxy">03. установка MTProxy</h2>
+<h2 id="06-mtproxy">06. установка MTProxy</h2>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/opt
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/TelegramMessenger/MTProxy.git
+mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/MTProxy/data
+chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/opt/MTProxy
 <span class="nb">cd</span><span class="w"> </span>MTProxy
 </code></pre></div>
-<h2 id="04">04. сборка</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Репозиторий MTProxy обновляется. Поведение и параметры могут изменяться между версиями.</p>
+</div>
+<h2 id="07">07. сборка</h2>
 <div class="highlight"><pre><span></span><code>make
 </code></pre></div>
-<p>Проверяем:</p>
-<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>objs/bin/mtproto-proxy
+<p>Проверяем бинарник:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">test</span><span class="w"> </span>-f<span class="w"> </span>objs/bin/mtproto-proxy<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>OK
 </code></pre></div>
-<h2 id="05-telegram">05. конфиги Telegram</h2>
+<p>Проверяем зависимости:</p>
+<div class="highlight"><pre><span></span><code>ldd<span class="w"> </span>objs/bin/mtproto-proxy
+</code></pre></div>
+<h2 id="08-telegram">08. конфиги Telegram</h2>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>https://core.telegram.org/getProxySecret<span class="w"> </span>-o<span class="w"> </span>proxy-secret
 curl<span class="w"> </span>-s<span class="w"> </span>https://core.telegram.org/getProxyConfig<span class="w"> </span>-o<span class="w"> </span>proxy-multi.conf
 </code></pre></div>
-<h2 id="06-base-secret">06. генерация base secret</h2>
+<p>Назначаем права:</p>
+<div class="highlight"><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nobody:nogroup<span class="w"> </span>/opt/MTProxy
+</code></pre></div>
+<h2 id="09-base-secret">09. генерация base secret</h2>
 <div class="highlight"><pre><span></span><code>head<span class="w"> </span>-c<span class="w"> </span><span class="m">16</span><span class="w"> </span>/dev/urandom<span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-ps
 </code></pre></div>
+<p>Secret должен содержать ровно 32 hex символа.</p>
 <p>Пример результата:</p>
 <div class="highlight"><pre><span></span><code>a1b2c3d4e5f60718293a4b5c6d7e8f90
 </code></pre></div>
-<h2 id="07-fake-tls">07. Fake TLS домен</h2>
+<h2 id="10-fake-tls">10. Fake TLS домен</h2>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;example.com&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-ps
 </code></pre></div>
+<p>Для Fake TLS обычно используют:</p>
+<ul>
+<li>существующий домен</li>
+<li>HTTPS сайт</li>
+<li>правдоподобный TLS endpoint</li>
+</ul>
 <p>Пример результата:</p>
 <div class="highlight"><pre><span></span><code>6578616d706c652e636f6d
 </code></pre></div>
-<h2 id="08">08. пробный запуск</h2>
-<p>В примерах используется 777/tcp, но MTProxy может работать и на других TCP портах.</p>
-<div class="highlight"><pre><span></span><code>./objs/bin/mtproto-proxy<span class="w"> </span>-u<span class="w"> </span>nobody<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span><span class="w"> </span>-H<span class="w"> </span><span class="m">777</span><span class="w"> </span>-S<span class="w"> </span>a1b2c3d4e5f60718293a4b5c6d7e8f90<span class="w"> </span>-D<span class="w"> </span>example.com<span class="w"> </span>--aes-pwd<span class="w"> </span>proxy-secret<span class="w"> </span>proxy-multi.conf<span class="w"> </span>--http-stats<span class="w"> </span>--allow-skip-dh<span class="w"> </span>-M<span class="w"> </span><span class="m">1</span>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Не используйте домены Telegram, Google или Cloudflare без понимания возможных последствий DPI/filtering.</p>
+</div>
+<h2 id="11">11. пробный запуск</h2>
+<p>В примерах используется <code>777/tcp</code>.</p>
+<p>MTProxy может работать практически на любом TCP порту, но некоторые провайдеры могут фильтровать нестандартные порты.</p>
+<div class="highlight"><pre><span></span><code>./objs/bin/mtproto-proxy<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span><span class="w"> </span>-H<span class="w"> </span><span class="m">777</span><span class="w"> </span>-S<span class="w"> </span>a1b2c3d4e5f60718293a4b5c6d7e8f90<span class="w"> </span>-D<span class="w"> </span>example.com<span class="w"> </span>--aes-pwd<span class="w"> </span>proxy-secret<span class="w"> </span>proxy-multi.conf<span class="w"> </span>--http-stats<span class="w"> </span>--allow-skip-dh<span class="w"> </span>-M<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
-<h2 id="09-mtproxybot">09. регистрация прокси в MTProxyBot</h2>
+<h2 id="12-mtproxy-server-mtproxybot">12. регистрация MTProxy server в MTProxyBot</h2>
 <p>Открываем:</p>
 <div class="highlight"><pre><span></span><code>@MTProxyBot
 </code></pre></div>
@@ -1132,20 +1343,22 @@ curl<span class="w"> </span>-s<span class="w"> </span>https://core.telegram.org/
 2. Secret
 a1b2c3d4e5f60718293a4b5c6d7e8f90
 </code></pre></div>
-<p>Важно:
-- отправляется только base secret
-- без <code>ee</code></p>
+<p>Важно:</p>
+<ul>
+<li>отправляется только base secret</li>
+<li>без <code>ee</code></li>
+</ul>
 <p>После этого бот выдаст:</p>
 <ul>
-<li>proxy tag</li>
+<li>proxy tag (<code>-P</code>)</li>
 <li>ссылку подключения</li>
-<li>информацию о прокси</li>
+<li>информацию о MTProxy server</li>
 </ul>
-<h2 id="10-sponsored-channel">10. sponsored channel</h2>
+<h2 id="13-telegram-sponsored-channel">13. Telegram sponsored channel</h2>
 <p>В боте:</p>
 <div class="highlight"><pre><span></span><code>/myproxies
 </code></pre></div>
-<p>Выбираем прокси → <code>Set Channel</code></p>
+<p>Выбираем MTProxy server → <code>Set Channel</code></p>
 <p>Отправляем:</p>
 <div class="highlight"><pre><span></span><code>@your_channel
 </code></pre></div>
@@ -1158,7 +1371,7 @@ a1b2c3d4e5f60718293a4b5c6d7e8f90
 <li>изменения применяются не сразу</li>
 <li>иногда обновление занимает до часа</li>
 </ul>
-<h2 id="11-systemd">11. systemd сервис</h2>
+<h2 id="14-systemd">14. systemd сервис</h2>
 <p>Создаем файл:</p>
 <div class="highlight"><pre><span></span><code>/etc/systemd/system/mtproxy.service
 </code></pre></div>
@@ -1168,51 +1381,76 @@ a1b2c3d4e5f60718293a4b5c6d7e8f90
 <span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
 
 <span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">nobody</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">nogroup</span>
 <span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/opt/MTProxy</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/opt/MTProxy/objs/bin/mtproto-proxy -u nobody -p 8888 -H 777 -S a1b2c3d4e5f60718293a4b5c6d7e8f90 -P abcdef1234567890abcdef1234567890 -D example.com --aes-pwd proxy-secret proxy-multi.conf --http-stats --allow-skip-dh -M 1</span>
+
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/opt/MTProxy/objs/bin/mtproto-proxy -p 8888 -H 777 -S a1b2c3d4e5f60718293a4b5c6d7e8f90 -P abcdef1234567890abcdef1234567890 -D example.com --aes-pwd proxy-secret proxy-multi.conf --http-stats --allow-skip-dh -M 1</span>
+
 <span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
 <span class="na">RestartSec</span><span class="o">=</span><span class="s">3</span>
+<span class="na">LimitNOFILE</span><span class="o">=</span><span class="s">65535</span>
+
+<span class="na">NoNewPrivileges</span><span class="o">=</span><span class="s">true</span>
+<span class="na">PrivateTmp</span><span class="o">=</span><span class="s">true</span>
 
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </code></pre></div>
-<h2 id="12">12. запуск</h2>
+<h2 id="15">15. запуск</h2>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>daemon-reload
-systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mtproxy
-systemctl<span class="w"> </span>start<span class="w"> </span>mtproxy
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mtproxy
 </code></pre></div>
 <p>Проверяем:</p>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>mtproxy
 </code></pre></div>
-<h2 id="13-firewall">13. firewall</h2>
-<div class="highlight"><pre><span></span><code>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">777</span>/tcp
+<p>Для применения изменений:</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>mtproxy
 </code></pre></div>
-<h2 id="14-fake-tls-secret">14. Fake TLS secret</h2>
+<h2 id="16-firewall">16. firewall</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Перед включением UFW убедитесь, что разрешен OpenSSH, иначе можно потерять SSH доступ.</p>
+</div>
+<div class="highlight"><pre><span></span><code>ufw<span class="w"> </span>allow<span class="w"> </span>OpenSSH
+ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">777</span>/tcp
+ufw<span class="w"> </span><span class="nb">enable</span>
+</code></pre></div>
+<h2 id="17-fake-tls-secret">17. Fake TLS secret</h2>
 <p>Формула:</p>
 <div class="highlight"><pre><span></span><code>ee + base_secret + hex(domain)
 </code></pre></div>
+<p>Fake TLS secret всегда начинается с <code>ee</code>.</p>
+<p>Secret чувствителен к регистру и должен передаваться без пробелов.</p>
 <p>Пример:</p>
 <div class="highlight"><pre><span></span><code>eea1b2c3d4e5f60718293a4b5c6d7e8f906578616d706c652e636f6d
 </code></pre></div>
-<h2 id="15">15. ссылка для пользователей</h2>
+<h2 id="18">18. ссылка для пользователей</h2>
 <div class="highlight"><pre><span></span><code>tg://proxy?server=123.45.67.89&amp;port=777&amp;secret=eea1b2c3d4e5f60718293a4b5c6d7e8f906578616d706c652e636f6d
 </code></pre></div>
-<h2 id="16">16. диагностика</h2>
+<h2 id="19">19. диагностика</h2>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>mtproxy
 journalctl<span class="w"> </span>-u<span class="w"> </span>mtproxy<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
-ss<span class="w"> </span>-tn<span class="w"> </span><span class="nv">sport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>:777
+journalctl<span class="w"> </span>-u<span class="w"> </span>mtproxy<span class="w"> </span>-f
+ss<span class="w"> </span>-tnlp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:777
 </code></pre></div>
-<h2 id="17">17. как это работает</h2>
+<h2 id="20">20. как это работает</h2>
 <ul>
-<li>MTProxy работает на base secret</li>
-<li>@MTProxyBot регистрирует этот же secret</li>
-<li>proxy tag связывает сервер и sponsored channel</li>
+<li>MTProxy server работает на base secret</li>
+<li><code>@MTProxyBot</code> регистрирует этот же secret</li>
+<li>proxy tag связывает MTProxy server с Telegram sponsored channel</li>
 <li>пользователи подключаются через Fake TLS ee-secret</li>
-<li>домен в secret используется для TLS camouflage</li>
+<li>домен в Fake TLS secret используется для TLS camouflage</li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>MTProxy не шифрует весь интернет traffic пользователя и не заменяет VPN.</p>
+</div>
 <h2 id="_1">полезные ссылки</h2>
-<p><a href="https://github.com/TelegramMessenger/MTProxy">Official MTProxy</a></p>
-<p><a href="https://t.me/MTProxyBot">@MTProxyBot</a></p>
+<p><a href="https://github.com/TelegramMessenger/MTProxy">Official MTProxy</a><br />
+https://github.com/TelegramMessenger/MTProxy/</p>
+<p><a href="https://t.me/MTProxyBot">@MTProxyBot</a><br />
+https://t.me/MTProxyBot/</p>
 
 
 

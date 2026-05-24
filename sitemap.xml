@@ -2,22 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://qwinsta.ru/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <lastmod>2026-05-24</lastmod>
     </url>
     <url>
          <loc>https://qwinsta.ru/github-pages-mkdocs/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://qwinsta.ru/latest/</loc>
+         <lastmod>2026-05-24</lastmod>
+    </url>
+    <url>
+         <loc>https://qwinsta.ru/mikrotik/wireguard-site-to-site/</loc>
+         <lastmod>2026-05-24</lastmod>
     </url>
     <url>
          <loc>https://qwinsta.ru/vpn/mtproxy-fake-tls/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <lastmod>2026-05-24</lastmod>
     </url>
     <url>
          <loc>https://qwinsta.ru/vpn/tinyproxy/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <lastmod>2026-05-24</lastmod>
     </url>
     <url>
          <loc>https://qwinsta.ru/vpn/xray-reality/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <lastmod>2026-05-24</lastmod>
     </url>
 </urlset>
