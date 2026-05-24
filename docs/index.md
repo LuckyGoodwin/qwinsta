@@ -1,6 +1,9 @@
 # QWINSTA
 
-windows / network / vpn / terminal services / real ops
+real infrastructure notes:
+windows / mikrotik / vpn / terminal services / powershell
+
+без маркетинговой воды и "enterprise best practices" ради галочки.
 
 ---
 
@@ -22,24 +25,26 @@ irm https://get.qwinsta.ru | iex
 ```
 
 !!! warning
-    `irm | iex` - это режим полного доверия.
 
-    сначала читай код, потом запускай.
+    `irm | iex` означает выполнение удаленного PowerShell кода с правами текущего пользователя.
 
----
+    Перед запуском рекомендуется:
+    - прочитать содержимое script
+    - проверить URL
+    - запускать только из доверенного source
 
-## последние материалы
+## последние статьи
 
-- WireGuard между филиалами
-- OpenVPN + Active Directory
-- MikroTik FastTrack vs VPN
-- Terminal Services troubleshooting
-- Event ID 4625
-
----
+<!-- latest:start -->
+- [как бесплатно поднять документацию на GitHub Pages через MkDocs](github-pages-mkdocs.md)
+- [установка и настройка MTProxy на Ubuntu 24.04](vpn/mtproxy-fake-tls.md)
+- [установка и настройка Tinyproxy на Ubuntu 24.04](vpn/tinyproxy.md)
+- [установка и настройка XRay (VLESS + Reality) + 3x-ui](vpn/xray-reality.md)
+- [настройка WireGuard site-to-site VPN между MikroTik](mikrotik/wireguard-site-to-site.md)
+<!-- latest:end -->
 
 ## about
 
-QWINSTA - заметки о реальной инфраструктуре.
+QWINSTA - заметки о реальной инфраструктуре и ее эксплуатации.
 
-windows, mikrotik, vpn, terminal services, powershell и эксплуатация без маркетинговой воды.
+Windows, MikroTik, VPN, Terminal Services, PowerShell, troubleshooting и production incidents без маркетинговой воды и пересказа документации.

@@ -1,17 +1,27 @@
 # установка и настройка Tinyproxy на Ubuntu 24.04
 
-Tinyproxy - легкий HTTP/HTTPS proxy сервер с минимальным потреблением ресурсов.
+Tinyproxy - lightweight HTTP proxy server с поддержкой HTTPS CONNECT tunneling и минимальным потреблением ресурсов.
 
-Подходит для:
-
-- Telegram
-- curl
-- API запросов
-- скриптов
-- браузеров
-- временного proxy через VPS
-
+Tinyproxy не является SOCKS proxy.
 Инструкция собиралась и проверялась на Ubuntu 24.04.
+
+По итогу получаем:
+
+- HTTP/HTTPS proxy server
+- HTTP CONNECT tunneling
+- systemd сервис
+- автозапуск
+- минимальное потребление ресурсов
+
+!!! info
+
+    Tinyproxy подходит для:
+	
+    - Telegram Desktop
+    - curl
+    - браузеров
+    - API запросов
+    - временного proxy доступа
 
 ## 00. подготовка сервера
 
@@ -79,20 +89,10 @@ sudo -i
 ## 02. установка Tinyproxy
 
 ```bash
-apt install -y tinyproxy apache2-utils
+apt install -y tinyproxy
 ```
 
-## 03. создание логина и пароля
-
-Создаем файл паролей:
-
-```bash
-htpasswd -c /etc/tinyproxy/passwd myuser
-```
-
-Вводим пароль.
-
-## 04. настройка Tinyproxy
+## 03. настройка авторизации
 
 Редактируем:
 
@@ -100,39 +100,61 @@ htpasswd -c /etc/tinyproxy/passwd myuser
 nano /etc/tinyproxy/tinyproxy.conf
 ```
 
-Минимальный пример:
+Минимальный production-friendly пример:
 
 ```text
+User tinyproxy
+Group tinyproxy
+
 Port 7777
+Listen 0.0.0.0
 
 Timeout 600
 
-Allow 0.0.0.0/0
+DefaultErrorFile "/usr/share/tinyproxy/default.html"
+StatFile "/usr/share/tinyproxy/stats.html"
+LogFile "/var/log/tinyproxy/tinyproxy.log"
+LogLevel Info
+
+PidFile "/run/tinyproxy/tinyproxy.pid"
+
+MaxClients 100
+
+DisableViaHeader Yes
 
 BasicAuth myuser mypassword
+
+Allow 1.2.3.4
 ```
 
 Важно:
 
-- `7777` - порт proxy
+- `7777` - порт proxy server
+- `Listen 0.0.0.0` - слушать все интерфейсы
 - `myuser` и `mypassword` заменить на свои
 - `Allow` ограничивает доступ по IP
-- `0.0.0.0/0` разрешает доступ всем
+- `DisableViaHeader Yes` уменьшает disclosure proxy headers
+- `LogLevel Info` включает predictable logging
 
 Пример ограничения по IP:
 
 ```text
 Allow 1.2.3.4
 Allow 5.6.7.0/24
+Allow 10.0.0.0/8
 ```
 
 Если авторизация не нужна - строку `BasicAuth` можно удалить.
 
-## 05. запуск
+!!! warning
+
+    1. Proxy без авторизации рекомендуется использовать только вместе с ограничением доступа через `Allow`.
+	2. Не оставляйте open proxy доступным всему интернету без необходимости.
+
+## 04. запуск
 
 ```bash
-systemctl enable tinyproxy
-systemctl restart tinyproxy
+systemctl enable --now tinyproxy
 ```
 
 Проверяем:
@@ -141,29 +163,41 @@ systemctl restart tinyproxy
 systemctl status tinyproxy
 ```
 
-## 06. firewall (опционально)
+## 05. firewall
+
+!!! warning
+
+    Перед включением UFW убедитесь, что разрешен OpenSSH, иначе можно потерять SSH доступ.
 
 ```bash
+ufw allow OpenSSH
 ufw allow 7777/tcp
+ufw enable
 ```
 
-## 07. проверка порта
+## 06. проверка порта
 
 ```bash
-ss -lntp | grep 7777
+ss -lntp | grep :7777
 ```
 
-## 08. подключение
+## 07. проверка proxy
 
-Пример proxy:
+Пример proxy URL:
 
 ```text
 http://myuser:mypassword@123.45.67.89:7777
 ```
 
-## 09. использование в Telegram Desktop
+Проверка через curl:
 
-Telegram Desktop умеет работать через HTTP proxy.
+```bash
+curl -x http://myuser:mypassword@127.0.0.1:7777 https://ifconfig.me
+```
+
+## 08. использование в Telegram Desktop
+
+Telegram Desktop поддерживает HTTP proxy.
 
 Настройки:
 
@@ -186,23 +220,36 @@ Username: myuser
 Password: mypassword
 ```
 
-## 10. диагностика
+## 09. диагностика
 
 ```bash
 systemctl status tinyproxy
 journalctl -u tinyproxy -n 50 --no-pager
-ss -lntp | grep 7777
+tail -f /var/log/tinyproxy/tinyproxy.log
+ss -lntp | grep :7777
 ```
 
-## 11. как это работает
+## 10. как это работает
 
-- Tinyproxy поднимает обычный HTTP proxy
+- Tinyproxy поднимает HTTP proxy server с поддержкой CONNECT tunneling
+- HTTPS traffic проходит через HTTP CONNECT proxy
 - Telegram Desktop умеет работать через HTTP proxy
-- трафик идет через ваш VPS
-- Telegram видит подключение как обычный HTTPS трафик
+- traffic маршрутизируется через ваш proxy server
+
+Tinyproxy не предоставляет полноценный VPN и не шифрует traffic между client и proxy server.
+
+!!! info
+
+    HTTP proxy видит destination hostnames и может видеть незашифрованный HTTP traffic.
+
+!!! warning
+
+    Не используйте HTTP proxy для передачи чувствительных данных через незашифрованный HTTP.
 
 ## полезные ссылки
 
-[Tinyproxy GitHub](https://github.com/tinyproxy/tinyproxy)
+[Tinyproxy GitHub](https://github.com/tinyproxy/tinyproxy/)  
+https://github.com/tinyproxy/tinyproxy/
 
-[Tinyproxy Documentation](https://tinyproxy.github.io/)
+[Tinyproxy Documentation](https://tinyproxy.github.io/)  
+https://tinyproxy.github.io/

@@ -1,4 +1,4 @@
-name: deploy mkdocs
+name: deploy
 
 on:
   push:
@@ -14,11 +14,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: 3.x
 
-      - run: pip install mkdocs-material
+      - run: pip install mkdocs mkdocs-material
+
+      - run: python scripts/update-latest.py
 
       - run: mkdocs gh-deploy --force

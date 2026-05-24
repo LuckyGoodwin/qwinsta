@@ -1,24 +1,106 @@
 # установка и настройка XRay (VLESS + Reality) + 3x-ui
 
-Инструкция собираалась и проверялась на Ubuntu 24.04.
+3x-ui - web panel для управления XRay core.
+
+XRay поддерживает:
+
+- VLESS
+- Reality
+- Trojan
+- Shadowsocks
+- VMess
+
+Reality использует TLS camouflage для обхода DPI/filtering.
+
+Инструкция собиралась и проверялась на Ubuntu 24.04.
 
 По итогу получаем:
 
+- XRay core
 - VLESS + Reality
-- 3x-ui панель
+- 3x-ui panel
 - один inbound для всех клиентов
-- Reality camouflage
+- TLS camouflage
 - QR и ссылки для клиентов
 - systemd сервис
-- работу через 443/tcp
+- работу через `443/tcp`
 
-## 00. установка 3x-ui
+## 00. подготовка сервера
+
+Подключаемся:
+
+```bash
+ssh root@123.45.67.89
+```
+
+Создаем пользователя:
+
+```bash
+adduser deployuser
+```
+
+Даем sudo:
+
+```bash
+usermod -aG sudo deployuser
+```
+
+Проверяем вход:
+
+```bash
+ssh deployuser@123.45.67.89
+```
+
+## 01. обновление системы
+
+```bash
+sudo apt update && sudo apt full-upgrade -y
+```
+
+Перезагружаем:
+
+```bash
+sudo reboot
+```
+
+## 02. отключение root login
+
+Редактируем:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Меняем:
+
+```text
+PermitRootLogin no
+```
+
+Перезапускаем SSH:
+
+```bash
+sudo systemctl restart ssh
+```
+
+## 03. подключение
+
+```bash
+ssh deployuser@123.45.67.89
+sudo -i
+```
+
+## 04. установка 3x-ui
 
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
 ```
 
-## 01. настройка при установке
+!!! warning
+
+    Установка выполняется через remote install script. Перед использованием рекомендуется проверить содержимое `install.sh`.
+
+## 05. настройка при установке
 
 Выбираем:
 
@@ -34,7 +116,13 @@ IPv6 → Enter
 Port for ACME → 80
 ```
 
-## 02. данные панели
+!!! warning
+
+    Пункты install script могут отличаться между версиями 3x-ui.
+
+Используйте нестандартный port для 3x-ui panel.
+
+## 06. данные панели
 
 После установки получаем:
 
@@ -45,13 +133,30 @@ Port: 2053
 WebBasePath: XXXXX
 ```
 
-## 03. вход в панель
+## 07. вход в панель
 
 ```text
 https://IP:2053/WEBBASEPATH
 ```
 
-## 04. создание inbound
+!!! warning
+
+    3x-ui panel регулярно сканируется ботами и может стать целью: 
+	
+    - brute-force атак
+    - mass scanning
+    - попыток подбора стандартных URL/path
+    - попыток входа с утекшими паролями
+
+    Рекомендуется:
+	
+    - использовать нестандартный port
+    - использовать сложный password для panel
+    - ограничить доступ по IP через firewall
+    - не публиковать panel без необходимости
+    - использовать reverse proxy/WAF при публичном доступе
+
+## 08. создание inbound
 
 Создаем inbound только один раз.
 
@@ -69,7 +174,7 @@ https://IP:2053/WEBBASEPATH
 Примечание: vpn
 ```
 
-## 05. настройка клиента
+## 09. настройка клиента
 
 Внутри inbound:
 
@@ -82,40 +187,50 @@ https://IP:2053/WEBBASEPATH
 ```text
 Email → имя устройства
 ID → Generate
-Flow → пусто
+Flow → оставить пустым
 ```
 
-Остальное не трогаем.
-
-## 06. транспорт
+## 10. transport и security
 
 ```text
-TCP (RAW)
+Network → TCP
+Security → Reality
 ```
 
-## 07. безопасность
+## 11. Reality настройки
 
-```text
-Reality
-```
-
-## 08. Reality настройки
+Пример:
 
 ```text
 Target:
-cloudflare.com:443
+example.com:443
 
 SNI:
-cloudflare.com
+example.com
 ```
 
-## 09. генерация ключей
+!!! warning
+
+    Reality target должен:
+	
+    - поддерживать HTTPS
+    - отвечать по TLS
+    - соответствовать SNI
+    - выглядеть правдоподобно для TLS camouflage
+
+## 12. генерация Reality keys
+
+В панели:
 
 ```text
-Get New Cert
+Get New Keys
 ```
 
-## 10. Short ID
+Reality использует public/private key pair.
+
+## 13. Short ID
+
+Short ID обычно содержит 8-16 hex символов.
 
 Можно оставить автоматически сгенерированный.
 
@@ -125,13 +240,13 @@ Get New Cert
 abc123
 ```
 
-## 11. создание inbound
+## 14. создание inbound
 
 ```text
 Создать подключение
 ```
 
-## 12. добавление новых пользователей
+## 15. добавление новых пользователей
 
 Новых пользователей добавляем внутрь существующего inbound:
 
@@ -141,72 +256,86 @@ abc123
 
 Новый inbound создавать не нужно.
 
-## 13. получение ссылки
+## 16. получение ссылки
 
 ```text
 Клиенты → QR / ссылка
 ```
 
-## 14. клиенты
+Импорт через:
 
-Windows / Android:
+- Import URL
+- Scan QR code
+
+## 17. клиенты
+
+Windows:
 
 ```text
-v2rayTun
+v2rayN
+```
+
+Android:
+
+```text
+v2rayNG
 ```
 
 iPhone:
 
 ```text
-v2rayTun
 Shadowrocket
 Streisand
 ```
 
-## 15. импорт
+## 18. firewall
 
-```text
-Import URL
-```
+!!! warning
 
-Вставляем:
-
-```text
-vless://
-```
-
-## 16. firewall (опционально)
+    Перед включением UFW убедитесь, что разрешен OpenSSH, иначе можно потерять SSH доступ.
 
 ```bash
+ufw allow OpenSSH
 ufw allow 443/tcp
 ufw allow 2053/tcp
+ufw enable
 ```
 
-## 17. проверка
+## 19. проверка
 
 ```bash
-ss -tulpen | grep 443
+ss -tulpen | grep :443
+ss -tulpen | grep :2053
+
 systemctl status x-ui
+journalctl -u x-ui -n 50 --no-pager
 ```
 
-## 18. проверка подключения
+## 20. проверка подключения
 
 ```text
-https://whatismyip.com
+https://ipinfo.io
 ```
 
-## 19. как это работает
+## 21. как это работает
 
-- inbound один (443)
+- inbound обычно один (`443/tcp`)
 - клиентов может быть сколько угодно
 - каждый клиент получает свой ID
-- Reality маскирует трафик под HTTPS
-- 3x-ui управляет XRay через web panel
+- Reality использует TLS camouflage для обхода DPI/filtering
+- 3x-ui управляет XRay core через web panel
+
+3x-ui не является самим VPN/proxy server.
+
+Панель управляет XRay core.
 
 ## полезные ссылки
 
-[3x-ui GitHub](https://github.com/MHSanaei/3x-ui)
+[3x-ui GitHub](https://github.com/MHSanaei/3x-ui/)  
+https://github.com/MHSanaei/3x-ui/
 
-[XRay Documentation](https://xtls.github.io/)
+[XRay Documentation](https://xtls.github.io/)  
+https://xtls.github.io/
 
-[V2RayTun](https://github.com/2dust/v2rayN)
+[v2rayN](https://github.com/2dust/v2rayN/)  
+https://github.com/2dust/v2rayN/

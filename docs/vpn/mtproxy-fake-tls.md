@@ -1,12 +1,14 @@
 # установка и настройка MTProxy на Ubuntu 24.04
 
+MTProxy - lightweight proxy для Telegram с поддержкой Fake TLS camouflage. Прокси разрабатывается командой Telegram и используется как официальный proxy-протокол для Telegram clients. Работает только поверх TCP и предназначен только для Telegram clients.
+
 Инструкция собиралась и проверялась на Ubuntu 24.04.
 
 По итогу получаем:
 
-- MTProxy для Telegram
-- Fake TLS
-- sponsored channel
+- MTProxy server для Telegram
+- Fake TLS camouflage
+- Telegram sponsored channel
 - systemd сервис
 - автозапуск
 
@@ -30,13 +32,27 @@ adduser deployuser
 usermod -aG sudo deployuser
 ```
 
-Проверяем вход:
+## 01. настройка SSH ключей
+
+На локальном ПК:
+
+```bash
+ssh-keygen
+```
+
+Копируем ключ:
+
+```bash
+ssh-copy-id deployuser@123.45.67.89
+```
+
+Проверяем вход без пароля:
 
 ```bash
 ssh deployuser@123.45.67.89
 ```
 
-Обновляем систему:
+## 02. обновление системы
 
 ```bash
 sudo apt update && sudo apt full-upgrade -y
@@ -48,7 +64,9 @@ sudo apt update && sudo apt full-upgrade -y
 sudo reboot
 ```
 
-Запрещаем root login:
+## 03. отключение root login
+
+Редактируем:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
@@ -60,57 +78,87 @@ sudo nano /etc/ssh/sshd_config
 PermitRootLogin no
 ```
 
+Рекомендуется также отключить password authentication:
+
+```text
+PasswordAuthentication no
+```
+
 Перезапускаем SSH:
 
 ```bash
 sudo systemctl restart ssh
 ```
 
-## 01. подключение
+!!! info
+
+    На Ubuntu service может называться `ssh` или `sshd`.
+
+## 04. подключение
 
 ```bash
 ssh deployuser@123.45.67.89
 sudo -i
 ```
 
-## 02. установка зависимостей
+## 05. установка зависимостей
 
 ```bash
 apt install -y git build-essential libssl-dev zlib1g-dev curl
 ```
 
-## 03. установка MTProxy
+## 06. установка MTProxy
 
 ```bash
 cd /opt
 git clone https://github.com/TelegramMessenger/MTProxy.git
+mkdir -p /opt/MTProxy/data
+chmod 755 /opt/MTProxy
 cd MTProxy
 ```
 
-## 04. сборка
+!!! warning
+
+    Репозиторий MTProxy обновляется. Поведение и параметры могут изменяться между версиями.
+
+## 07. сборка
 
 ```bash
 make
 ```
 
-Проверяем:
+Проверяем бинарник:
 
 ```bash
-ls objs/bin/mtproto-proxy
+test -f objs/bin/mtproto-proxy && echo OK
 ```
 
-## 05. конфиги Telegram
+Проверяем зависимости:
+
+```bash
+ldd objs/bin/mtproto-proxy
+```
+
+## 08. конфиги Telegram
 
 ```bash
 curl -s https://core.telegram.org/getProxySecret -o proxy-secret
 curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
 ```
 
-## 06. генерация base secret
+Назначаем права:
+
+```bash
+chown -R nobody:nogroup /opt/MTProxy
+```
+
+## 09. генерация base secret
 
 ```bash
 head -c 16 /dev/urandom | xxd -ps
 ```
+
+Secret должен содержать ровно 32 hex символа.
 
 Пример результата:
 
@@ -118,11 +166,17 @@ head -c 16 /dev/urandom | xxd -ps
 a1b2c3d4e5f60718293a4b5c6d7e8f90
 ```
 
-## 07. Fake TLS домен
+## 10. Fake TLS домен
 
 ```bash
 echo -n "example.com" | xxd -ps
 ```
+
+Для Fake TLS обычно используют:
+
+- существующий домен
+- HTTPS сайт
+- правдоподобный TLS endpoint
 
 Пример результата:
 
@@ -130,15 +184,21 @@ echo -n "example.com" | xxd -ps
 6578616d706c652e636f6d
 ```
 
-## 08. пробный запуск
+!!! warning
 
-В примерах используется 777/tcp, но MTProxy может работать и на других TCP портах.
+    Не используйте домены Telegram, Google или Cloudflare без понимания возможных последствий DPI/filtering.
+
+## 11. пробный запуск
+
+В примерах используется `777/tcp`.
+
+MTProxy может работать практически на любом TCP порту, но некоторые провайдеры могут фильтровать нестандартные порты.
 
 ```bash
-./objs/bin/mtproto-proxy -u nobody -p 8888 -H 777 -S a1b2c3d4e5f60718293a4b5c6d7e8f90 -D example.com --aes-pwd proxy-secret proxy-multi.conf --http-stats --allow-skip-dh -M 1
+./objs/bin/mtproto-proxy -p 8888 -H 777 -S a1b2c3d4e5f60718293a4b5c6d7e8f90 -D example.com --aes-pwd proxy-secret proxy-multi.conf --http-stats --allow-skip-dh -M 1
 ```
 
-## 09. регистрация прокси в MTProxyBot
+## 12. регистрация MTProxy server в MTProxyBot
 
 Открываем:
 
@@ -164,16 +224,17 @@ a1b2c3d4e5f60718293a4b5c6d7e8f90
 ```
 
 Важно:
+
 - отправляется только base secret
 - без `ee`
 
 После этого бот выдаст:
 
-- proxy tag
+- proxy tag (`-P`)
 - ссылку подключения
-- информацию о прокси
+- информацию о MTProxy server
 
-## 10. sponsored channel
+## 13. Telegram sponsored channel
 
 В боте:
 
@@ -181,7 +242,7 @@ a1b2c3d4e5f60718293a4b5c6d7e8f90
 /myproxies
 ```
 
-Выбираем прокси → `Set Channel`
+Выбираем MTProxy server → `Set Channel`
 
 Отправляем:
 
@@ -201,7 +262,7 @@ t.me/your_channel
 - изменения применяются не сразу
 - иногда обновление занимает до часа
 
-## 11. systemd сервис
+## 14. systemd сервис
 
 Создаем файл:
 
@@ -217,21 +278,28 @@ Description=MTProto Proxy
 After=network.target
 
 [Service]
+User=nobody
+Group=nogroup
 WorkingDirectory=/opt/MTProxy
-ExecStart=/opt/MTProxy/objs/bin/mtproto-proxy -u nobody -p 8888 -H 777 -S a1b2c3d4e5f60718293a4b5c6d7e8f90 -P abcdef1234567890abcdef1234567890 -D example.com --aes-pwd proxy-secret proxy-multi.conf --http-stats --allow-skip-dh -M 1
+
+ExecStart=/opt/MTProxy/objs/bin/mtproto-proxy -p 8888 -H 777 -S a1b2c3d4e5f60718293a4b5c6d7e8f90 -P abcdef1234567890abcdef1234567890 -D example.com --aes-pwd proxy-secret proxy-multi.conf --http-stats --allow-skip-dh -M 1
+
 Restart=always
 RestartSec=3
+LimitNOFILE=65535
+
+NoNewPrivileges=true
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-## 12. запуск
+## 15. запуск
 
 ```bash
 systemctl daemon-reload
-systemctl enable mtproxy
-systemctl start mtproxy
+systemctl enable --now mtproxy
 ```
 
 Проверяем:
@@ -240,13 +308,25 @@ systemctl start mtproxy
 systemctl status mtproxy
 ```
 
-## 13. firewall
+Для применения изменений:
 
 ```bash
-ufw allow 777/tcp
+systemctl restart mtproxy
 ```
 
-## 14. Fake TLS secret
+## 16. firewall
+
+!!! warning
+
+    Перед включением UFW убедитесь, что разрешен OpenSSH, иначе можно потерять SSH доступ.
+
+```bash
+ufw allow OpenSSH
+ufw allow 777/tcp
+ufw enable
+```
+
+## 17. Fake TLS secret
 
 Формула:
 
@@ -254,36 +334,48 @@ ufw allow 777/tcp
 ee + base_secret + hex(domain)
 ```
 
+Fake TLS secret всегда начинается с `ee`.
+
+Secret чувствителен к регистру и должен передаваться без пробелов.
+
 Пример:
 
 ```text
 eea1b2c3d4e5f60718293a4b5c6d7e8f906578616d706c652e636f6d
 ```
 
-## 15. ссылка для пользователей
+## 18. ссылка для пользователей
 
 ```text
 tg://proxy?server=123.45.67.89&port=777&secret=eea1b2c3d4e5f60718293a4b5c6d7e8f906578616d706c652e636f6d
 ```
 
-## 16. диагностика
+## 19. диагностика
 
 ```bash
 systemctl status mtproxy
 journalctl -u mtproxy -n 50 --no-pager
-ss -tn sport = :777
+journalctl -u mtproxy -f
+ss -tnlp | grep :777
 ```
 
-## 17. как это работает
+## 20. как это работает
 
-- MTProxy работает на base secret
-- @MTProxyBot регистрирует этот же secret
-- proxy tag связывает сервер и sponsored channel
+- MTProxy server работает на base secret
+- `@MTProxyBot` регистрирует этот же secret
+- proxy tag связывает MTProxy server с Telegram sponsored channel
 - пользователи подключаются через Fake TLS ee-secret
-- домен в secret используется для TLS camouflage
+- домен в Fake TLS secret используется для TLS camouflage
+
+
+!!! info
+
+    MTProxy не шифрует весь интернет traffic пользователя и не заменяет VPN.
 
 ## полезные ссылки
 
-[Official MTProxy](https://github.com/TelegramMessenger/MTProxy)
+[Official MTProxy](https://github.com/TelegramMessenger/MTProxy)  
+https://github.com/TelegramMessenger/MTProxy/
 
-[@MTProxyBot](https://t.me/MTProxyBot)
+[@MTProxyBot](https://t.me/MTProxyBot)  
+https://t.me/MTProxyBot/

@@ -1,144 +1,153 @@
-# как бесплатно поднять документацию на GitHub Pages
+# как бесплатно поднять документацию на GitHub Pages через MkDocs
 
-Всё делаем из командной строки Windows.
+Когда заметки, конфиги, инструкции и txt-файлы начинают жить годами - их обычно собирают в документацию.
 
-cmd желательно запускать от имени администратора.
+GitHub Pages + MkDocs + Material theme позволяют сделать это бесплатно, без VPS, Docker, Nginx и отдельного сервера.
 
-Когда у тебя куча заметок, конфигов, команд, инструкций и "временных" txt-файлов, которые живут уже 3 года, рано или поздно ловишь себя на мысли: пора сделать нормальную документацию.
-
-Но платить ни за что не хочется, поднимать отдельный сервер лень, а городить Wordpress - преступление.
-
-В итоге оказывается, что GitHub Pages + MkDocs Material закрывают почти всё бесплатно.
-
-Всё собиралось на обычной Windows 10 22H2 через cmd, Python, Git, MkDocs и GitHub Pages.
+Инструкция проверялась на Windows 10 22H2 через cmd.exe.
 
 По итогу получаем:
 
-- свой сайт
-- свой домен
-- Markdown
+- сайт с документацией
+- публикацию через GitHub Pages
+- Markdown статьи
 - поиск
-- нормальную навигацию
+- навигацию
 - git versioning
-- auto deploy
-- бесплатно
+- auto deploy через GitHub Actions
+- возможность подключить свой домен
+- бесплатный хостинг
 
-И всё это без:
+## 00. требования
 
-- VPS
-- Docker
-- Nginx
-- сертификатов
-- баз данных
+Нужно:
 
-## что будем использовать
-
-- GitHub Pages
-- MkDocs
-- Material for MkDocs
-- Git
-- Python
+- Windows
+- GitHub аккаунт
+- интернет
 - winget
 
-## 1. проверяем winget
+!!! warning
+
+    Для работы GitHub Pages нужен публичный GitHub repository либо тариф/настройки, которые позволяют публиковать Pages из private repository.
+
+Проверяем winget:
 
 ```cmd
 winget --version
 ```
 
-Если команда не найдена - нужно установить App Installer из Microsoft Store.
+Если команда не найдена - установите App Installer из Microsoft Store и перезапустите cmd.
 
-## 2. установка Python
+## 01. установка Python
 
 ```cmd
 winget install --id Python.Python.3 --exact
 ```
 
-Закрываем `cmd`, открываем заново и проверяем:
+Перезапускаем `cmd` и проверяем:
 
 ```cmd
 python --version
 pip --version
 ```
 
-## 3. установка Git
+!!! info
+
+    Если python или pip не находятся после установки - перезапустите cmd или проверьте PATH.
+
+## 02. установка Git
 
 ```cmd
 winget install --id Git.Git --exact
 ```
 
-Закрываем `cmd`, открываем заново и проверяем:
+Перезапускаем `cmd` и проверяем:
 
 ```cmd
 git --version
 ```
 
-## 4. установка MkDocs
+## 03. установка MkDocs
 
 ```cmd
-pip install mkdocs mkdocs-material
+python -m pip install mkdocs mkdocs-material
 ```
 
 Проверяем:
 
 ```cmd
-mkdocs --version
+python -m mkdocs --version
 ```
 
-## 5. создание проекта
-
-```cmd
-cd C:\
-mkdocs new mydocs
-cd C:\mydocs
-```
-
-## 6. локальный запуск
+Если `mkdocs` доступен в PATH, можно использовать короткие команды:
 
 ```cmd
 mkdocs serve
+mkdocs build
 ```
 
-После этого сайт будет доступен:
+## 04. создание проекта
+
+```cmd
+cd C:\
+python -m mkdocs new infra-docs
+cd C:\infra-docs
+```
+
+## 05. локальный запуск
+
+```cmd
+python -m mkdocs serve
+```
+
+Сайт будет доступен:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-Все изменения в `.md` файлах обновляются автоматически.
+Изменения в `.md` файлах обычно применяются автоматически после сохранения файла.
 
 Остановить сервер:
 
 ```text
-Ctrl + C
+Ctrl+C
 ```
 
-## 7. структура проекта
+## 06. структура проекта
 
-Минимально:
+Минимальная структура:
 
 ```text
-mydocs/
+infra-docs/
 ├─ docs/
 │  ├─ index.md
+│  ├─ github-pages-mkdocs.md
 │  └─ stylesheets/
 │     └─ extra.css
 ├─ mkdocs.yml
 ```
 
-## 8. настройка mkdocs.yml
+Создаем статью:
 
-Редактируем файл:
+```cmd
+notepad C:\infra-docs\docs\github-pages-mkdocs.md
+```
+
+## 07. настройка mkdocs.yml
+
+Редактируем:
 
 ```text
-C:\mydocs\mkdocs.yml
+C:\infra-docs\mkdocs.yml
 ```
 
 Содержимое:
 
 ```yaml
-site_name: "mydocs"
-site_url: https://mydocs.example.com/
+site_name: "infra docs"
+site_url: https://USERNAME.github.io/REPO/
 
 theme:
   name: material
@@ -183,12 +192,17 @@ nav:
       - "GitHub Pages + MkDocs": github-pages-mkdocs.md
 ```
 
-## 9. опционально: убираем содержание справа и меняем списки
+!!! warning
+
+    site_url должен соответствовать реальному URL сайта. Для GitHub Pages обычно используется:
+    https://USERNAME.github.io/REPO/
+
+## 08. кастомный CSS
 
 Создаем файл:
 
 ```text
-C:\mydocs\docs\stylesheets\extra.css
+C:\infra-docs\docs\stylesheets\extra.css
 ```
 
 Содержимое:
@@ -211,6 +225,7 @@ C:\mydocs\docs\stylesheets\extra.css
 }
 
 .md-typeset ul li {
+  position: relative;
   margin: 0.08em 0;
   line-height: 1.25;
 }
@@ -227,18 +242,19 @@ C:\mydocs\docs\stylesheets\extra.css
 }
 ```
 
-## 10. GitHub Pages
+## 09. GitHub repository
 
-Создаем репозиторий на GitHub.
+Создаем repository на GitHub.
 
 Замените:
+
 - `USERNAME` на свой GitHub username
-- `REPO` на название репозитория
+- `REPO` на название repository
 
 Дальше в `cmd`:
 
 ```cmd
-cd C:\mydocs
+cd C:\infra-docs
 git init
 git add .
 git commit -m "initial commit"
@@ -247,15 +263,15 @@ git remote add origin https://github.com/USERNAME/REPO.git
 git push -u origin main
 ```
 
-## 11. GitHub Actions Deploy
+## 10. GitHub Actions deploy
 
 Создаем файл:
 
 ```text
-C:\mydocs\.github\workflows\deploy.yml
+C:\infra-docs\.github\workflows\deploy.yml
 ```
 
-Если папок `.github` и `workflows` нет - создаем их вручную.
+Если `.github` и `workflows` отсутствуют - создаем вручную.
 
 Содержимое:
 
@@ -281,12 +297,18 @@ jobs:
         with:
           python-version: 3.x
 
-      - run: pip install mkdocs-material
+      - run: pip install mkdocs mkdocs-material
 
       - run: mkdocs gh-deploy --force
 ```
 
-## 12. публикация изменений
+`mkdocs gh-deploy` публикует сайт в branch `gh-pages`.
+
+!!! info
+
+    После первого deploy branch `gh-pages` создается автоматически.
+
+## 11. публикация изменений
 
 После изменений:
 
@@ -296,11 +318,29 @@ git commit -m "update docs"
 git push
 ```
 
-GitHub Actions соберет сайт и обновит GitHub Pages.
+GitHub Actions автоматически соберет сайт и опубликует его в branch `gh-pages`.
 
-## 13. свой домен
+В GitHub Pages source должен быть выбран:
 
-Для домена нужно создать DNS записи.
+- branch: `gh-pages`
+- folder: `/(root)`
+
+Проверить сайт можно по адресу:
+
+```text
+https://USERNAME.github.io/REPO/
+```
+
+Даже если собственный домен еще не настроен.
+
+!!! info
+
+    GitHub Pages обновляется не мгновенно.
+    Первый deploy иногда занимает несколько минут.
+
+## 12. свой домен
+
+Для домена создаем DNS записи.
 
 Пример:
 
@@ -310,29 +350,115 @@ A      @       185.199.109.153
 A      @       185.199.110.153
 A      @       185.199.111.153
 
-CNAME www     USERNAME.github.io
+CNAME  www     USERNAME.github.io
 ```
 
-где:
-- `USERNAME` - ваш GitHub username
-- `@` - корень домена
+!!! warning
+
+    DNS записи GitHub Pages лучше периодически сверять с официальной документацией GitHub.
+
+!!! info
+
+    - `USERNAME` - GitHub username
+    - `@` - корень домена
 
 После этого в GitHub:
 
 ```text
-Settings -> Pages
+Settings -> Pages -> Custom domain
 ```
 
 указываем свой домен.
 
-## итог
+После настройки домена желательно включить:
 
-На всё ушло:
+- Enforce HTTPS
+
+## 13. проверка
+
+Локальный запуск:
+
+```cmd
+python -m mkdocs serve
+```
+
+Проверка сборки:
+
+```cmd
+python -m mkdocs build
+```
+
+Проверка deploy:
+
+```cmd
+git push
+```
+
+Если deploy успешен - workflow в GitHub Actions завершится со статусом `Success`.
+
+## 14. типовые проблемы
+
+### mkdocs не найден
+
+Проверить:
+
+```cmd
+python -m mkdocs --version
+```
+
+Если команда не работает - обычно помогает перезапуск `cmd`.
+
+### сайт не обновляется
+
+Проверить:
+
+- git push
+- GitHub Actions
+- branch main
+- workflow status
+
+### GitHub Actions успешен, но сайт не обновляется
+
+Проверить:
+
+- source branch gh-pages
+- cache браузера
+- custom domain
+- DNS propagation
+- GitHub Pages status
+
+### CSS не применяется
+
+Проверить:
+
+- путь `docs/stylesheets/extra.css`
+- extra_css в mkdocs.yml
+- обновление страницы через `Ctrl + F5`
+
+### GitHub Pages открывает 404
+
+Проверить:
+
+- включен ли GitHub Pages
+- успешен ли deploy
+- правильный ли repository URL
+
+### www домен не открывается
+
+Проверить:
+
+- CNAME запись
+- Custom domain в GitHub Pages
+- DNS propagation
+
+## 15. итог
+
+На базовую настройку обычно уходит:
 
 - пара часов
 - один домен
 - ноль рублей за хостинг
 
-Собственно, если вы читаете эту статью - значит всё получилось.
+Если сайт успешно открывается через GitHub Pages URL или собственный домен - документация настроена корректно.
 
-Этот сайт собран через MkDocs, деплоится через GitHub Actions, опубликован на GitHub Pages и создан ровно по инструкции выше.
+Сайт собран через Material for MkDocs, деплоится через GitHub Actions, опубликован на GitHub Pages и создан ровно по инструкции выше.
