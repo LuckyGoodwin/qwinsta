@@ -1,29 +1,21 @@
-# установка и настройка XRay (VLESS + Reality) + 3x-ui
+# XRay: VLESS + Reality + 3x-ui
 
-3x-ui - web panel для управления XRay core.
+3x-ui — веб-панель для управления XRay core.
 
-XRay поддерживает:
+XRay поддерживает VLESS, Reality, Trojan, Shadowsocks и VMess. Reality прячет трафик за TLS camouflage — DPI его не распознаёт.
 
-- VLESS
-- Reality
-- Trojan
-- Shadowsocks
-- VMess
+Инструкция проверена на Ubuntu 24.04.
 
-Reality использует TLS camouflage для обхода DPI/filtering.
-
-Инструкция собиралась и проверялась на Ubuntu 24.04.
-
-По итогу получаем:
+После настройки получишь:
 
 - XRay core
 - VLESS + Reality
 - 3x-ui panel
 - один inbound для всех клиентов
 - TLS camouflage
-- QR и ссылки для клиентов
-- systemd сервис
-- работу через `443/tcp`
+- QR-коды и ссылки для клиентов
+- systemd-сервис
+- вход через `443/tcp`
 
 ## 00. подготовка сервера
 
@@ -33,13 +25,13 @@ Reality использует TLS camouflage для обхода DPI/filtering.
 ssh root@123.45.67.89
 ```
 
-Создаем пользователя:
+Создаём пользователя:
 
 ```bash
 adduser deployuser
 ```
 
-Даем sudo:
+Даём sudo:
 
 ```bash
 usermod -aG sudo deployuser
@@ -64,8 +56,6 @@ sudo reboot
 ```
 
 ## 02. отключение root login
-
-Редактируем:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
@@ -96,13 +86,9 @@ sudo -i
 bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
 ```
 
-!!! warning
-
-    Установка выполняется через remote install script. Перед использованием рекомендуется проверить содержимое `install.sh`.
+> **Внимание.** Скрипт выполняется напрямую с GitHub. Прочитай `install.sh` перед запуском.
 
 ## 05. настройка при установке
-
-Выбираем:
 
 ```text
 Do you want to customize the Panel Port? → y
@@ -116,15 +102,13 @@ IPv6 → Enter
 Port for ACME → 80
 ```
 
-!!! warning
+> **Внимание.** Пункты скрипта меняются между версиями 3x-ui.
 
-    Пункты install script могут отличаться между версиями 3x-ui.
-
-Используйте нестандартный port для 3x-ui panel.
+Ставь нестандартный порт для панели — стандартный сканируют.
 
 ## 06. данные панели
 
-После установки получаем:
+После установки скрипт выведет:
 
 ```text
 Username: XXXXX
@@ -139,34 +123,21 @@ WebBasePath: XXXXX
 https://IP:2053/WEBBASEPATH
 ```
 
-!!! warning
-
-    3x-ui panel регулярно сканируется ботами и может стать целью: 
-	
-    - brute-force атак
-    - mass scanning
-    - попыток подбора стандартных URL/path
-    - попыток входа с утекшими паролями
-
-    Рекомендуется:
-	
-    - использовать нестандартный port
-    - использовать сложный password для panel
-    - ограничить доступ по IP через firewall
-    - не публиковать panel без необходимости
-    - использовать reverse proxy/WAF при публичном доступе
+> **Внимание.** Боты постоянно сканируют 3x-ui: брутфорсят пароли, перебирают стандартные пути, пробуют утёкшие credentials.
+>
+> Защита минимум:
+> - нестандартный порт
+> - сложный пароль
+> - ограничение по IP через firewall
+> - reverse proxy или WAF при публичном доступе
 
 ## 08. создание inbound
 
-Создаем inbound только один раз.
-
-Переходим:
+Inbound создаёшь один раз. Все пользователи идут через него.
 
 ```text
 Подключения → Создать подключение
 ```
-
-Настройки:
 
 ```text
 Протокол: VLESS
@@ -174,15 +145,11 @@ https://IP:2053/WEBBASEPATH
 Примечание: vpn
 ```
 
-## 09. настройка клиента
-
-Внутри inbound:
+## 09. добавление клиента
 
 ```text
 Добавить клиента
 ```
-
-Настройки:
 
 ```text
 Email → имя устройства
@@ -197,9 +164,7 @@ Network → TCP
 Security → Reality
 ```
 
-## 11. Reality настройки
-
-Пример:
+## 11. Reality: target и SNI
 
 ```text
 Target:
@@ -209,90 +174,55 @@ SNI:
 example.com
 ```
 
-!!! warning
+> **Внимание.** Target должен работать по HTTPS, отвечать по TLS и совпадать с SNI. Выбирай домен, который выглядит правдоподобно — именно его трафик будет имитировать Reality.
 
-    Reality target должен:
-	
-    - поддерживать HTTPS
-    - отвечать по TLS
-    - соответствовать SNI
-    - выглядеть правдоподобно для TLS camouflage
-
-## 12. генерация Reality keys
-
-В панели:
+## 12. генерация ключей Reality
 
 ```text
 Get New Keys
 ```
 
-Reality использует public/private key pair.
+Reality работает на паре public/private key. Генерируй прямо в панели.
 
 ## 13. Short ID
 
-Short ID обычно содержит 8-16 hex символов.
-
-Можно оставить автоматически сгенерированный.
-
-Или указать свой:
+Short ID — 8–16 hex-символов. Оставь автоматический или задай свой:
 
 ```text
 abc123
 ```
 
-## 14. создание inbound
+## 14. сохранение inbound
 
 ```text
 Создать подключение
 ```
 
-## 15. добавление новых пользователей
+## 15. новые пользователи
 
-Новых пользователей добавляем внутрь существующего inbound:
+Добавляй пользователей внутрь существующего inbound — новый создавать не нужно:
 
 ```text
 Подключения → inbound → Клиенты → Добавить
 ```
 
-Новый inbound создавать не нужно.
-
-## 16. получение ссылки
+## 16. ссылка и QR-код
 
 ```text
 Клиенты → QR / ссылка
 ```
 
-Импорт через:
-
-- Import URL
-- Scan QR code
+Импортируй через Import URL или сканирование QR.
 
 ## 17. клиенты
 
-Windows:
-
-```text
-v2rayN
-```
-
-Android:
-
-```text
-v2rayNG
-```
-
-iPhone:
-
-```text
-Shadowrocket
-Streisand
-```
+Windows — v2rayN  
+Android — v2rayNG  
+iPhone — Shadowrocket или Streisand
 
 ## 18. firewall
 
-!!! warning
-
-    Перед включением UFW убедитесь, что разрешен OpenSSH, иначе можно потерять SSH доступ.
+> **Внимание.** Сначала разреши OpenSSH — иначе после включения UFW потеряешь SSH.
 
 ```bash
 ufw allow OpenSSH
@@ -301,7 +231,7 @@ ufw allow 2053/tcp
 ufw enable
 ```
 
-## 19. проверка
+## 19. проверка сервисов
 
 ```bash
 ss -tulpen | grep :443
@@ -319,23 +249,12 @@ https://ipinfo.io
 
 ## 21. как это работает
 
-- inbound обычно один (`443/tcp`)
-- клиентов может быть сколько угодно
-- каждый клиент получает свой ID
-- Reality использует TLS camouflage для обхода DPI/filtering
-- 3x-ui управляет XRay core через web panel
+Один inbound на `443/tcp`, сколько угодно клиентов. Каждый получает свой UUID. Reality имитирует TLS-трафик легитимного сайта — DPI видит обычный HTTPS.
 
-3x-ui не является самим VPN/proxy server.
+3x-ui — не VPN и не proxy. Это интерфейс управления XRay core.
 
-Панель управляет XRay core.
-
-## полезные ссылки
+## ссылки
 
 [3x-ui GitHub](https://github.com/MHSanaei/3x-ui/)  
-https://github.com/MHSanaei/3x-ui/
-
 [XRay Documentation](https://xtls.github.io/)  
-https://xtls.github.io/
-
-[v2rayN](https://github.com/2dust/v2rayN/)  
-https://github.com/2dust/v2rayN/
+[v2rayN](https://github.com/2dust/v2rayN/)

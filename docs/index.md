@@ -5,16 +5,12 @@ windows / mikrotik / vpn / terminal services / powershell
 
 без маркетинговой воды и "enterprise best practices" ради галочки.
 
----
-
 ## разделы
 
 - [Windows]
 - [MikroTik]
 - [VPN](vpn/mtproxy-fake-tls.md)
 - [Toolkit]
-
----
 
 ## QWINSTA Toolkit
 
@@ -37,10 +33,10 @@ irm https://get.qwinsta.ru | iex
 
 <!-- latest:start -->
 - [как бесплатно поднять документацию на GitHub Pages через MkDocs](github-pages-mkdocs.md)
+- [настройка WireGuard site-to-site VPN между MikroTik](mikrotik/wireguard-site-to-site.md)
+- [установка и настройка XRay (VLESS + Reality) + 3x-ui](vpn/xray-reality.md)
 - [установка и настройка MTProxy на Ubuntu 24.04](vpn/mtproxy-fake-tls.md)
 - [установка и настройка Tinyproxy на Ubuntu 24.04](vpn/tinyproxy.md)
-- [установка и настройка XRay (VLESS + Reality) + 3x-ui](vpn/xray-reality.md)
-- [настройка WireGuard site-to-site VPN между MikroTik](mikrotik/wireguard-site-to-site.md)
 <!-- latest:end -->
 
 ## about
