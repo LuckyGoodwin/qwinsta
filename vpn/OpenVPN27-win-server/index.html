@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#openvpn-27-windows-server-2022-production-setup" class="md-skip">
+        <a href="#openvpn-27-windows-server-2022" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -636,7 +636,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        о серии статей
+        Что получится в результате
       
     </span>
   </a>
@@ -644,10 +644,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#1-openvpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        что делаем в этой статье
+        1. Устанавливаем OpenVPN
       
     </span>
   </a>
@@ -655,10 +655,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#00" class="md-nav__link">
+  <a href="#2-easy-rsa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        00. схема
+        2. Готовим удобный запуск Easy-RSA
       
     </span>
   </a>
@@ -666,10 +666,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#01-openvpn" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. установка OpenVPN
+        3. Настраиваем параметры сертификатов
       
     </span>
   </a>
@@ -677,66 +677,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#02" class="md-nav__link">
+  <a href="#4-pki" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. создаем структуру каталогов
+        4. Создаём PKI
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#03-easy-rsa-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        03. Easy-RSA runner
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#04-vars" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        04. vars
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#05-pki" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        05. создаем PKI
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#06-serverovpn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        06. создаем server.ovpn
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="06. создаем server.ovpn">
+    <nav class="md-nav" aria-label="4. Создаём PKI">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#topology-subnet" class="md-nav__link">
+  <a href="#1-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        topology subnet
+        Вариант 1. CA с паролем
       
     </span>
   </a>
@@ -744,43 +700,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tls-crypt" class="md-nav__link">
+  <a href="#2-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        tls-crypt
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-ciphers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        data-ciphers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disable-dco" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        disable-dco
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#persist-tun" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        persist-tun
+        Вариант 2. CA без пароля
       
     </span>
   </a>
@@ -793,49 +716,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#07-firewall-routing" class="md-nav__link">
+  <a href="#5-tls-crypt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. firewall + routing
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="07. firewall + routing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ipenablerouter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        IPEnableRouter
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reboot" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        reboot обязателен
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#08-openvpnservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        08. перезапускаем OpenVPNService
+        5. Создаём ключ tls-crypt
       
     </span>
   </a>
@@ -843,10 +727,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09" class="md-nav__link">
+  <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. создаем клиента
+        6. Создаём конфигурацию сервера
       
     </span>
   </a>
@@ -854,69 +738,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-mikrotik" class="md-nav__link">
+  <a href="#7-windows" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. MikroTik
+        7. Включаем маршрутизацию Windows
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="10. MikroTik">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dst-nat" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        dst-nat
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#route" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        route
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-reboot" class="md-nav__link">
+  <a href="#8-openvpn-windows" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. reboot
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="11. reboot">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reboot_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        reboot обязателен
+        8. Разрешаем OpenVPN в брандмауэре Windows
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#9-openvpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Настраиваем службу OpenVPN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Выпускаем сертификат клиента
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Создаём клиентский профиль
+      
+    </span>
+  </a>
   
 </li>
       
@@ -924,7 +796,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. результат
+        12. Запускаем сервер и читаем журнал
       
     </span>
   </a>
@@ -932,22 +804,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#production-notes" class="md-nav__link">
+  <a href="#13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        production notes
+        13. Настраиваем маршрутизатор
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="production notes">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Устанавливаем клиент и проверяем подключение
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Устанавливаем клиент и проверяем подключение">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#confirmed" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        confirmed
+        На телефоне
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        На Windows
       
     </span>
   </a>
@@ -958,7 +852,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        важно
+        Что проверять после подключения
       
     </span>
   </a>
@@ -967,6 +861,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Резервная копия
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1300,7 +1205,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        о серии статей
+        Что получится в результате
       
     </span>
   </a>
@@ -1308,10 +1213,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#1-openvpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        что делаем в этой статье
+        1. Устанавливаем OpenVPN
       
     </span>
   </a>
@@ -1319,10 +1224,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#00" class="md-nav__link">
+  <a href="#2-easy-rsa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        00. схема
+        2. Готовим удобный запуск Easy-RSA
       
     </span>
   </a>
@@ -1330,10 +1235,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#01-openvpn" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. установка OpenVPN
+        3. Настраиваем параметры сертификатов
       
     </span>
   </a>
@@ -1341,66 +1246,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#02" class="md-nav__link">
+  <a href="#4-pki" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. создаем структуру каталогов
+        4. Создаём PKI
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#03-easy-rsa-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        03. Easy-RSA runner
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#04-vars" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        04. vars
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#05-pki" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        05. создаем PKI
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#06-serverovpn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        06. создаем server.ovpn
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="06. создаем server.ovpn">
+    <nav class="md-nav" aria-label="4. Создаём PKI">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#topology-subnet" class="md-nav__link">
+  <a href="#1-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        topology subnet
+        Вариант 1. CA с паролем
       
     </span>
   </a>
@@ -1408,43 +1269,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tls-crypt" class="md-nav__link">
+  <a href="#2-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        tls-crypt
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-ciphers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        data-ciphers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disable-dco" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        disable-dco
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#persist-tun" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        persist-tun
+        Вариант 2. CA без пароля
       
     </span>
   </a>
@@ -1457,49 +1285,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#07-firewall-routing" class="md-nav__link">
+  <a href="#5-tls-crypt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. firewall + routing
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="07. firewall + routing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ipenablerouter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        IPEnableRouter
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reboot" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        reboot обязателен
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#08-openvpnservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        08. перезапускаем OpenVPNService
+        5. Создаём ключ tls-crypt
       
     </span>
   </a>
@@ -1507,10 +1296,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09" class="md-nav__link">
+  <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. создаем клиента
+        6. Создаём конфигурацию сервера
       
     </span>
   </a>
@@ -1518,69 +1307,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-mikrotik" class="md-nav__link">
+  <a href="#7-windows" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. MikroTik
+        7. Включаем маршрутизацию Windows
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="10. MikroTik">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dst-nat" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        dst-nat
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#route" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        route
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-reboot" class="md-nav__link">
+  <a href="#8-openvpn-windows" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. reboot
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="11. reboot">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reboot_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        reboot обязателен
+        8. Разрешаем OpenVPN в брандмауэре Windows
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#9-openvpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Настраиваем службу OpenVPN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Выпускаем сертификат клиента
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Создаём клиентский профиль
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1588,7 +1365,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. результат
+        12. Запускаем сервер и читаем журнал
       
     </span>
   </a>
@@ -1596,22 +1373,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#production-notes" class="md-nav__link">
+  <a href="#13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        production notes
+        13. Настраиваем маршрутизатор
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="production notes">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Устанавливаем клиент и проверяем подключение
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Устанавливаем клиент и проверяем подключение">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#confirmed" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        confirmed
+        На телефоне
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        На Windows
       
     </span>
   </a>
@@ -1622,7 +1421,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        важно
+        Что проверять после подключения
       
     </span>
   </a>
@@ -1631,6 +1430,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Резервная копия
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1651,684 +1461,462 @@
 
 
 
-<h1 id="openvpn-27-windows-server-2022-production-setup">OpenVPN 2.7 на Windows Server 2022 - production setup с нуля</h1>
-<h2 id="_1">о серии статей</h2>
-<p>Это серия статей по OpenVPN 2.7 на Windows Server.</p>
-<p>Разбирается:
-- настройка OpenVPN
-- PKI
-- сертификаты
-- Active Directory авторизация
-- routing
-- security
-- диагностика проблем
-- production эксплуатация</p>
-<hr />
-<h2 id="_2">что делаем в этой статье</h2>
-<p>В данной статье настраивается базовый OpenVPN сервер для постоянной рабочей эксплуатации.</p>
-<p>В результате получаем:
-- OpenVPNService с автозапуском
-- split tunnel
-- доступ клиентов в LAN
-- routing между VPN и локальной сетью
-- работу:
-  - ping
-  - DNS
-  - RDP
-- автоматический запуск после reboot</p>
-<p>Используется:
-- OpenVPN 2.7
-- TAP driver
-- Easy-RSA
-- EC certificates
-- tls-crypt
-- AES-256-GCM</p>
-<p>Конфигурация протестирована:
-- Windows Server 2022
-- OpenVPN 2.7.4
-- MikroTik RouterOS v7</p>
-<p>В данной статье:
-- без Active Directory
-- без MFA
-- без паролей на сертификаты
-- без hardening</p>
-<p>Это базовая рабочая конфигурация, на основе которой дальше будут:
-- AD авторизация
-- защита PKI
-- статические VPN IP
-- revoke сертификатов
-- hardening
-- диагностика проблем</p>
-<hr />
-<h2 id="00">00. схема</h2>
-<div class="highlight"><pre><span></span><code>internet
-    |
-public ip
-212.104.74.82
-    |
-MikroTik
-dst-nat udp/1194
-    |
-Windows Server 2022
-OpenVPN 2.7
-192.168.2.58
-    |
-LAN 192.168.2.0/24
-</code></pre></div>
-<p>После настройки получаем:</p>
+<h1 id="openvpn-27-windows-server-2022">OpenVPN 2.7 на Windows Server 2022: ручная установка и настройка с нуля</h1>
+<p>В этой статье рассмотрим установку и настройку OpenVPN Server 2.7 на Windows Server 2022. По пути разберёмся, из каких компонентов состоит OpenVPN, зачем нужен каждый файл и что делает каждый важный параметр конфигурации.</p>
+<h2 id="_1">Что получится в результате</h2>
+<p>После выполнения всех шагов вы получите полностью настроенный OpenVPN-сервер на Windows Server 2022.</p>
+<p>Будут настроены:</p>
 <ul>
-<li>OpenVPNService автоматически стартует после reboot</li>
-<li>клиент получает доступ в LAN</li>
-<li>работает:</li>
-<li>ping</li>
-<li>DNS</li>
-<li>RDP</li>
-<li>используется:</li>
-<li>tls-crypt</li>
-<li>AES-256-GCM</li>
-<li>TLS 1.2+</li>
-<li>split tunnel</li>
-<li>конфиг полностью готов для постоянной эксплуатации</li>
+<li>OpenVPN Server;</li>
+<li>OpenSSL;</li>
+<li>Easy-RSA;</li>
+<li>собственный центр сертификации (CA);</li>
+<li>серверный сертификат;</li>
+<li>первый клиентский сертификат;</li>
+<li>защита служебного обмена с помощью <code>tls-crypt</code>;</li>
+<li>автоматический запуск службы OpenVPN;</li>
+<li>маршрутизация Windows;</li>
+<li>правило брандмауэра Windows;</li>
+<li>готовый клиентский профиль <code>.ovpn</code>.</li>
 </ul>
-<p>Стенд:</p>
-<div class="highlight"><pre><span></span><code>OS: Windows Server 2022
-OpenVPN: 2.7.4
-Easy-RSA: 3.2.6
-OpenSSL: 3.6.2
-VPN subnet: 192.168.254.0/24
-LAN subnet: 192.168.2.0/24
-</code></pre></div>
+<p>После этого останется только импортировать профиль в OpenVPN Connect и подключиться к локальной сети через Интернет.</p>
 <hr />
-<h2 id="01-openvpn">01. установка OpenVPN</h2>
-<p>Устанавливаем:</p>
+<p>В примерах используется такая схема:</p>
+<div class="highlight"><pre><span></span><code>Windows Server с OpenVPN: 192.168.10.10
+Локальная сеть:           192.168.10.0/24
+Внутренний DNS:           192.168.10.5
+
+VPN-сеть:                 192.168.254.0/24
+Внешний адрес:            vpn.example.com
+Порт OpenVPN:             UDP 1194
+Первый клиент:            test1
+</code></pre></div>
+<p>Если у вас другие адреса, меняйте их прямо в командах и конфигурационных файлах в тех местах, где они встречаются.</p>
+<p>Все команды PowerShell должны выполняться от имени администратора.</p>
+<hr />
+<h2 id="1-openvpn">1. Устанавливаем OpenVPN</h2>
+<p>Создаём временный каталог и скачиваем установщик OpenVPN 2.7.4.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Path</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN-Deploy</span> <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+<span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">SecurityProtocol</span> <span class="p">=</span> <span class="no">[System.Net.SecurityProtocolType]</span><span class="p">::</span><span class="n">Tls12</span>
+<span class="p">(</span><span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadFile</span><span class="p">(</span><span class="s2">&quot;https://swupdate.openvpn.org/community/releases/OpenVPN-2.7.4-I002-amd64.msi&quot;</span><span class="p">,</span><span class="s2">&quot;C:\OpenVPN-Deploy\OpenVPN-2.7.4-I002-amd64.msi&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Перед установкой проверяем цифровую подпись файла:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-AuthenticodeSignature</span> <span class="s2">&quot;C:\OpenVPN-Deploy\OpenVPN-2.7.4-I002-amd64.msi&quot;</span>
+</code></pre></div>
+<p>В строке <code>Status</code> должно быть:</p>
+<div class="highlight"><pre><span></span><code>Valid
+</code></pre></div>
+<p>Теперь уже можно установить OpenVPN, TAP-драйвер, OpenSSL и Easy-RSA:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Start-Process</span> <span class="n">msiexec</span><span class="p">.</span><span class="n">exe</span> <span class="n">-ArgumentList</span> <span class="s1">&#39;/i &quot;C:\OpenVPN-Deploy\OpenVPN-2.7.4-I002-amd64.msi&quot; /qn /norestart INSTALLDIR=&quot;C:\OpenVPN&quot; ADDLOCAL=OpenVPN,OpenVPN.GUI,OpenVPN.Service,Drivers,Drivers.TAPWindows6,OpenSSL,EasyRSA /L*v &quot;C:\OpenVPN-Deploy\openvpn-install.log&quot;&#39;</span> <span class="n">-Wait</span>
+</code></pre></div>
+<p>После завершения установки достаточно убедиться, что появились файлы в каталоге <code>C:\OpenVPN\</code>, служба <code>OpenVPNService</code>, а в списке сетевых адаптеров — <code>TAP-Windows Adapter</code>.</p>
+<p>Во время установки OpenVPN автоматически создаёт несколько рабочих каталогов. В дальнейшем чаще всего используются следующие:</p>
+<p><code>C:\OpenVPN\config-auto</code> — здесь находится конфигурация сервера. Служба <code>OpenVPNService</code> автоматически запускает все файлы <code>.ovpn</code>, расположенные в этом каталоге.</p>
+<p><code>C:\OpenVPN\easy-rsa\pki</code> — здесь будут храниться инфраструктура сертификатов (PKI): сертификат центра сертификации (CA), серверные и клиентские сертификаты, закрытые ключи и список отозванных сертификатов (CRL). Это один из самых важных каталогов OpenVPN.</p>
+<p><code>C:\ProgramData\OpenVPN\Log</code> — здесь находятся журналы работы OpenVPN. Если сервер не запускается или возникают проблемы с подключением клиентов, в первую очередь следует проверить именно этот каталог.</p>
+<hr />
+<h2 id="2-easy-rsa">2. Готовим удобный запуск Easy-RSA</h2>
+<p>Easy-RSA — это набор утилит для создания центра сертификации (CA), выпуска и отзыва сертификатов OpenVPN. В Windows она запускается через <code>sh.exe</code> и использует служебные программы из собственного каталога.</p>
+<p>Чтобы каждый раз не писать длинную команду с путями, создадим небольшой командный файл. После этого сертификаты можно будет выпускать обычными командами из PowerShell или командной строки.</p>
+<p>Открываем файл:</p>
+<div class="highlight"><pre><span></span><code><span class="n">notepad</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span>
+</code></pre></div>
+<p>Вставляем:</p>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="k">setlocal</span> EnableExtensions
+
+<span class="k">set</span> <span class="s2">&quot;ER=C:\OpenVPN\easy-rsa&quot;</span>
+<span class="k">set</span> <span class="s2">&quot;PATH=C:\OpenVPN\bin;</span><span class="nv">%ER%</span><span class="s2">\bin;</span><span class="nv">%PATH%</span><span class="s2">&quot;</span>
+
+<span class="s2">&quot;</span><span class="nv">%ER%</span><span class="s2">\bin\sh.exe&quot;</span> -lc <span class="s2">&quot;cd &#39;C:/OpenVPN/easy-rsa&#39; || exit 111; ./easyrsa </span><span class="nv">%*</span><span class="s2">; exit $?&quot;</span> <span class="mi">2</span><span class="p">&gt;&amp;</span><span class="mi">1</span>
+<span class="k">exit</span> /b <span class="nv">%errorlevel%</span>
+</code></pre></div>
+<p>Сохраняем и проверяем:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; --version&quot;</span>
+</code></pre></div>
+<p>Дальше через этот файл будем создавать центр сертификации, серверный сертификат и клиентские сертификаты.</p>
+<hr />
+<h2 id="3">3. Настраиваем параметры сертификатов</h2>
+<p>Открываем файл:</p>
+<div class="highlight"><pre><span></span><code><span class="n">notepad</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">vars</span>
+</code></pre></div>
+<p>Вставляем:</p>
+<div class="highlight"><pre><span></span><code>set_var EASYRSA_DN &quot;cn_only&quot;
+set_var EASYRSA_ALGO &quot;ec&quot;
+set_var EASYRSA_CURVE &quot;prime256v1&quot;
+set_var EASYRSA_DIGEST &quot;sha256&quot;
+
+set_var EASYRSA_CA_EXPIRE 3650
+set_var EASYRSA_CERT_EXPIRE 825
+set_var EASYRSA_CRL_DAYS 30
+
+set_var EASYRSA_REQ_COUNTRY    &quot;RU&quot;
+set_var EASYRSA_REQ_PROVINCE   &quot;Region&quot;
+set_var EASYRSA_REQ_CITY       &quot;City&quot;
+set_var EASYRSA_REQ_ORG        &quot;Example Organization&quot;
+set_var EASYRSA_REQ_EMAIL      &quot;vpn-admin@example.invalid&quot;
+set_var EASYRSA_REQ_OU         &quot;VPN&quot;
+</code></pre></div>
+<p>Что здесь важно:</p>
 <ul>
-<li>OpenVPN Service - запуск OpenVPN как Windows service</li>
-<li>TAP driver - виртуальный сетевой интерфейс OpenVPN</li>
-<li>OpenSSL - openssl.exe и работа с сертификатами</li>
-<li>Easy-RSA - создание PKI и выпуск сертификатов</li>
+<li><code>EASYRSA_ALGO "ec"</code> — создаём сертификаты на эллиптических кривых вместо RSA;</li>
+<li><code>prime256v1</code> — конкретная стандартная кривая, которую использует Easy-RSA;</li>
+<li><code>sha256</code> — алгоритм подписи сертификатов;</li>
+<li><code>EASYRSA_CA_EXPIRE 3650</code> — центр сертификации действует 10 лет;</li>
+<li><code>EASYRSA_CERT_EXPIRE 825</code> — серверные и клиентские сертификаты действуют 825 дней;</li>
+<li><code>EASYRSA_CRL_DAYS 30</code> — список отозванных сертификатов действует 30 дней.</li>
 </ul>
-<p>Используется именно TAP-драйвер.</p>
-<p><code>ovpn-dco-win</code> и DCO в данной конфигурации отключены, потому что классическая схема через TAP:
-- проще диагностируется
-- работает более предсказуемо
-- имеет меньше проблем в Windows</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
+<p>Поля страны, города, организации и электронной почты можно заменить своими или оставить условными.</p>
+<hr />
+<h2 id="4-pki">4. Создаём PKI</h2>
+<p>PKI — это каталог, в котором Easy-RSA хранит:</p>
+<ul>
+<li>центр сертификации;</li>
+<li>закрытый ключ центра сертификации;</li>
+<li>выпущенные сертификаты;</li>
+<li>закрытые ключи серверов и клиентов;</li>
+<li>список отозванных сертификатов.</li>
+</ul>
+<p>Создаём структуру PKI:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; init-pki&quot;</span>
+</code></pre></div>
+<h3 id="1-ca">Вариант 1. CA с паролем</h3>
+<p>Так безопаснее. Easy-RSA попросит придумать пароль:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; build-ca&quot;</span>
+</code></pre></div>
+<h3 id="2-ca">Вариант 2. CA без пароля</h3>
+<p>Так проще, но закрытый ключ CA нужно особенно хорошо защищать:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; --batch build-ca nopass&quot;</span>
+</code></pre></div>
+<p>В примерах этой статьи используется CA без пароля.</p>
+<p>Создаём серверный сертификат и ключ:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; --batch build-server-full server nopass&quot;</span>
+</code></pre></div>
+<p>Серверный ключ оставляем без пароля, иначе служба OpenVPN не сможет запускаться автоматически после перезагрузки.</p>
+<p>Создаём список отозванных сертификатов:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; --batch gen-crl&quot;</span>
+</code></pre></div>
+<p>CRL — это список сертификатов, которым сервер больше не должен доверять. Например, если ноутбук потерян или сотрудник уволился, его сертификат отзывается, после чего обновлённый CRL запрещает этому клиенту подключаться.</p>
+<p>После выполнения команд проверьте наличие файлов в Проводнике:</p>
+<div class="highlight"><pre><span></span><code>C:\OpenVPN\easy-rsa\pki\ca.crt
+C:\OpenVPN\easy-rsa\pki\private\ca.key
+C:\OpenVPN\easy-rsa\pki\issued\server.crt
+C:\OpenVPN\easy-rsa\pki\private\server.key
+C:\OpenVPN\easy-rsa\pki\crl.pem
+</code></pre></div>
+<p>Файл <code>ca.key</code> — самый важный файл всей PKI. Получив его, можно выпускать новые доверенные сертификаты. Сделайте резервную копию и ограничьте к нему доступ. Никогда не копируйте его на клиентские устройства и не храните рядом с клиентскими профилями.</p>
+<hr />
+<h2 id="5-tls-crypt">5. Создаём ключ tls-crypt</h2>
+<p><code>tls-crypt</code> защищает служебный обмен OpenVPN до установления VPN-соединения.</p>
+<p>Создаём ключ:</p>
+<div class="highlight"><pre><span></span><code><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">openvpn</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-genkey</span> <span class="n">secret</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">tls-crypt</span><span class="p">.</span><span class="n">key</span>
+</code></pre></div>
+<p>После выполнения должен появиться файл:</p>
+<div class="highlight"><pre><span></span><code>C:\OpenVPN\easy-rsa\tls-crypt.key
+</code></pre></div>
+<p>Этот же ключ позже будет встроен в клиентский профиль.</p>
+<hr />
+<h2 id="6">6. Создаём конфигурацию сервера</h2>
+<p>Открываем файл:</p>
+<div class="highlight"><pre><span></span><code><span class="n">notepad</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">config-auto</span><span class="p">\</span><span class="n">server</span><span class="p">.</span><span class="n">ovpn</span>
+</code></pre></div>
+<p>Вставляем конфигурацию и при необходимости заменяем адреса локальной сети, DNS-сервера, VPN-подсети, порт и другие параметры на свои:</p>
+<div class="highlight"><pre><span></span><code>port 1194
+proto udp4
+dev tun
+disable-dco
 
-<span class="c">#requires -RunAsAdministrator</span>
+topology subnet
+server 192.168.254.0 255.255.255.0
 
-<span class="c"># версия OpenVPN</span>
-<span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;2.7.4&quot;</span>
+ca &quot;C:/OpenVPN/easy-rsa/pki/ca.crt&quot;
+cert &quot;C:/OpenVPN/easy-rsa/pki/issued/server.crt&quot;
+key &quot;C:/OpenVPN/easy-rsa/pki/private/server.key&quot;
+crl-verify &quot;C:/OpenVPN/easy-rsa/pki/crl.pem&quot;
+tls-crypt &quot;C:/OpenVPN/easy-rsa/tls-crypt.key&quot;
 
-<span class="c"># ссылка на MSI</span>
-<span class="nv">$MsiUrl</span> <span class="p">=</span> <span class="s2">&quot;https://swupdate.openvpn.org/community/releases/OpenVPN-$Version-I001-amd64.msi&quot;</span>
+data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305
+cipher AES-256-GCM
+auth SHA256
+tls-version-min 1.2
+remote-cert-tls client
 
-<span class="c"># каталог для установки</span>
-<span class="nv">$TempDir</span> <span class="p">=</span> <span class="s2">&quot;C:\OpenVPN-Deploy&quot;</span>
+keepalive 10 60
+explicit-exit-notify 1
+persist-tun
 
-<span class="c"># путь до MSI</span>
-<span class="nv">$MsiPath</span> <span class="p">=</span> <span class="s2">&quot;$TempDir\OpenVPN-$Version-amd64.msi&quot;</span>
+push &quot;route 192.168.10.0 255.255.255.0&quot;
+push &quot;dhcp-option DNS 192.168.10.5&quot;
 
-<span class="c"># создаем каталог</span>
-<span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Force</span> <span class="n">-Path</span> <span class="nv">$TempDir</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+client-config-dir &quot;C:/OpenVPN/ccd&quot;
 
-<span class="c"># скачиваем MSI</span>
-<span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
-    <span class="n">-Uri</span> <span class="nv">$MsiUrl</span> <span class="p">`</span>
-    <span class="n">-OutFile</span> <span class="nv">$MsiPath</span>
+status-version 3
+status &quot;C:/ProgramData/OpenVPN/Log/status.log&quot; 10
+log-append &quot;C:/ProgramData/OpenVPN/Log/server.log&quot;
+verb 3
+</code></pre></div>
+<p>Что делает каждая строка:</p>
+<ul>
+<li><code>port 1194</code> — порт OpenVPN;</li>
+<li><code>proto udp4</code> — UDP только по IPv4;</li>
+<li><code>dev tun</code> — маршрутизируемый VPN-интерфейс;</li>
+<li><code>disable-dco</code> — отключает использование DCO-драйвера, так как в этой статье используется TAP-драйвер;</li>
+<li><code>topology subnet</code> — клиенты получают обычные адреса из VPN-подсети;</li>
+<li><code>server ...</code> — VPN-подсеть;</li>
+<li><code>ca</code>, <code>cert</code>, <code>key</code> — сертификат CA, сертификат сервера и закрытый ключ сервера;</li>
+<li><code>crl-verify</code> — проверка списка отозванных сертификатов;</li>
+<li><code>tls-crypt</code> — защита служебного трафика;</li>
+<li><code>data-ciphers</code> — разрешённые алгоритмы шифрования;</li>
+<li><code>cipher</code> — совместимое значение для клиентов, которые ещё используют старый параметр;</li>
+<li><code>auth SHA256</code> — проверка целостности служебных сообщений;</li>
+<li><code>tls-version-min 1.2</code> — запрет старых версий TLS;</li>
+<li><code>remote-cert-tls client</code> — сервер принимает только клиентские сертификаты;</li>
+<li><code>keepalive 10 60</code> — сервер каждые 10с проверяет доступность клиента и разрывает соединение через 60с при отсутствии ответа;</li>
+<li><code>explicit-exit-notify 1</code> — уведомление UDP-клиента при штатном завершении;</li>
+<li><code>persist-tun</code> — не удалять VPN-интерфейс при перезапуске процесса;</li>
+<li><code>push "route ..."</code> — передать клиенту маршрут в локальную сеть;</li>
+<li><code>push "dhcp-option DNS ..."</code> — передать клиенту внутренний DNS;</li>
+<li><code>client-config-dir</code> — каталог индивидуальных настроек клиентов;</li>
+<li><code>status</code> — файл текущих подключений;</li>
+<li><code>log-append</code> — журнал сервера;</li>
+<li><code>verb 3</code> — обычный уровень подробности журнала.</li>
+</ul>
+<p>Сохраняем файл.</p>
+<hr />
+<h2 id="7-windows">7. Включаем маршрутизацию Windows</h2>
+<p>По умолчанию Windows Server не пересылает пакеты между сетевыми интерфейсами.</p>
+<p>OpenVPN-клиент сможет подключиться к серверу, но без маршрутизации Windows пакеты из VPN-сети не попадут в локальную сеть.</p>
+<p>Для этого достаточно изменить один параметр реестра:</p>
+<div class="highlight"><pre><span></span><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 
-<span class="nv">$Arguments</span> <span class="p">=</span> <span class="p">@(</span>
-
-    <span class="s2">&quot;/i&quot;</span>
-    <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$MsiPath</span><span class="se">`&quot;</span><span class="s2">&quot;</span>
-
-    <span class="c"># тихая установка</span>
-    <span class="s2">&quot;/qn&quot;</span>
-
-    <span class="c"># путь установки</span>
-    <span class="s2">&quot;INSTALLDIR=C:\OpenVPN&quot;</span>
-
-    <span class="c"># OpenVPN.Service - автозапуск OpenVPN как Windows service</span>
-    <span class="c"># Drivers.TAPWindows6 - TAP драйвер</span>
-    <span class="c"># OpenSSL - openssl.exe</span>
-    <span class="c"># EasyRSA - PKI и сертификаты</span>
-    <span class="s2">&quot;ADDLOCAL=OpenVPN,OpenVPN.GUI,OpenVPN.Service,Drivers,Drivers.TAPWindows6,OpenSSL,EasyRSA&quot;</span>
-
-    <span class="c"># лог установки MSI</span>
-    <span class="s2">&quot;/L*v&quot;</span>
-    <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">C:\OpenVPN-Deploy\openvpn-install.log</span><span class="se">`&quot;</span><span class="s2">&quot;</span>
-<span class="p">)</span>
-
-<span class="c"># запускаем установку</span>
-<span class="nb">Start-Process</span> <span class="p">`</span>
-    <span class="n">-FilePath</span> <span class="s2">&quot;msiexec.exe&quot;</span> <span class="p">`</span>
-    <span class="n">-ArgumentList</span> <span class="nv">$Arguments</span> <span class="p">`</span>
-    <span class="n">-Wait</span> <span class="p">`</span>
-    <span class="n">-NoNewWindow</span>
+IPEnableRouter = 1 (DWORD)
+</code></pre></div>
+<p>Если параметр <code>IPEnableRouter</code> отсутствует, создайте его вручную.</p>
+<p>После изменения параметра необходимо перезагрузить сервер. Только после перезагрузки Windows начнёт выполнять маршрутизацию.</p>
+<hr />
+<h2 id="8-openvpn-windows">8. Разрешаем OpenVPN в брандмауэре Windows</h2>
+<p>Открываем:</p>
+<div class="highlight"><pre><span></span><code>Брандмауэр Защитника Windows в режиме повышенной безопасности
+</code></pre></div>
+<p>Переходим:</p>
+<div class="highlight"><pre><span></span><code>Правила для входящих подключений → Создать правило
+</code></pre></div>
+<p>Создаём правило:</p>
+<div class="highlight"><pre><span></span><code>Тип правила:       Для программы
+Программа:         C:\OpenVPN\bin\openvpn.exe
+Протокол:          UDP
+Локальный порт:    1194
+Действие:          Разрешить подключение
+Профили:           Доменный, Частный, Публичный
+Имя:               OpenVPN Server UDP 1194
 </code></pre></div>
 <hr />
-<h2 id="02">02. создаем структуру каталогов</h2>
-<p>Создаем рабочие каталоги OpenVPN.</p>
-<p><code>config-auto</code> используется для автоматического запуска <code>.ovpn</code> файлов через OpenVPNService.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="nv">$Dirs</span> <span class="p">=</span> <span class="p">@(</span>
-
-    <span class="c"># конфиги для OpenVPNService</span>
-    <span class="s2">&quot;C:\OpenVPN\config-auto&quot;</span><span class="p">,</span>
-
-    <span class="c"># client-config-dir</span>
-    <span class="s2">&quot;C:\OpenVPN\ccd&quot;</span><span class="p">,</span>
-
-    <span class="c"># готовые ovpn клиентов</span>
-    <span class="s2">&quot;C:\OpenVPN\clients-configs&quot;</span><span class="p">,</span>
-
-    <span class="c"># вспомогательные скрипты</span>
-    <span class="s2">&quot;C:\OpenVPN\scripts&quot;</span><span class="p">,</span>
-
-    <span class="c"># backup PKI</span>
-    <span class="s2">&quot;C:\OpenVPN\pki-backup&quot;</span><span class="p">,</span>
-
-    <span class="c"># логи OpenVPN</span>
-    <span class="s2">&quot;C:\ProgramData\OpenVPN\Log&quot;</span>
-<span class="p">)</span>
-
-<span class="k">foreach</span> <span class="p">(</span><span class="nv">$Dir</span> <span class="k">in</span> <span class="nv">$Dirs</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="nb">New-Item</span> <span class="p">`</span>
-        <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="p">`</span>
-        <span class="n">-Path</span> <span class="nv">$Dir</span> <span class="p">`</span>
-        <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-<span class="p">}</span>
-</code></pre></div>
-<hr />
-<h2 id="03-easy-rsa-runner">03. Easy-RSA runner</h2>
-<p>Easy-RSA в Windows использует unix tools через <code>sh.exe</code>.</p>
-<p>Без runner:
-- automation ломается
-- <code>cat</code>
-- <code>printf</code></p>
-<p>не находятся.</p>
-<p>Runner нужен для:
-- автоматического выпуска сертификатов
-- автоматического создания PKI
-- последующей автоматизации через PowerShell</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="sh">@&#39;</span>
-<span class="sh">@echo off</span>
-<span class="sh">setlocal EnableExtensions</span>
-
-<span class="sh">set &quot;ER=C:\OpenVPN\easy-rsa&quot;</span>
-
-<span class="sh">REM openssl.exe + unix tools Easy-RSA</span>
-<span class="sh">set &quot;PATH=C:\OpenVPN\bin;%ER%\bin;%PATH%&quot;</span>
-
-<span class="sh">REM запуск Easy-RSA через sh.exe</span>
-<span class="sh">&quot;%ER%\bin\sh.exe&quot; -lc &quot;cd &#39;C:/OpenVPN/easy-rsa&#39; || exit 111; ./easyrsa %*; exit $?&quot; 2&gt;&amp;1</span>
-
-<span class="sh">exit /b %errorlevel%</span>
-<span class="sh">&#39;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="p">`</span>
-    <span class="n">-Encoding</span> <span class="n">ascii</span> <span class="p">`</span>
-    <span class="n">-Force</span> <span class="p">`</span>
-    <span class="s2">&quot;C:\OpenVPN\easy-rsa\easyrsa-run.cmd&quot;</span>
-</code></pre></div>
-<hr />
-<h2 id="04-vars">04. vars</h2>
-<p>Используется:
-- EC certificates
-- curve <code>prime256v1</code>
-- SHA256</p>
-<p>Вместо RSA используется EC.</p>
-<p>Что это дает:
-- меньше размер ключей
-- быстрее работа TLS
-- меньше нагрузка на CPU</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="sh">@&#39;</span>
-<span class="sh">set_var EASYRSA_DN &quot;cn_only&quot;</span>
-
-<span class="sh"># elliptic curve certificates</span>
-<span class="sh">set_var EASYRSA_ALGO &quot;ec&quot;</span>
-
-<span class="sh"># elliptic curve</span>
-<span class="sh">set_var EASYRSA_CURVE &quot;prime256v1&quot;</span>
-
-<span class="sh"># hash algorithm</span>
-<span class="sh">set_var EASYRSA_DIGEST &quot;sha256&quot;</span>
-
-<span class="sh"># срок жизни CA</span>
-<span class="sh">set_var EASYRSA_CA_EXPIRE 3650</span>
-
-<span class="sh"># срок жизни сертификатов</span>
-<span class="sh">set_var EASYRSA_CERT_EXPIRE 825</span>
-
-<span class="sh"># CRL validity</span>
-<span class="sh">set_var EASYRSA_CRL_DAYS 30</span>
-
-<span class="sh"># certificate fields</span>
-<span class="sh">set_var EASYRSA_REQ_COUNTRY    &quot;RU&quot;</span>
-<span class="sh">set_var EASYRSA_REQ_PROVINCE   &quot;RU&quot;</span>
-<span class="sh">set_var EASYRSA_REQ_CITY       &quot;RU&quot;</span>
-<span class="sh">set_var EASYRSA_REQ_ORG        &quot;OpenVPN&quot;</span>
-<span class="sh">set_var EASYRSA_REQ_EMAIL      &quot;admin@example.local&quot;</span>
-<span class="sh">set_var EASYRSA_REQ_OU         &quot;VPN&quot;</span>
-<span class="sh">&#39;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="p">`</span>
-    <span class="n">-Encoding</span> <span class="n">ascii</span> <span class="p">`</span>
-    <span class="n">-Force</span> <span class="p">`</span>
-    <span class="s2">&quot;C:\OpenVPN\easy-rsa\vars&quot;</span>
-</code></pre></div>
-<hr />
-<h2 id="05-pki">05. создаем PKI</h2>
-<p>Создается:</p>
-<div class="highlight"><pre><span></span><code>CA
-server certificate
-CRL
-</code></pre></div>
-<p>В данной статье CA создается без пароля (<code>nopass</code>).</p>
-<p>Это упрощает автоматизацию, но имеет риски.</p>
-<p>Для более защищенной схемы рекомендуется:
-- пароль на CA
-- offline CA
-- backup private key
-- отдельный issuing host</p>
-<p>Это будет рассмотрено в отдельной статье.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="c"># путь до Easy-RSA</span>
-<span class="nv">$EasyRsaPath</span> <span class="p">=</span> <span class="s2">&quot;C:\OpenVPN\easy-rsa&quot;</span>
-
-<span class="c"># PKI каталог</span>
-<span class="nv">$PkiPath</span> <span class="p">=</span> <span class="s2">&quot;$EasyRsaPath\pki&quot;</span>
-
-<span class="c"># удаляем старую PKI</span>
-<span class="nb">Remove-Item</span> <span class="p">`</span>
-    <span class="n">-Recurse</span> <span class="p">`</span>
-    <span class="n">-Force</span> <span class="p">`</span>
-    <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">`</span>
-    <span class="nv">$PkiPath</span>
-
-<span class="c"># создаем PKI</span>
-<span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$EasyRsaPath\easyrsa-run.cmd</span><span class="se">`&quot;</span><span class="s2"> init-pki&quot;</span>
-
-<span class="c"># создаем CA</span>
-<span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$EasyRsaPath\easyrsa-run.cmd</span><span class="se">`&quot;</span><span class="s2"> --batch build-ca nopass&quot;</span>
-
-<span class="c"># создаем server certificate</span>
-<span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$EasyRsaPath\easyrsa-run.cmd</span><span class="se">`&quot;</span><span class="s2"> --batch build-server-full server nopass&quot;</span>
-
-<span class="c"># создаем CRL</span>
-<span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$EasyRsaPath\easyrsa-run.cmd</span><span class="se">`&quot;</span><span class="s2"> --batch gen-crl&quot;</span>
-</code></pre></div>
-<hr />
-<h2 id="06-serverovpn">06. создаем server.ovpn</h2>
-<h3 id="topology-subnet">topology subnet</h3>
-<p>Современный режим адресации OpenVPN.</p>
-<p>Каждый клиент получает обычный IP внутри VPN-подсети.</p>
-<h3 id="tls-crypt">tls-crypt</h3>
-<p>Шифрует служебный TLS-трафик OpenVPN.</p>
-<p>Что дает:
-- скрывает процесс установки VPN-сессии
-- уменьшает количество мусорных подключений
-- усложняет обнаружение OpenVPN</p>
-<h3 id="data-ciphers">data-ciphers</h3>
-<p>Список разрешенных алгоритмов шифрования.</p>
-<p>Используются только современные AEAD cipher:
-- AES-256-GCM
-- AES-128-GCM
-- CHACHA20-POLY1305</p>
-<p>CBC cipher не используются.</p>
-<h3 id="disable-dco">disable-dco</h3>
-<p>Отключает <code>ovpn-dco-win</code>.</p>
-<p>Используется классическая схема через TAP-драйвер.</p>
-<p>Что это дает:
-- более стабильную работу
-- проще диагностику
-- меньше проблем с Windows firewall и routing</p>
-<h3 id="persist-tun">persist-tun</h3>
-<p>Не пересоздает TAP interface при reconnect/restart.</p>
-<p>Это уменьшает:
-- проблемы с маршрутами
-- пересоздание интерфейса
-- проблемы после reconnect</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="c"># базовый каталог OpenVPN</span>
-<span class="nv">$BasePath</span> <span class="p">=</span> <span class="s2">&quot;C:\OpenVPN&quot;</span>
-
-<span class="c"># UDP порт OpenVPN</span>
-<span class="nv">$Port</span> <span class="p">=</span> <span class="n">1194</span>
-
-<span class="c"># протокол OpenVPN</span>
-<span class="nv">$Proto</span> <span class="p">=</span> <span class="s2">&quot;udp4&quot;</span>
-
-<span class="c"># VPN подсеть</span>
-<span class="nv">$VpnNet</span> <span class="p">=</span> <span class="s2">&quot;192.168.254.0&quot;</span>
-
-<span class="c"># маска VPN подсети</span>
-<span class="nv">$VpnMask</span> <span class="p">=</span> <span class="s2">&quot;255.255.255.0&quot;</span>
-
-<span class="c"># локальная LAN</span>
-<span class="nv">$LanNet</span> <span class="p">=</span> <span class="s2">&quot;192.168.2.0&quot;</span>
-
-<span class="c"># маска LAN</span>
-<span class="nv">$LanMask</span> <span class="p">=</span> <span class="s2">&quot;255.255.255.0&quot;</span>
-
-<span class="c"># DNS который push клиентам</span>
-<span class="nv">$Dns</span> <span class="p">=</span> <span class="s2">&quot;192.168.2.5&quot;</span>
-
-<span class="c"># tls-crypt key</span>
-<span class="nv">$TlsCryptKey</span> <span class="p">=</span> <span class="s2">&quot;$BasePath\easy-rsa\tls-crypt.key&quot;</span>
-
-<span class="c"># удаляем старый tls-crypt key</span>
-<span class="nb">Remove-Item</span> <span class="p">`</span>
-    <span class="n">-Force</span> <span class="p">`</span>
-    <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">`</span>
-    <span class="nv">$TlsCryptKey</span>
-
-<span class="c"># генерируем tls-crypt key</span>
-<span class="p">&amp;</span> <span class="s2">&quot;$BasePath\bin\openvpn.exe&quot;</span> <span class="p">`</span>
-    <span class="p">-</span><span class="n">-genkey</span> <span class="p">`</span>
-    <span class="n">secret</span> <span class="p">`</span>
-    <span class="nv">$TlsCryptKey</span>
-
-<span class="sh">@&quot;</span>
-<span class="sh">port $Port</span>
-<span class="sh">proto $Proto</span>
-
-<span class="sh"># routed TUN mode</span>
-<span class="sh">dev tun</span>
-
-<span class="sh"># отключаем ovpn-dco-win</span>
-<span class="sh">disable-dco</span>
-
-<span class="sh"># normal subnet addressing</span>
-<span class="sh">topology subnet</span>
-
-<span class="sh"># VPN subnet</span>
-<span class="sh">server $VpnNet $VpnMask</span>
-
-<span class="sh"># PKI</span>
-<span class="sh">ca &quot;C:/OpenVPN/easy-rsa/pki/ca.crt&quot;</span>
-<span class="sh">cert &quot;C:/OpenVPN/easy-rsa/pki/issued/server.crt&quot;</span>
-<span class="sh">key &quot;C:/OpenVPN/easy-rsa/pki/private/server.key&quot;</span>
-
-<span class="sh"># certificate revoke list</span>
-<span class="sh">crl-verify &quot;C:/OpenVPN/easy-rsa/pki/crl.pem&quot;</span>
-
-<span class="sh"># tls-crypt protection</span>
-<span class="sh">tls-crypt &quot;C:/OpenVPN/easy-rsa/tls-crypt.key&quot;</span>
-
-<span class="sh"># modern AEAD ciphers</span>
-<span class="sh">data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305</span>
-
-<span class="sh"># compatibility fallback</span>
-<span class="sh">cipher AES-256-GCM</span>
-
-<span class="sh"># HMAC auth</span>
-<span class="sh">auth SHA256</span>
-
-<span class="sh"># minimum TLS version</span>
-<span class="sh">tls-version-min 1.2</span>
-
-<span class="sh"># проверка client certificate</span>
-<span class="sh">remote-cert-tls client</span>
-
-<span class="sh"># keepalive</span>
-<span class="sh">keepalive 10 60</span>
-
-<span class="sh"># UDP notify on disconnect</span>
-<span class="sh">explicit-exit-notify 1</span>
-
-<span class="sh"># не пересоздаем TAP interface</span>
-<span class="sh">persist-tun</span>
-
-<span class="sh"># route LAN to clients</span>
-<span class="sh">push &quot;route $LanNet $LanMask&quot;</span>
-
-<span class="sh"># DNS to clients</span>
-<span class="sh">push &quot;dhcp-option DNS $Dns&quot;</span>
-
-<span class="sh"># client-config-dir</span>
-<span class="sh">client-config-dir &quot;C:/OpenVPN/ccd&quot;</span>
-
-<span class="sh"># status log</span>
-<span class="sh">status-version 3</span>
-<span class="sh">status &quot;C:/ProgramData/OpenVPN/Log/status.log&quot; 10</span>
-
-<span class="sh"># server log</span>
-<span class="sh">log-append &quot;C:/ProgramData/OpenVPN/Log/server.log&quot;</span>
-
-<span class="sh"># log verbosity</span>
-<span class="sh">verb 3</span>
-<span class="sh">&quot;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="p">`</span>
-    <span class="n">-Encoding</span> <span class="n">ascii</span> <span class="p">`</span>
-    <span class="n">-Force</span> <span class="p">`</span>
-    <span class="s2">&quot;$BasePath\config-auto\server.ovpn&quot;</span>
-</code></pre></div>
-<hr />
-<h2 id="07-firewall-routing">07. firewall + routing</h2>
-<h3 id="ipenablerouter">IPEnableRouter</h3>
-<p>Включает IPv4 routing в Windows.</p>
-<p>Без него:
-- VPN tunnel может подниматься
-- клиент может подключаться
-- но доступа в LAN не будет</p>
-<h3 id="reboot">reboot обязателен</h3>
-<p>Важный момент.</p>
-<p>Windows применяет IP routing не полностью сразу после изменения registry.</p>
-<p>Без reboot:
-- OpenVPN может выглядеть рабочим
-- клиент может подключаться
-- но маршрутизация между VPN и LAN может не работать</p>
-<p>После reboot:
-- сетевой стек Windows полностью активирует routing
-- доступ в LAN начинает работать нормально</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="c"># включаем IPv4 routing в Windows</span>
-<span class="nb">Set-ItemProperty</span> <span class="p">`</span>
-    <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters&quot;</span> <span class="p">`</span>
-    <span class="n">-Name</span> <span class="s2">&quot;IPEnableRouter&quot;</span> <span class="p">`</span>
-    <span class="n">-Type</span> <span class="n">DWord</span> <span class="p">`</span>
-    <span class="n">-Value</span> <span class="n">1</span>
-
-<span class="c"># удаляем старое firewall rule</span>
-<span class="nb">Get-NetFirewallRule</span> <span class="p">`</span>
-    <span class="n">-DisplayName</span> <span class="s2">&quot;OpenVPN Server UDP 1194&quot;</span> <span class="p">`</span>
-    <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">|</span>
-    <span class="nb">Remove-NetFirewallRule</span>
-
-<span class="c"># разрешаем входящий UDP/1194</span>
-<span class="nb">New-NetFirewallRule</span> <span class="p">`</span>
-    <span class="n">-DisplayName</span> <span class="s2">&quot;OpenVPN Server UDP 1194&quot;</span> <span class="p">`</span>
-    <span class="n">-Direction</span> <span class="n">Inbound</span> <span class="p">`</span>
-    <span class="n">-Action</span> <span class="n">Allow</span> <span class="p">`</span>
-    <span class="n">-Protocol</span> <span class="n">UDP</span> <span class="p">`</span>
-    <span class="n">-LocalPort</span> <span class="n">1194</span> <span class="p">`</span>
-    <span class="n">-Profile</span> <span class="n">Any</span> <span class="p">`</span>
-    <span class="n">-Program</span> <span class="s2">&quot;C:\OpenVPN\bin\openvpn.exe&quot;</span>
-
-<span class="c"># restart OpenVPNService on failure</span>
-<span class="n">sc</span><span class="p">.</span><span class="n">exe</span> <span class="n">failure</span> <span class="n">OpenVPNService</span> <span class="n">reset</span><span class="p">=</span> <span class="n">86400</span> <span class="n">actions</span><span class="p">=</span> <span class="n">restart</span><span class="p">/</span><span class="n">60000</span><span class="p">/</span><span class="n">restart</span><span class="p">/</span><span class="n">60000</span><span class="p">/</span><span class="n">restart</span><span class="p">/</span><span class="n">60000</span>
-
-<span class="c"># включаем recovery actions</span>
+<h2 id="9-openvpn">9. Настраиваем службу OpenVPN</h2>
+<p>Откройте <code>services.msc</code>, найдите службу <code>OpenVPNService</code> и установите тип запуска <strong>Автоматически</strong>.</p>
+<p>Также рекомендуется настроить автоматический перезапуск службы при сбоях:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sc</span><span class="p">.</span><span class="n">exe</span> <span class="n">failure</span> <span class="n">OpenVPNService</span> <span class="n">reset</span><span class="p">=</span> <span class="n">86400</span> <span class="n">actions</span><span class="p">=</span> <span class="n">restart</span><span class="p">/</span><span class="n">60000</span><span class="p">/</span><span class="n">restart</span><span class="p">/</span><span class="n">60000</span><span class="p">/</span><span class="n">restart</span><span class="p">/</span><span class="n">60000</span>
 <span class="n">sc</span><span class="p">.</span><span class="n">exe</span> <span class="n">failureflag</span> <span class="n">OpenVPNService</span> <span class="n">1</span>
 </code></pre></div>
+<p>После этого Windows будет автоматически пытаться восстановить работу OpenVPN при его аварийном завершении.</p>
 <hr />
-<h2 id="08-openvpnservice">08. перезапускаем OpenVPNService</h2>
-<p>OpenVPNService автоматически запускает все <code>.ovpn</code> файлы из:</p>
-<div class="highlight"><pre><span></span><code>C:\OpenVPN\config-auto
+<h2 id="10">10. Выпускаем сертификат клиента</h2>
+<p>Создаём сертификат клиента <code>test1</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; --batch build-client-full test1 nopass&quot;</span>
 </code></pre></div>
-<p>Это production-вариант для Windows.</p>
-<p>Не требуется:
-- GUI
-- ручной запуск
-- scheduled tasks</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="c"># перезапускаем OpenVPNService</span>
-<span class="nb">Restart-Service</span> <span class="n">OpenVPNService</span> <span class="n">-Force</span>
-
-<span class="c"># ждем поднятия OpenVPN</span>
-<span class="nb">Start-Sleep</span> <span class="n">-Seconds</span> <span class="n">15</span>
+<p>После выпуска нового сертификата обновляем CRL:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">d</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;&quot;</span><span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">easyrsa-run</span><span class="p">.</span><span class="n">cmd</span><span class="s2">&quot; --batch gen-crl&quot;</span>
 </code></pre></div>
+<p>Убедитесь, что появились следующие файлы:</p>
+<div class="highlight"><pre><span></span><code>C:\OpenVPN\easy-rsa\pki\issued\test1.crt
+C:\OpenVPN\easy-rsa\pki\private\test1.key
+</code></pre></div>
+<p>Для другого пользователя замените <code>test1</code> на уникальное имя, например:</p>
+<div class="highlight"><pre><span></span><code>ivanov-laptop
+director-phone
+service-notebook
+</code></pre></div>
+<p>Один сертификат лучше выдавать одному конкретному устройству. Тогда при потере устройства можно отозвать только его сертификат.</p>
 <hr />
-<h2 id="09">09. создаем клиента</h2>
-<p>Создается единый <code>.ovpn</code> файл с embedded:
-- CA
-- client cert
-- private key
-- tls-crypt</p>
-<p>Такой файл удобно:
-- импортировать в OpenVPN Connect
-- переносить между устройствами
-- хранить как готовый client profile</p>
-<div class="highlight"><pre><span></span><code><span class="nb">clear</span>
-
-<span class="c"># базовый каталог OpenVPN</span>
-<span class="nv">$BasePath</span> <span class="p">=</span> <span class="s2">&quot;C:\OpenVPN&quot;</span>
-
-<span class="c"># каталог Easy-RSA</span>
-<span class="nv">$EasyRsaPath</span> <span class="p">=</span> <span class="s2">&quot;$BasePath\easy-rsa&quot;</span>
-
-<span class="c"># каталог PKI</span>
-<span class="nv">$PkiPath</span> <span class="p">=</span> <span class="s2">&quot;$EasyRsaPath\pki&quot;</span>
-
-<span class="c"># имя клиента</span>
-<span class="nv">$ClientName</span> <span class="p">=</span> <span class="s2">&quot;test1&quot;</span>
-
-<span class="c"># внешний IP MikroTik</span>
-<span class="nv">$RemoteHost</span> <span class="p">=</span> <span class="s2">&quot;212.104.74.82&quot;</span>
-
-<span class="c"># OpenVPN port</span>
-<span class="nv">$Port</span> <span class="p">=</span> <span class="n">1194</span>
-
-<span class="c"># OpenVPN protocol</span>
-<span class="nv">$Proto</span> <span class="p">=</span> <span class="s2">&quot;udp4&quot;</span>
-
-<span class="c"># создаем client certificate</span>
-<span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$EasyRsaPath\easyrsa-run.cmd</span><span class="se">`&quot;</span><span class="s2"> --batch build-client-full $ClientName nopass&quot;</span>
-
-<span class="c"># обновляем CRL</span>
-<span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$EasyRsaPath\easyrsa-run.cmd</span><span class="se">`&quot;</span><span class="s2"> --batch gen-crl&quot;</span>
-
-<span class="c"># читаем CA</span>
-<span class="nv">$ca</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s2">&quot;$PkiPath\ca.crt&quot;</span> <span class="n">-Raw</span>
-
-<span class="c"># читаем client cert</span>
-<span class="nv">$cert</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s2">&quot;$PkiPath\issued\$ClientName.crt&quot;</span> <span class="n">-Raw</span>
-
-<span class="c"># читаем private key</span>
-<span class="nv">$key</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s2">&quot;$PkiPath\private\$ClientName.key&quot;</span> <span class="n">-Raw</span>
-
-<span class="c"># читаем tls-crypt key</span>
-<span class="nv">$tc</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s2">&quot;$EasyRsaPath\tls-crypt.key&quot;</span> <span class="n">-Raw</span>
-
-<span class="sh">@&quot;</span>
-<span class="sh">client</span>
-<span class="sh">dev tun</span>
-<span class="sh">proto $Proto</span>
-
-<span class="sh"># внешний IP MikroTik</span>
-<span class="sh">remote $RemoteHost $Port</span>
-
-<span class="sh">nobind</span>
-<span class="sh">resolv-retry infinite</span>
-
-<span class="sh"># проверка server certificate</span>
-<span class="sh">remote-cert-tls server</span>
-
-<span class="sh"># modern AEAD ciphers</span>
-<span class="sh">data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305</span>
-
-<span class="sh"># compatibility fallback</span>
-<span class="sh">cipher AES-256-GCM</span>
-
-<span class="sh"># HMAC auth</span>
-<span class="sh">auth SHA256</span>
-
-<span class="sh"># minimum TLS version</span>
-<span class="sh">tls-version-min 1.2</span>
-
-<span class="sh"># log verbosity</span>
-<span class="sh">verb 3</span>
-
-<span class="sh">&lt;ca&gt;</span>
-<span class="sh">$ca</span>
-<span class="sh">&lt;/ca&gt;</span>
-
-<span class="sh">&lt;cert&gt;</span>
-<span class="sh">$cert</span>
-<span class="sh">&lt;/cert&gt;</span>
-
-<span class="sh">&lt;key&gt;</span>
-<span class="sh">$key</span>
-<span class="sh">&lt;/key&gt;</span>
-
-<span class="sh">&lt;tls-crypt&gt;</span>
-<span class="sh">$tc</span>
-<span class="sh">&lt;/tls-crypt&gt;</span>
-<span class="sh">&quot;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="p">`</span>
-    <span class="n">-Encoding</span> <span class="n">ascii</span> <span class="p">`</span>
-    <span class="n">-Force</span> <span class="p">`</span>
-    <span class="s2">&quot;$BasePath\clients-configs\$ClientName.ovpn&quot;</span>
-</code></pre></div>
-<hr />
-<h2 id="10-mikrotik">10. MikroTik</h2>
-<h3 id="dst-nat">dst-nat</h3>
-<div class="highlight"><pre><span></span><code>/ip firewall nat
-
-add chain=dstnat \
-    protocol=udp \
-    dst-port=1194 \
-    action=dst-nat \
-    to-addresses=192.168.2.58 \
-    to-ports=1194 \
-    comment=&quot;OpenVPN UDP 1194&quot;
-</code></pre></div>
-<h3 id="route">route</h3>
-<p>Без статического маршрута MikroTik не будет знать:
-- куда отправлять VPN подсеть
-- через какой gateway доступен OpenVPN subnet</p>
-<div class="highlight"><pre><span></span><code>/ip route
-
-add dst-address=192.168.254.0/24 gateway=192.168.2.58
-</code></pre></div>
-<hr />
-<h2 id="11-reboot">11. reboot</h2>
-<h3 id="reboot_1">reboot обязателен</h3>
-<p>Без reboot:
-- OpenVPN может выглядеть рабочим
-- клиент может подключаться
-- но маршрутизация между VPN и LAN может не работать</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Restart-Computer</span>
-</code></pre></div>
-<hr />
-<h2 id="12">12. результат</h2>
-<p>После reboot:</p>
+<h2 id="11">11. Создаём клиентский профиль</h2>
+<p>Клиенту нужны:</p>
 <ul>
-<li>OpenVPNService автоматически стартует</li>
-<li>VPN поднимается автоматически</li>
-<li>routing работает</li>
-<li>LAN доступен</li>
-<li>RDP работает</li>
-<li>DNS работает</li>
+<li>адрес сервера;</li>
+<li>параметры шифрования;</li>
+<li>сертификат центра сертификации;</li>
+<li>его собственный сертификат;</li>
+<li>его закрытый ключ;</li>
+<li>ключ <code>tls-crypt</code>.</li>
+</ul>
+<p>Можно передавать эти файлы отдельно, но удобнее собрать всё в один <code>.ovpn</code>. Такой файл импортируется в OpenVPN Connect целиком.</p>
+<p>Важно: внутри <code>.ovpn</code> находится закрытый ключ клиента. Этот файл фактически является ключом доступа к VPN. Его нельзя отправлять в открытые чаты, хранить в общей папке или передавать другим пользователям.</p>
+<p>Сначала создаём заготовку:</p>
+<div class="highlight"><pre><span></span><code><span class="n">notepad</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">test1</span><span class="p">.</span><span class="n">ovpn</span>
+</code></pre></div>
+<p>Вставляем:</p>
+<div class="highlight"><pre><span></span><code>client
+dev tun
+proto udp4
+remote vpn.example.com 1194
+
+nobind
+resolv-retry infinite
+remote-cert-tls server
+
+data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305
+cipher AES-256-GCM
+auth SHA256
+tls-version-min 1.2
+
+verb 3
+
+&lt;ca&gt;
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\pki\ca.crt
+&lt;/ca&gt;
+
+&lt;cert&gt;
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\pki\issued\test1.crt
+&lt;/cert&gt;
+
+&lt;key&gt;
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\pki\private\test1.key
+&lt;/key&gt;
+
+&lt;tls-crypt&gt;
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\tls-crypt.key
+&lt;/tls-crypt&gt;
+</code></pre></div>
+<p>В строке:</p>
+<div class="highlight"><pre><span></span><code>remote vpn.example.com 1194
+</code></pre></div>
+<p>Замените <code>vpn.example.com</code> на публичный IP-адрес или DNS-имя вашего интернет-канала (маршрутизатора, через который опубликован OpenVPN).</p>
+<p>Откройте каждый файл обычным Блокнотом, полностью скопируйте его содержимое и вставьте между соответствующими тегами.</p>
+<p>Например, внутри блока <code>&lt;ca&gt;</code> должны находиться строки от:</p>
+<div class="highlight"><pre><span></span><code>-----BEGIN CERTIFICATE-----
+</code></pre></div>
+<p>до:</p>
+<div class="highlight"><pre><span></span><code>-----END CERTIFICATE-----
+</code></pre></div>
+<p>Каждый блок должен содержать полное содержимое соответствующего файла, включая строки BEGIN и END.</p>
+<p>После заполнения сохраните профиль:</p>
+<div class="highlight"><pre><span></span><code>C:\OpenVPN\test1.ovpn
+</code></pre></div>
+<hr />
+<h2 id="12">12. Запускаем сервер и читаем журнал</h2>
+<p>Перезапускаем службу:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Restart-Service</span> <span class="n">OpenVPNService</span> <span class="n">-Force</span>
+</code></pre></div>
+<p>Ждём примерно 15 секунд.</p>
+<p>Проверяем службу через:</p>
+<div class="highlight"><pre><span></span><code>services.msc
+</code></pre></div>
+<p>Состояние <code>OpenVPNService</code> должно быть:</p>
+<div class="highlight"><pre><span></span><code>Выполняется
+</code></pre></div>
+<p>Проверяем журнал:</p>
+<div class="highlight"><pre><span></span><code>C:\ProgramData\OpenVPN\Log\server.log
+</code></pre></div>
+<p>Открываем его Блокнотом и ищем строку:</p>
+<div class="highlight"><pre><span></span><code>Initialization Sequence Completed
+</code></pre></div>
+<p>Эта строка означает, что сервер прочитал конфигурацию, создал VPN-интерфейс и начал слушать порт.</p>
+<p>Если служба остановилась или этой строки нет, смотрим последние строки <code>server.log</code>. Обычно там прямо указан неверный путь, параметр или отсутствующий файл.</p>
+<hr />
+<h2 id="13">13. Настраиваем маршрутизатор</h2>
+<p>В качестве маршрутизатора в этой статье используется <strong>MikroTik</strong>. Если у вас маршрутизатор другого производителя, необходимо выполнить аналогичные настройки средствами вашего оборудования.</p>
+<p>В любом случае требуется выполнить две задачи:</p>
+<ul>
+<li>перенаправить входящие UDP-подключения на порт <code>1194</code> на сервер OpenVPN;</li>
+<li>добавить маршрут до VPN-подсети через сервер OpenVPN.</li>
+</ul>
+<p>Для MikroTik эти настройки выглядят следующим образом.</p>
+<p>Перенаправляем входящие подключения UDP <code>1194</code> на Windows Server:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall nat add chain=dstnat protocol=udp dst-port=1194 action=dst-nat to-addresses=192.168.10.10 to-ports=1194 comment=&quot;OpenVPN UDP 1194&quot;
+</code></pre></div>
+<p>Замените <code>192.168.10.10</code> на локальный IP-адрес вашего сервера OpenVPN.</p>
+<p>Добавляем маршрут до VPN-подсети:</p>
+<div class="highlight"><pre><span></span><code>/ip route add dst-address=192.168.254.0/24 gateway=192.168.10.10 comment=&quot;OpenVPN clients&quot;
+</code></pre></div>
+<p>Без этого маршрута устройства локальной сети не смогут отправлять ответный трафик VPN-клиентам.</p>
+<hr />
+<h2 id="14">14. Устанавливаем клиент и проверяем подключение</h2>
+<p>Проверять нужно из внешней сети. Если подключаться из той же локальной сети через публичный адрес, результат будет зависеть от настройки обратного NAT на MikroTik.</p>
+<p>Проще всего выполнить первый тест с телефона через мобильный Интернет.</p>
+<h3 id="_2">На телефоне</h3>
+<ol>
+<li>Установите OpenVPN Connect.</li>
+<li>Передайте на телефон файл <code>test1.ovpn</code>.</li>
+<li>Откройте файл через OpenVPN Connect.</li>
+<li>Подтвердите импорт профиля.</li>
+<li>Отключите Wi-Fi, чтобы телефон использовал мобильный Интернет.</li>
+<li>Нажмите подключение.</li>
+<li>Разрешите создание VPN-подключения.</li>
+</ol>
+<p>После подключения в OpenVPN Connect не должно быть ошибок проверки сертификата или <code>tls-crypt</code>.</p>
+<h3 id="windows">На Windows</h3>
+<ol>
+<li>Установите OpenVPN Connect.</li>
+<li>Откройте программу.</li>
+<li>Выберите импорт профиля из файла.</li>
+<li>Укажите <code>test1.ovpn</code>.</li>
+<li>Подключитесь из сети, которая не является локальной сетью сервера.</li>
+</ol>
+<h3 id="_3">Что проверять после подключения</h3>
+<p>Сначала проверяем сам VPN-интерфейс сервера:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.254.1
+</code></pre></div>
+<p>Потом локальный адрес Windows Server:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.10.10
+</code></pre></div>
+<p>Затем проверяем адрес шлюза локальной сети. В нашем примере это MikroTik:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.10.1
+</code></pre></div>
+<p>Потом любой разрешённый компьютер локальной сети:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.10.20
+</code></pre></div>
+<p>После этого проверяем DNS:</p>
+<div class="highlight"><pre><span></span><code>ping internal-server.example.local
+</code></pre></div>
+<p>И только затем проверяем нужный прикладной доступ, например RDP:</p>
+<div class="highlight"><pre><span></span><code>mstsc
+</code></pre></div>
+<p>Вводим имя или адрес компьютера локальной сети.</p>
+<p>Порядок проверки важен:</p>
+<ol>
+<li><code>192.168.254.1</code> — работает сам VPN;</li>
+<li>адрес Windows Server — работает маршрутизация до локального интерфейса сервера;</li>
+<li>адрес MikroTik — работает выход из VPN в локальную сеть;</li>
+<li>другой компьютер — работает обратный маршрут;</li>
+<li>DNS-имя — клиент получил и использует внутренний DNS;</li>
+<li>RDP или другой сервис — работает конечное приложение.</li>
+</ol>
+<p>Если VPN подключается, но пинги в локальную сеть не проходят, проверьте:</p>
+<ul>
+<li>перезагружался ли Windows Server после изменения <code>IPEnableRouter</code>;</li>
+<li>есть ли на MikroTik маршрут к <code>192.168.254.0/24</code>;</li>
+<li>указан ли в <code>server.ovpn</code> правильный маршрут локальной сети;</li>
+<li>разрешает ли брандмауэр целевого компьютера обращения из <code>192.168.254.0/24</code>;</li>
+<li>не пересекается ли локальная сеть клиента с локальной сетью офиса.</li>
 </ul>
 <hr />
-<h2 id="production-notes">production notes</h2>
-<h3 id="confirmed">confirmed</h3>
-<div class="highlight"><pre><span></span><code>- OpenVPN 2.7.4 production-tested на Windows Server 2022
-- TAP predictable
-- disable-dco predictable
-- config-auto подходит для production
-- IPEnableRouter требует reboot
+<h2 id="15">15. Резервная копия</h2>
+<p>После завершения настройки рекомендуется сразу сделать резервную копию следующих файлов и каталогов:</p>
+<div class="highlight"><pre><span></span><code>C:\OpenVPN\config-auto\server.ovpn
+C:\OpenVPN\easy-rsa\pki
+C:\OpenVPN\easy-rsa\tls-crypt.key
 </code></pre></div>
-<h3 id="_3">важно</h3>
-<div class="highlight"><pre><span></span><code>- windows-driver wintun может вести себя нестабильно в некоторых сценариях на Windows Server 2022
-- persist-key не используется в данной конфигурации
-</code></pre></div>
-<p>В OpenVPN 2.7 это вызывает deprecated behavior или нестабильную работу.</p>
+<p>Именно эти файлы и каталоги являются основой вашего VPN-сервера.</p>
+<p>Каталог <code>pki</code> содержит центр сертификации (CA), закрытые ключи, серверные и клиентские сертификаты, а также список отозванных сертификатов (CRL).</p>
+<p>Файл <code>tls-crypt.key</code> используется одновременно сервером и всеми клиентами для защиты служебного обмена OpenVPN.</p>
+<p>Файл <code>server.ovpn</code> содержит всю конфигурацию сервера.</p>
+<p>При потере каталога <code>pki</code> вы больше не сможете выпускать новые клиентские сертификаты, отзывать существующие и обновлять список CRL.</p>
+<p>При потере <code>tls-crypt.key</code> все клиентские профили придётся выпустить заново.</p>
+<p>При потере <code>server.ovpn</code> сервер не сможет запуститься с прежней конфигурацией.</p>
+<p>Не храните резервную копию на этом же VPN-сервере. Сохраните её на другом сервере, NAS или внешнем носителе.</p>
+<p>После создания резервной копии временный каталог <code>C:\OpenVPN-Deploy</code>, использовавшийся только для установки OpenVPN, можно удалить. Дальнейшая работа с OpenVPN выполняется уже из каталога <code>C:\OpenVPN</code>.</p>
+<hr />
+<p>На этом первоначальная настройка OpenVPN завершена.</p>
+<p>В дальнейшем администратору обычно приходится выпускать новые клиентские сертификаты, отзывать скомпрометированные сертификаты, обновлять список отозванных сертификатов (CRL) и сопровождать работающий VPN-сервер.</p>
+<p>Этим задачам будет посвящена следующая статья.</p>
 
 
 
