@@ -1,808 +1,696 @@
-# OpenVPN 2.7 на Windows Server 2022 - production setup с нуля
+# OpenVPN 2.7 на Windows Server 2022: ручная установка и настройка с нуля
 
-## о серии статей
+В этой статье рассмотрим установку и настройку OpenVPN Server 2.7 на Windows Server 2022. По пути разберёмся, из каких компонентов состоит OpenVPN, зачем нужен каждый файл и что делает каждый важный параметр конфигурации.
 
-Это серия статей по OpenVPN 2.7 на Windows Server.
+## Что получится в результате
 
-Разбирается:
-- настройка OpenVPN
-- PKI
-- сертификаты
-- Active Directory авторизация
-- routing
-- security
-- диагностика проблем
-- production эксплуатация
+После выполнения всех шагов вы получите полностью настроенный OpenVPN-сервер на Windows Server 2022.
 
----
+Будут настроены:
 
-## что делаем в этой статье
+- OpenVPN Server;
+- OpenSSL;
+- Easy-RSA;
+- собственный центр сертификации (CA);
+- серверный сертификат;
+- первый клиентский сертификат;
+- защита служебного обмена с помощью `tls-crypt`;
+- автоматический запуск службы OpenVPN;
+- маршрутизация Windows;
+- правило брандмауэра Windows;
+- готовый клиентский профиль `.ovpn`.
 
-В данной статье настраивается базовый OpenVPN сервер для постоянной рабочей эксплуатации.
-
-В результате получаем:
-- OpenVPNService с автозапуском
-- split tunnel
-- доступ клиентов в LAN
-- routing между VPN и локальной сетью
-- работу:
-  - ping
-  - DNS
-  - RDP
-- автоматический запуск после reboot
-
-Используется:
-- OpenVPN 2.7
-- TAP driver
-- Easy-RSA
-- EC certificates
-- tls-crypt
-- AES-256-GCM
-
-Конфигурация протестирована:
-- Windows Server 2022
-- OpenVPN 2.7.4
-- MikroTik RouterOS v7
-
-В данной статье:
-- без Active Directory
-- без MFA
-- без паролей на сертификаты
-- без hardening
-
-Это базовая рабочая конфигурация, на основе которой дальше будут:
-- AD авторизация
-- защита PKI
-- статические VPN IP
-- revoke сертификатов
-- hardening
-- диагностика проблем
+После этого останется только импортировать профиль в OpenVPN Connect и подключиться к локальной сети через Интернет.
 
 ---
 
-## 00. схема
+В примерах используется такая схема:
 
 ```text
-internet
-    |
-public ip
-212.104.74.82
-    |
-MikroTik
-dst-nat udp/1194
-    |
-Windows Server 2022
-OpenVPN 2.7
-192.168.2.58
-    |
-LAN 192.168.2.0/24
+Windows Server с OpenVPN: 192.168.10.10
+Локальная сеть:           192.168.10.0/24
+Внутренний DNS:           192.168.10.5
+
+VPN-сеть:                 192.168.254.0/24
+Внешний адрес:            vpn.example.com
+Порт OpenVPN:             UDP 1194
+Первый клиент:            test1
 ```
 
-После настройки получаем:
+Если у вас другие адреса, меняйте их прямо в командах и конфигурационных файлах в тех местах, где они встречаются.
 
-- OpenVPNService автоматически стартует после reboot
-- клиент получает доступ в LAN
-- работает:
-  - ping
-  - DNS
-  - RDP
-- используется:
-  - tls-crypt
-  - AES-256-GCM
-  - TLS 1.2+
-- split tunnel
-- конфиг полностью готов для постоянной эксплуатации
+Все команды PowerShell должны выполняться от имени администратора.
 
-Стенд:
+---
+
+## 1. Устанавливаем OpenVPN
+
+Создаём временный каталог и скачиваем установщик OpenVPN 2.7.4.
+
+```powershell
+New-Item -ItemType Directory -Path C:\OpenVPN-Deploy -Force | Out-Null
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+(New-Object System.Net.WebClient).DownloadFile("https://swupdate.openvpn.org/community/releases/OpenVPN-2.7.4-I002-amd64.msi","C:\OpenVPN-Deploy\OpenVPN-2.7.4-I002-amd64.msi")
+```
+
+Перед установкой проверяем цифровую подпись файла:
+
+```powershell
+Get-AuthenticodeSignature "C:\OpenVPN-Deploy\OpenVPN-2.7.4-I002-amd64.msi"
+```
+
+В строке `Status` должно быть:
 
 ```text
-OS: Windows Server 2022
-OpenVPN: 2.7.4
-Easy-RSA: 3.2.6
-OpenSSL: 3.6.2
-VPN subnet: 192.168.254.0/24
-LAN subnet: 192.168.2.0/24
+Valid
 ```
+
+Теперь уже можно установить OpenVPN, TAP-драйвер, OpenSSL и Easy-RSA:
+
+```powershell
+Start-Process msiexec.exe -ArgumentList '/i "C:\OpenVPN-Deploy\OpenVPN-2.7.4-I002-amd64.msi" /qn /norestart INSTALLDIR="C:\OpenVPN" ADDLOCAL=OpenVPN,OpenVPN.GUI,OpenVPN.Service,Drivers,Drivers.TAPWindows6,OpenSSL,EasyRSA /L*v "C:\OpenVPN-Deploy\openvpn-install.log"' -Wait
+```
+
+После завершения установки достаточно убедиться, что появились файлы в каталоге `C:\OpenVPN\`, служба `OpenVPNService`, а в списке сетевых адаптеров — `TAP-Windows Adapter`.
+
+Во время установки OpenVPN автоматически создаёт несколько рабочих каталогов. В дальнейшем чаще всего используются следующие:
+
+`C:\OpenVPN\config-auto` — здесь находится конфигурация сервера. Служба `OpenVPNService` автоматически запускает все файлы `.ovpn`, расположенные в этом каталоге.
+
+`C:\OpenVPN\easy-rsa\pki` — здесь будут храниться инфраструктура сертификатов (PKI): сертификат центра сертификации (CA), серверные и клиентские сертификаты, закрытые ключи и список отозванных сертификатов (CRL). Это один из самых важных каталогов OpenVPN.
+
+`C:\ProgramData\OpenVPN\Log` — здесь находятся журналы работы OpenVPN. Если сервер не запускается или возникают проблемы с подключением клиентов, в первую очередь следует проверить именно этот каталог.
 
 ---
 
-## 01. установка OpenVPN
+## 2. Готовим удобный запуск Easy-RSA
 
-Устанавливаем:
+Easy-RSA — это набор утилит для создания центра сертификации (CA), выпуска и отзыва сертификатов OpenVPN. В Windows она запускается через `sh.exe` и использует служебные программы из собственного каталога.
 
-- OpenVPN Service - запуск OpenVPN как Windows service
-- TAP driver - виртуальный сетевой интерфейс OpenVPN
-- OpenSSL - openssl.exe и работа с сертификатами
-- Easy-RSA - создание PKI и выпуск сертификатов
+Чтобы каждый раз не писать длинную команду с путями, создадим небольшой командный файл. После этого сертификаты можно будет выпускать обычными командами из PowerShell или командной строки.
 
-Используется именно TAP-драйвер.
-
-`ovpn-dco-win` и DCO в данной конфигурации отключены, потому что классическая схема через TAP:
-- проще диагностируется
-- работает более предсказуемо
-- имеет меньше проблем в Windows
+Открываем файл:
 
 ```powershell
-clear
-
-#requires -RunAsAdministrator
-
-# версия OpenVPN
-$Version = "2.7.4"
-
-# ссылка на MSI
-$MsiUrl = "https://swupdate.openvpn.org/community/releases/OpenVPN-$Version-I001-amd64.msi"
-
-# каталог для установки
-$TempDir = "C:\OpenVPN-Deploy"
-
-# путь до MSI
-$MsiPath = "$TempDir\OpenVPN-$Version-amd64.msi"
-
-# создаем каталог
-New-Item -ItemType Directory -Force -Path $TempDir | Out-Null
-
-# скачиваем MSI
-Invoke-WebRequest `
-    -Uri $MsiUrl `
-    -OutFile $MsiPath
-
-$Arguments = @(
-
-    "/i"
-    "`"$MsiPath`""
-
-    # тихая установка
-    "/qn"
-
-    # путь установки
-    "INSTALLDIR=C:\OpenVPN"
-
-    # OpenVPN.Service - автозапуск OpenVPN как Windows service
-    # Drivers.TAPWindows6 - TAP драйвер
-    # OpenSSL - openssl.exe
-    # EasyRSA - PKI и сертификаты
-    "ADDLOCAL=OpenVPN,OpenVPN.GUI,OpenVPN.Service,Drivers,Drivers.TAPWindows6,OpenSSL,EasyRSA"
-
-    # лог установки MSI
-    "/L*v"
-    "`"C:\OpenVPN-Deploy\openvpn-install.log`""
-)
-
-# запускаем установку
-Start-Process `
-    -FilePath "msiexec.exe" `
-    -ArgumentList $Arguments `
-    -Wait `
-    -NoNewWindow
+notepad C:\OpenVPN\easy-rsa\easyrsa-run.cmd
 ```
 
----
+Вставляем:
 
-## 02. создаем структуру каталогов
-
-Создаем рабочие каталоги OpenVPN.
-
-`config-auto` используется для автоматического запуска `.ovpn` файлов через OpenVPNService.
-
-```powershell
-clear
-
-$Dirs = @(
-
-    # конфиги для OpenVPNService
-    "C:\OpenVPN\config-auto",
-
-    # client-config-dir
-    "C:\OpenVPN\ccd",
-
-    # готовые ovpn клиентов
-    "C:\OpenVPN\clients-configs",
-
-    # вспомогательные скрипты
-    "C:\OpenVPN\scripts",
-
-    # backup PKI
-    "C:\OpenVPN\pki-backup",
-
-    # логи OpenVPN
-    "C:\ProgramData\OpenVPN\Log"
-)
-
-foreach ($Dir in $Dirs) {
-
-    New-Item `
-        -ItemType Directory `
-        -Path $Dir `
-        -Force | Out-Null
-}
-```
-
----
-
-## 03. Easy-RSA runner
-
-Easy-RSA в Windows использует unix tools через `sh.exe`.
-
-Без runner:
-- automation ломается
-- `cat`
-- `printf`
-
-не находятся.
-
-Runner нужен для:
-- автоматического выпуска сертификатов
-- автоматического создания PKI
-- последующей автоматизации через PowerShell
-
-```powershell
-clear
-
-@'
+```bat
 @echo off
 setlocal EnableExtensions
 
 set "ER=C:\OpenVPN\easy-rsa"
-
-REM openssl.exe + unix tools Easy-RSA
 set "PATH=C:\OpenVPN\bin;%ER%\bin;%PATH%"
 
-REM запуск Easy-RSA через sh.exe
 "%ER%\bin\sh.exe" -lc "cd 'C:/OpenVPN/easy-rsa' || exit 111; ./easyrsa %*; exit $?" 2>&1
-
 exit /b %errorlevel%
-'@ | Out-File `
-    -Encoding ascii `
-    -Force `
-    "C:\OpenVPN\easy-rsa\easyrsa-run.cmd"
 ```
 
----
-
-## 04. vars
-
-Используется:
-- EC certificates
-- curve `prime256v1`
-- SHA256
-
-Вместо RSA используется EC.
-
-Что это дает:
-- меньше размер ключей
-- быстрее работа TLS
-- меньше нагрузка на CPU
+Сохраняем и проверяем:
 
 ```powershell
-clear
-
-@'
-set_var EASYRSA_DN "cn_only"
-
-# elliptic curve certificates
-set_var EASYRSA_ALGO "ec"
-
-# elliptic curve
-set_var EASYRSA_CURVE "prime256v1"
-
-# hash algorithm
-set_var EASYRSA_DIGEST "sha256"
-
-# срок жизни CA
-set_var EASYRSA_CA_EXPIRE 3650
-
-# срок жизни сертификатов
-set_var EASYRSA_CERT_EXPIRE 825
-
-# CRL validity
-set_var EASYRSA_CRL_DAYS 30
-
-# certificate fields
-set_var EASYRSA_REQ_COUNTRY    "RU"
-set_var EASYRSA_REQ_PROVINCE   "RU"
-set_var EASYRSA_REQ_CITY       "RU"
-set_var EASYRSA_REQ_ORG        "OpenVPN"
-set_var EASYRSA_REQ_EMAIL      "admin@example.local"
-set_var EASYRSA_REQ_OU         "VPN"
-'@ | Out-File `
-    -Encoding ascii `
-    -Force `
-    "C:\OpenVPN\easy-rsa\vars"
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" --version"
 ```
+
+Дальше через этот файл будем создавать центр сертификации, серверный сертификат и клиентские сертификаты.
 
 ---
 
-## 05. создаем PKI
+## 3. Настраиваем параметры сертификатов
 
-Создается:
+Открываем файл:
+
+```powershell
+notepad C:\OpenVPN\easy-rsa\vars
+```
+
+Вставляем:
 
 ```text
-CA
-server certificate
-CRL
+set_var EASYRSA_DN "cn_only"
+set_var EASYRSA_ALGO "ec"
+set_var EASYRSA_CURVE "prime256v1"
+set_var EASYRSA_DIGEST "sha256"
+
+set_var EASYRSA_CA_EXPIRE 3650
+set_var EASYRSA_CERT_EXPIRE 825
+set_var EASYRSA_CRL_DAYS 30
+
+set_var EASYRSA_REQ_COUNTRY    "RU"
+set_var EASYRSA_REQ_PROVINCE   "Region"
+set_var EASYRSA_REQ_CITY       "City"
+set_var EASYRSA_REQ_ORG        "Example Organization"
+set_var EASYRSA_REQ_EMAIL      "vpn-admin@example.invalid"
+set_var EASYRSA_REQ_OU         "VPN"
 ```
 
-В данной статье CA создается без пароля (`nopass`).
+Что здесь важно:
 
-Это упрощает автоматизацию, но имеет риски.
+- `EASYRSA_ALGO "ec"` — создаём сертификаты на эллиптических кривых вместо RSA;
+- `prime256v1` — конкретная стандартная кривая, которую использует Easy-RSA;
+- `sha256` — алгоритм подписи сертификатов;
+- `EASYRSA_CA_EXPIRE 3650` — центр сертификации действует 10 лет;
+- `EASYRSA_CERT_EXPIRE 825` — серверные и клиентские сертификаты действуют 825 дней;
+- `EASYRSA_CRL_DAYS 30` — список отозванных сертификатов действует 30 дней.
 
-Для более защищенной схемы рекомендуется:
-- пароль на CA
-- offline CA
-- backup private key
-- отдельный issuing host
-
-Это будет рассмотрено в отдельной статье.
-
-```powershell
-clear
-
-# путь до Easy-RSA
-$EasyRsaPath = "C:\OpenVPN\easy-rsa"
-
-# PKI каталог
-$PkiPath = "$EasyRsaPath\pki"
-
-# удаляем старую PKI
-Remove-Item `
-    -Recurse `
-    -Force `
-    -ErrorAction SilentlyContinue `
-    $PkiPath
-
-# создаем PKI
-cmd.exe /c "`"$EasyRsaPath\easyrsa-run.cmd`" init-pki"
-
-# создаем CA
-cmd.exe /c "`"$EasyRsaPath\easyrsa-run.cmd`" --batch build-ca nopass"
-
-# создаем server certificate
-cmd.exe /c "`"$EasyRsaPath\easyrsa-run.cmd`" --batch build-server-full server nopass"
-
-# создаем CRL
-cmd.exe /c "`"$EasyRsaPath\easyrsa-run.cmd`" --batch gen-crl"
-```
+Поля страны, города, организации и электронной почты можно заменить своими или оставить условными.
 
 ---
 
-## 06. создаем server.ovpn
+## 4. Создаём PKI
 
-### topology subnet
+PKI — это каталог, в котором Easy-RSA хранит:
 
-Современный режим адресации OpenVPN.
+- центр сертификации;
+- закрытый ключ центра сертификации;
+- выпущенные сертификаты;
+- закрытые ключи серверов и клиентов;
+- список отозванных сертификатов.
 
-Каждый клиент получает обычный IP внутри VPN-подсети.
-
-### tls-crypt
-
-Шифрует служебный TLS-трафик OpenVPN.
-
-Что дает:
-- скрывает процесс установки VPN-сессии
-- уменьшает количество мусорных подключений
-- усложняет обнаружение OpenVPN
-
-### data-ciphers
-
-Список разрешенных алгоритмов шифрования.
-
-Используются только современные AEAD cipher:
-- AES-256-GCM
-- AES-128-GCM
-- CHACHA20-POLY1305
-
-CBC cipher не используются.
-
-### disable-dco
-
-Отключает `ovpn-dco-win`.
-
-Используется классическая схема через TAP-драйвер.
-
-Что это дает:
-- более стабильную работу
-- проще диагностику
-- меньше проблем с Windows firewall и routing
-
-### persist-tun
-
-Не пересоздает TAP interface при reconnect/restart.
-
-Это уменьшает:
-- проблемы с маршрутами
-- пересоздание интерфейса
-- проблемы после reconnect
+Создаём структуру PKI:
 
 ```powershell
-clear
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" init-pki"
+```
 
-# базовый каталог OpenVPN
-$BasePath = "C:\OpenVPN"
+### Вариант 1. CA с паролем
 
-# UDP порт OpenVPN
-$Port = 1194
+Так безопаснее. Easy-RSA попросит придумать пароль:
 
-# протокол OpenVPN
-$Proto = "udp4"
+```powershell
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" build-ca"
+```
 
-# VPN подсеть
-$VpnNet = "192.168.254.0"
+### Вариант 2. CA без пароля
 
-# маска VPN подсети
-$VpnMask = "255.255.255.0"
+Так проще, но закрытый ключ CA нужно особенно хорошо защищать:
 
-# локальная LAN
-$LanNet = "192.168.2.0"
+```powershell
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" --batch build-ca nopass"
+```
 
-# маска LAN
-$LanMask = "255.255.255.0"
+В примерах этой статьи используется CA без пароля.
 
-# DNS который push клиентам
-$Dns = "192.168.2.5"
+Создаём серверный сертификат и ключ:
 
-# tls-crypt key
-$TlsCryptKey = "$BasePath\easy-rsa\tls-crypt.key"
+```powershell
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" --batch build-server-full server nopass"
+```
 
-# удаляем старый tls-crypt key
-Remove-Item `
-    -Force `
-    -ErrorAction SilentlyContinue `
-    $TlsCryptKey
+Серверный ключ оставляем без пароля, иначе служба OpenVPN не сможет запускаться автоматически после перезагрузки.
 
-# генерируем tls-crypt key
-& "$BasePath\bin\openvpn.exe" `
-    --genkey `
-    secret `
-    $TlsCryptKey
+Создаём список отозванных сертификатов:
 
-@"
-port $Port
-proto $Proto
+```powershell
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" --batch gen-crl"
+```
 
-# routed TUN mode
+CRL — это список сертификатов, которым сервер больше не должен доверять. Например, если ноутбук потерян или сотрудник уволился, его сертификат отзывается, после чего обновлённый CRL запрещает этому клиенту подключаться.
+
+После выполнения команд проверьте наличие файлов в Проводнике:
+
+```text
+C:\OpenVPN\easy-rsa\pki\ca.crt
+C:\OpenVPN\easy-rsa\pki\private\ca.key
+C:\OpenVPN\easy-rsa\pki\issued\server.crt
+C:\OpenVPN\easy-rsa\pki\private\server.key
+C:\OpenVPN\easy-rsa\pki\crl.pem
+```
+
+Файл `ca.key` — самый важный файл всей PKI. Получив его, можно выпускать новые доверенные сертификаты. Сделайте резервную копию и ограничьте к нему доступ. Никогда не копируйте его на клиентские устройства и не храните рядом с клиентскими профилями.
+
+---
+
+## 5. Создаём ключ tls-crypt
+
+`tls-crypt` защищает служебный обмен OpenVPN до установления VPN-соединения.
+
+Создаём ключ:
+
+```powershell
+C:\OpenVPN\bin\openvpn.exe --genkey secret C:\OpenVPN\easy-rsa\tls-crypt.key
+```
+
+После выполнения должен появиться файл:
+
+```text
+C:\OpenVPN\easy-rsa\tls-crypt.key
+```
+
+Этот же ключ позже будет встроен в клиентский профиль.
+
+---
+
+## 6. Создаём конфигурацию сервера
+
+Открываем файл:
+
+```powershell
+notepad C:\OpenVPN\config-auto\server.ovpn
+```
+
+Вставляем конфигурацию и при необходимости заменяем адреса локальной сети, DNS-сервера, VPN-подсети, порт и другие параметры на свои:
+
+```text
+port 1194
+proto udp4
 dev tun
-
-# отключаем ovpn-dco-win
 disable-dco
 
-# normal subnet addressing
 topology subnet
+server 192.168.254.0 255.255.255.0
 
-# VPN subnet
-server $VpnNet $VpnMask
-
-# PKI
 ca "C:/OpenVPN/easy-rsa/pki/ca.crt"
 cert "C:/OpenVPN/easy-rsa/pki/issued/server.crt"
 key "C:/OpenVPN/easy-rsa/pki/private/server.key"
-
-# certificate revoke list
 crl-verify "C:/OpenVPN/easy-rsa/pki/crl.pem"
-
-# tls-crypt protection
 tls-crypt "C:/OpenVPN/easy-rsa/tls-crypt.key"
 
-# modern AEAD ciphers
 data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305
-
-# compatibility fallback
 cipher AES-256-GCM
-
-# HMAC auth
 auth SHA256
-
-# minimum TLS version
 tls-version-min 1.2
-
-# проверка client certificate
 remote-cert-tls client
 
-# keepalive
 keepalive 10 60
-
-# UDP notify on disconnect
 explicit-exit-notify 1
-
-# не пересоздаем TAP interface
 persist-tun
 
-# route LAN to clients
-push "route $LanNet $LanMask"
+push "route 192.168.10.0 255.255.255.0"
+push "dhcp-option DNS 192.168.10.5"
 
-# DNS to clients
-push "dhcp-option DNS $Dns"
-
-# client-config-dir
 client-config-dir "C:/OpenVPN/ccd"
 
-# status log
 status-version 3
 status "C:/ProgramData/OpenVPN/Log/status.log" 10
-
-# server log
 log-append "C:/ProgramData/OpenVPN/Log/server.log"
-
-# log verbosity
 verb 3
-"@ | Out-File `
-    -Encoding ascii `
-    -Force `
-    "$BasePath\config-auto\server.ovpn"
+```
+
+Что делает каждая строка:
+
+- `port 1194` — порт OpenVPN;
+- `proto udp4` — UDP только по IPv4;
+- `dev tun` — маршрутизируемый VPN-интерфейс;
+- `disable-dco` — отключает использование DCO-драйвера, так как в этой статье используется TAP-драйвер;
+- `topology subnet` — клиенты получают обычные адреса из VPN-подсети;
+- `server ...` — VPN-подсеть;
+- `ca`, `cert`, `key` — сертификат CA, сертификат сервера и закрытый ключ сервера;
+- `crl-verify` — проверка списка отозванных сертификатов;
+- `tls-crypt` — защита служебного трафика;
+- `data-ciphers` — разрешённые алгоритмы шифрования;
+- `cipher` — совместимое значение для клиентов, которые ещё используют старый параметр;
+- `auth SHA256` — проверка целостности служебных сообщений;
+- `tls-version-min 1.2` — запрет старых версий TLS;
+- `remote-cert-tls client` — сервер принимает только клиентские сертификаты;
+- `keepalive 10 60` — сервер каждые 10с проверяет доступность клиента и разрывает соединение через 60с при отсутствии ответа;
+- `explicit-exit-notify 1` — уведомление UDP-клиента при штатном завершении;
+- `persist-tun` — не удалять VPN-интерфейс при перезапуске процесса;
+- `push "route ..."` — передать клиенту маршрут в локальную сеть;
+- `push "dhcp-option DNS ..."` — передать клиенту внутренний DNS;
+- `client-config-dir` — каталог индивидуальных настроек клиентов;
+- `status` — файл текущих подключений;
+- `log-append` — журнал сервера;
+- `verb 3` — обычный уровень подробности журнала.
+
+Сохраняем файл.
+
+---
+
+## 7. Включаем маршрутизацию Windows
+
+По умолчанию Windows Server не пересылает пакеты между сетевыми интерфейсами.
+
+OpenVPN-клиент сможет подключиться к серверу, но без маршрутизации Windows пакеты из VPN-сети не попадут в локальную сеть.
+
+Для этого достаточно изменить один параметр реестра:
+
+```text
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+
+IPEnableRouter = 1 (DWORD)
+```
+
+Если параметр `IPEnableRouter` отсутствует, создайте его вручную.
+
+После изменения параметра необходимо перезагрузить сервер. Только после перезагрузки Windows начнёт выполнять маршрутизацию.
+
+---
+
+## 8. Разрешаем OpenVPN в брандмауэре Windows
+
+Открываем:
+
+```text
+Брандмауэр Защитника Windows в режиме повышенной безопасности
+```
+
+Переходим:
+
+```text
+Правила для входящих подключений → Создать правило
+```
+
+Создаём правило:
+
+```text
+Тип правила:       Для программы
+Программа:         C:\OpenVPN\bin\openvpn.exe
+Протокол:          UDP
+Локальный порт:    1194
+Действие:          Разрешить подключение
+Профили:           Доменный, Частный, Публичный
+Имя:               OpenVPN Server UDP 1194
 ```
 
 ---
 
-## 07. firewall + routing
+## 9. Настраиваем службу OpenVPN
 
-### IPEnableRouter
 
-Включает IPv4 routing в Windows.
+Откройте `services.msc`, найдите службу `OpenVPNService` и установите тип запуска **Автоматически**.
 
-Без него:
-- VPN tunnel может подниматься
-- клиент может подключаться
-- но доступа в LAN не будет
-
-### reboot обязателен
-
-Важный момент.
-
-Windows применяет IP routing не полностью сразу после изменения registry.
-
-Без reboot:
-- OpenVPN может выглядеть рабочим
-- клиент может подключаться
-- но маршрутизация между VPN и LAN может не работать
-
-После reboot:
-- сетевой стек Windows полностью активирует routing
-- доступ в LAN начинает работать нормально
+Также рекомендуется настроить автоматический перезапуск службы при сбоях:
 
 ```powershell
-clear
-
-# включаем IPv4 routing в Windows
-Set-ItemProperty `
-    -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" `
-    -Name "IPEnableRouter" `
-    -Type DWord `
-    -Value 1
-
-# удаляем старое firewall rule
-Get-NetFirewallRule `
-    -DisplayName "OpenVPN Server UDP 1194" `
-    -ErrorAction SilentlyContinue |
-    Remove-NetFirewallRule
-
-# разрешаем входящий UDP/1194
-New-NetFirewallRule `
-    -DisplayName "OpenVPN Server UDP 1194" `
-    -Direction Inbound `
-    -Action Allow `
-    -Protocol UDP `
-    -LocalPort 1194 `
-    -Profile Any `
-    -Program "C:\OpenVPN\bin\openvpn.exe"
-
-# restart OpenVPNService on failure
 sc.exe failure OpenVPNService reset= 86400 actions= restart/60000/restart/60000/restart/60000
-
-# включаем recovery actions
 sc.exe failureflag OpenVPNService 1
 ```
 
+После этого Windows будет автоматически пытаться восстановить работу OpenVPN при его аварийном завершении.
+
 ---
 
-## 08. перезапускаем OpenVPNService
+## 10. Выпускаем сертификат клиента
 
-OpenVPNService автоматически запускает все `.ovpn` файлы из:
+Создаём сертификат клиента `test1`:
+
+```powershell
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" --batch build-client-full test1 nopass"
+```
+
+После выпуска нового сертификата обновляем CRL:
+
+```powershell
+cmd.exe /d /c ""C:\OpenVPN\easy-rsa\easyrsa-run.cmd" --batch gen-crl"
+```
+
+Убедитесь, что появились следующие файлы:
 
 ```text
-C:\OpenVPN\config-auto
+C:\OpenVPN\easy-rsa\pki\issued\test1.crt
+C:\OpenVPN\easy-rsa\pki\private\test1.key
 ```
 
-Это production-вариант для Windows.
+Для другого пользователя замените `test1` на уникальное имя, например:
 
-Не требуется:
-- GUI
-- ручной запуск
-- scheduled tasks
-
-```powershell
-clear
-
-# перезапускаем OpenVPNService
-Restart-Service OpenVPNService -Force
-
-# ждем поднятия OpenVPN
-Start-Sleep -Seconds 15
+```text
+ivanov-laptop
+director-phone
+service-notebook
 ```
+
+Один сертификат лучше выдавать одному конкретному устройству. Тогда при потере устройства можно отозвать только его сертификат.
 
 ---
 
-## 09. создаем клиента
+## 11. Создаём клиентский профиль
 
-Создается единый `.ovpn` файл с embedded:
-- CA
-- client cert
-- private key
-- tls-crypt
+Клиенту нужны:
 
-Такой файл удобно:
-- импортировать в OpenVPN Connect
-- переносить между устройствами
-- хранить как готовый client profile
+- адрес сервера;
+- параметры шифрования;
+- сертификат центра сертификации;
+- его собственный сертификат;
+- его закрытый ключ;
+- ключ `tls-crypt`.
+
+Можно передавать эти файлы отдельно, но удобнее собрать всё в один `.ovpn`. Такой файл импортируется в OpenVPN Connect целиком.
+
+Важно: внутри `.ovpn` находится закрытый ключ клиента. Этот файл фактически является ключом доступа к VPN. Его нельзя отправлять в открытые чаты, хранить в общей папке или передавать другим пользователям.
+
+Сначала создаём заготовку:
 
 ```powershell
-clear
+notepad C:\OpenVPN\test1.ovpn
+```
 
-# базовый каталог OpenVPN
-$BasePath = "C:\OpenVPN"
+Вставляем:
 
-# каталог Easy-RSA
-$EasyRsaPath = "$BasePath\easy-rsa"
-
-# каталог PKI
-$PkiPath = "$EasyRsaPath\pki"
-
-# имя клиента
-$ClientName = "test1"
-
-# внешний IP MikroTik
-$RemoteHost = "212.104.74.82"
-
-# OpenVPN port
-$Port = 1194
-
-# OpenVPN protocol
-$Proto = "udp4"
-
-# создаем client certificate
-cmd.exe /c "`"$EasyRsaPath\easyrsa-run.cmd`" --batch build-client-full $ClientName nopass"
-
-# обновляем CRL
-cmd.exe /c "`"$EasyRsaPath\easyrsa-run.cmd`" --batch gen-crl"
-
-# читаем CA
-$ca = Get-Content "$PkiPath\ca.crt" -Raw
-
-# читаем client cert
-$cert = Get-Content "$PkiPath\issued\$ClientName.crt" -Raw
-
-# читаем private key
-$key = Get-Content "$PkiPath\private\$ClientName.key" -Raw
-
-# читаем tls-crypt key
-$tc = Get-Content "$EasyRsaPath\tls-crypt.key" -Raw
-
-@"
+```text
 client
 dev tun
-proto $Proto
-
-# внешний IP MikroTik
-remote $RemoteHost $Port
+proto udp4
+remote vpn.example.com 1194
 
 nobind
 resolv-retry infinite
-
-# проверка server certificate
 remote-cert-tls server
 
-# modern AEAD ciphers
 data-ciphers AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305
-
-# compatibility fallback
 cipher AES-256-GCM
-
-# HMAC auth
 auth SHA256
-
-# minimum TLS version
 tls-version-min 1.2
 
-# log verbosity
 verb 3
 
 <ca>
-$ca
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\pki\ca.crt
 </ca>
 
 <cert>
-$cert
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\pki\issued\test1.crt
 </cert>
 
 <key>
-$key
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\pki\private\test1.key
 </key>
 
 <tls-crypt>
-$tc
+СЮДА ВСТАВИТЬ СОДЕРЖИМОЕ C:\OpenVPN\easy-rsa\tls-crypt.key
 </tls-crypt>
-"@ | Out-File `
-    -Encoding ascii `
-    -Force `
-    "$BasePath\clients-configs\$ClientName.ovpn"
+```
+
+В строке:
+
+```text
+remote vpn.example.com 1194
+```
+
+Замените `vpn.example.com` на публичный IP-адрес или DNS-имя вашего интернет-канала (маршрутизатора, через который опубликован OpenVPN).
+
+Откройте каждый файл обычным Блокнотом, полностью скопируйте его содержимое и вставьте между соответствующими тегами.
+
+Например, внутри блока `<ca>` должны находиться строки от:
+
+```text
+-----BEGIN CERTIFICATE-----
+```
+
+до:
+
+```text
+-----END CERTIFICATE-----
+```
+
+Каждый блок должен содержать полное содержимое соответствующего файла, включая строки BEGIN и END.
+
+После заполнения сохраните профиль:
+
+```text
+C:\OpenVPN\test1.ovpn
 ```
 
 ---
 
-## 10. MikroTik
+## 12. Запускаем сервер и читаем журнал
 
-### dst-nat
-
-```routeros
-/ip firewall nat
-
-add chain=dstnat \
-    protocol=udp \
-    dst-port=1194 \
-    action=dst-nat \
-    to-addresses=192.168.2.58 \
-    to-ports=1194 \
-    comment="OpenVPN UDP 1194"
-```
-
-### route
-
-Без статического маршрута MikroTik не будет знать:
-- куда отправлять VPN подсеть
-- через какой gateway доступен OpenVPN subnet
-
-```routeros
-/ip route
-
-add dst-address=192.168.254.0/24 gateway=192.168.2.58
-```
-
----
-
-## 11. reboot
-
-### reboot обязателен
-
-Без reboot:
-- OpenVPN может выглядеть рабочим
-- клиент может подключаться
-- но маршрутизация между VPN и LAN может не работать
+Перезапускаем службу:
 
 ```powershell
-Restart-Computer
+Restart-Service OpenVPNService -Force
 ```
+
+Ждём примерно 15 секунд.
+
+Проверяем службу через:
+
+```text
+services.msc
+```
+
+Состояние `OpenVPNService` должно быть:
+
+```text
+Выполняется
+```
+
+Проверяем журнал:
+
+```text
+C:\ProgramData\OpenVPN\Log\server.log
+```
+
+Открываем его Блокнотом и ищем строку:
+
+```text
+Initialization Sequence Completed
+```
+
+Эта строка означает, что сервер прочитал конфигурацию, создал VPN-интерфейс и начал слушать порт.
+
+Если служба остановилась или этой строки нет, смотрим последние строки `server.log`. Обычно там прямо указан неверный путь, параметр или отсутствующий файл.
 
 ---
 
-## 12. результат
+## 13. Настраиваем маршрутизатор
 
-После reboot:
+В качестве маршрутизатора в этой статье используется **MikroTik**. Если у вас маршрутизатор другого производителя, необходимо выполнить аналогичные настройки средствами вашего оборудования.
 
-- OpenVPNService автоматически стартует
-- VPN поднимается автоматически
-- routing работает
-- LAN доступен
-- RDP работает
-- DNS работает
+В любом случае требуется выполнить две задачи:
+
+- перенаправить входящие UDP-подключения на порт `1194` на сервер OpenVPN;
+- добавить маршрут до VPN-подсети через сервер OpenVPN.
+
+Для MikroTik эти настройки выглядят следующим образом.
+
+Перенаправляем входящие подключения UDP `1194` на Windows Server:
+
+```routeros
+/ip firewall nat add chain=dstnat protocol=udp dst-port=1194 action=dst-nat to-addresses=192.168.10.10 to-ports=1194 comment="OpenVPN UDP 1194"
+```
+
+Замените `192.168.10.10` на локальный IP-адрес вашего сервера OpenVPN.
+
+Добавляем маршрут до VPN-подсети:
+
+```routeros
+/ip route add dst-address=192.168.254.0/24 gateway=192.168.10.10 comment="OpenVPN clients"
+```
+
+Без этого маршрута устройства локальной сети не смогут отправлять ответный трафик VPN-клиентам.
 
 ---
 
-## production notes
+## 14. Устанавливаем клиент и проверяем подключение
 
-### confirmed
+Проверять нужно из внешней сети. Если подключаться из той же локальной сети через публичный адрес, результат будет зависеть от настройки обратного NAT на MikroTik.
+
+Проще всего выполнить первый тест с телефона через мобильный Интернет.
+
+### На телефоне
+
+1. Установите OpenVPN Connect.
+2. Передайте на телефон файл `test1.ovpn`.
+3. Откройте файл через OpenVPN Connect.
+4. Подтвердите импорт профиля.
+5. Отключите Wi-Fi, чтобы телефон использовал мобильный Интернет.
+6. Нажмите подключение.
+7. Разрешите создание VPN-подключения.
+
+После подключения в OpenVPN Connect не должно быть ошибок проверки сертификата или `tls-crypt`.
+
+### На Windows
+
+1. Установите OpenVPN Connect.
+2. Откройте программу.
+3. Выберите импорт профиля из файла.
+4. Укажите `test1.ovpn`.
+5. Подключитесь из сети, которая не является локальной сетью сервера.
+
+### Что проверять после подключения
+
+Сначала проверяем сам VPN-интерфейс сервера:
 
 ```text
-- OpenVPN 2.7.4 production-tested на Windows Server 2022
-- TAP predictable
-- disable-dco predictable
-- config-auto подходит для production
-- IPEnableRouter требует reboot
+ping 192.168.254.1
 ```
 
-### важно
+Потом локальный адрес Windows Server:
 
 ```text
-- windows-driver wintun может вести себя нестабильно в некоторых сценариях на Windows Server 2022
-- persist-key не используется в данной конфигурации
+ping 192.168.10.10
 ```
 
-В OpenVPN 2.7 это вызывает deprecated behavior или нестабильную работу.
+Затем проверяем адрес шлюза локальной сети. В нашем примере это MikroTik:
+
+```text
+ping 192.168.10.1
+```
+
+Потом любой разрешённый компьютер локальной сети:
+
+```text
+ping 192.168.10.20
+```
+
+После этого проверяем DNS:
+
+```text
+ping internal-server.example.local
+```
+
+И только затем проверяем нужный прикладной доступ, например RDP:
+
+```text
+mstsc
+```
+
+Вводим имя или адрес компьютера локальной сети.
+
+Порядок проверки важен:
+
+1. `192.168.254.1` — работает сам VPN;
+2. адрес Windows Server — работает маршрутизация до локального интерфейса сервера;
+3. адрес MikroTik — работает выход из VPN в локальную сеть;
+4. другой компьютер — работает обратный маршрут;
+5. DNS-имя — клиент получил и использует внутренний DNS;
+6. RDP или другой сервис — работает конечное приложение.
+
+Если VPN подключается, но пинги в локальную сеть не проходят, проверьте:
+
+- перезагружался ли Windows Server после изменения `IPEnableRouter`;
+- есть ли на MikroTik маршрут к `192.168.254.0/24`;
+- указан ли в `server.ovpn` правильный маршрут локальной сети;
+- разрешает ли брандмауэр целевого компьютера обращения из `192.168.254.0/24`;
+- не пересекается ли локальная сеть клиента с локальной сетью офиса.
+
+---
+
+## 15. Резервная копия
+
+После завершения настройки рекомендуется сразу сделать резервную копию следующих файлов и каталогов:
+
+```text
+C:\OpenVPN\config-auto\server.ovpn
+C:\OpenVPN\easy-rsa\pki
+C:\OpenVPN\easy-rsa\tls-crypt.key
+```
+
+Именно эти файлы и каталоги являются основой вашего VPN-сервера.
+
+Каталог `pki` содержит центр сертификации (CA), закрытые ключи, серверные и клиентские сертификаты, а также список отозванных сертификатов (CRL).
+
+Файл `tls-crypt.key` используется одновременно сервером и всеми клиентами для защиты служебного обмена OpenVPN.
+
+Файл `server.ovpn` содержит всю конфигурацию сервера.
+
+При потере каталога `pki` вы больше не сможете выпускать новые клиентские сертификаты, отзывать существующие и обновлять список CRL.
+
+При потере `tls-crypt.key` все клиентские профили придётся выпустить заново.
+
+При потере `server.ovpn` сервер не сможет запуститься с прежней конфигурацией.
+
+Не храните резервную копию на этом же VPN-сервере. Сохраните её на другом сервере, NAS или внешнем носителе.
+
+После создания резервной копии временный каталог `C:\OpenVPN-Deploy`, использовавшийся только для установки OpenVPN, можно удалить. Дальнейшая работа с OpenVPN выполняется уже из каталога `C:\OpenVPN`.
+
+---
+
+На этом первоначальная настройка OpenVPN завершена.
+
+В дальнейшем администратору обычно приходится выпускать новые клиентские сертификаты, отзывать скомпрометированные сертификаты, обновлять список отозванных сертификатов (CRL) и сопровождать работающий VPN-сервер.
+
+Этим задачам будет посвящена следующая статья.
