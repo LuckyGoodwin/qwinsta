@@ -44,15 +44,14 @@ nav:
       - "GitHub Pages + MkDocs": github-pages-mkdocs.md
 
   - "VPN":
-      - "MTProxy + Fake TLS + Sponsor Bot": vpn/mtproxy-fake-tls.md
-      - "Tinyproxy HTTP Proxy": vpn/tinyproxy.md
-      - "XRay + Reality + 3x-ui": vpn/xray-reality.md
-      - "OpenVPN 2.7 на Windows Server 2022": vpn/OpenVPN27-win-server.md
+      - "OpenVPN на Windows Server 2022": vpn/openvpn/install-windows-server.md
+      - "WireGuard Site-to-Site (MikroTik)": vpn/wireguard/wireguard-site-to-site-mikrotik.md
+      - "XRay + Reality + 3x-ui": vpn/xray/xray-reality.md
+      - "MTProxy + Fake TLS + Sponsor Bot": vpn/mtproxy/fake-tls.md
+      - "Tinyproxy HTTP Proxy": vpn/tinyproxy/install.md
 
-  - "MikroTik":
-      - "WireGuard Site-to-Site": mikrotik/wireguard-site-to-site.md
-  - Windows:
-    - Обзор: windows/index.md
-    - RDP:
-        - Обзор: windows/rdp/index.md
-        - Event ID 4625: windows/rdp/event-id-4625.md
+  - "Windows":
+      - "Обзор": windows/index.md
+      - "RDP":
+          - "Обзор": windows/rdp/index.md
+          - "Event ID 4625": windows/rdp/event-id-4625.md
