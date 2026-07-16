@@ -1537,10 +1537,10 @@ VPN-сеть:                 192.168.254.0/24
 <p>Дальше через этот файл будем создавать центр сертификации, серверный сертификат и клиентские сертификаты.</p>
 <hr />
 <h2 id="3">3. Настраиваем параметры сертификатов</h2>
-<p>Открываем файл:</p>
-<div class="highlight"><pre><span></span><code><span class="n">notepad</span> <span class="n">C</span><span class="p">:\</span><span class="n">OpenVPN</span><span class="p">\</span><span class="n">easy-rsa</span><span class="p">\</span><span class="n">vars</span>
+<p>В каталоге</p>
+<div class="highlight"><pre><span></span><code>C:\OpenVPN\easy-rsa
 </code></pre></div>
-<p>Вставляем:</p>
+<p>создайте файл <strong><code>vars</code></strong> (без расширения) со следующим содержимым:</p>
 <div class="highlight"><pre><span></span><code>set_var EASYRSA_DN &quot;cn_only&quot;
 set_var EASYRSA_ALGO &quot;ec&quot;
 set_var EASYRSA_CURVE &quot;prime256v1&quot;
@@ -1560,13 +1560,13 @@ set_var EASYRSA_REQ_OU         &quot;VPN&quot;
 <p>Что здесь важно:</p>
 <ul>
 <li><code>EASYRSA_ALGO "ec"</code> — создаём сертификаты на эллиптических кривых вместо RSA;</li>
-<li><code>prime256v1</code> — конкретная стандартная кривая, которую использует Easy-RSA;</li>
+<li><code>prime256v1</code> — используем стандартную криптографическую кривую, поддерживаемую всеми современными клиентами OpenVPN;</li>
 <li><code>sha256</code> — алгоритм подписи сертификатов;</li>
 <li><code>EASYRSA_CA_EXPIRE 3650</code> — центр сертификации действует 10 лет;</li>
 <li><code>EASYRSA_CERT_EXPIRE 825</code> — серверные и клиентские сертификаты действуют 825 дней;</li>
 <li><code>EASYRSA_CRL_DAYS 30</code> — список отозванных сертификатов действует 30 дней.</li>
 </ul>
-<p>Поля страны, города, организации и электронной почты можно заменить своими или оставить условными.</p>
+<p>Поля страны, региона, города, организации и электронной почты можно заменить своими или оставить условными.</p>
 <hr />
 <h2 id="4-pki">4. Создаём PKI</h2>
 <p>PKI — это каталог, в котором Easy-RSA хранит:</p>
