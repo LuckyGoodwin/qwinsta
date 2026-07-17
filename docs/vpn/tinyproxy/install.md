@@ -1,43 +1,44 @@
-# установка и настройка Tinyproxy на Ubuntu 24.04
+# Tinyproxy на Ubuntu 24.04: установка и настройка HTTP-прокси
 
-Tinyproxy - lightweight HTTP proxy server с поддержкой HTTPS CONNECT tunneling и минимальным потреблением ресурсов.
+В этой статье рассмотрим установку и настройку Tinyproxy на Ubuntu 24.04.
 
-Tinyproxy не является SOCKS proxy.
-Инструкция собиралась и проверялась на Ubuntu 24.04.
+Tinyproxy — небольшой HTTP-прокси-сервер с поддержкой HTTPS через метод `CONNECT`. Он потребляет минимум ресурсов и подходит для случаев, когда не требуется полноценный VPN или SOCKS-прокси.
 
-По итогу получаем:
+Инструкция проверена на Ubuntu 24.04.
 
-- HTTP/HTTPS proxy server
-- HTTP CONNECT tunneling
-- systemd сервис
-- автозапуск
-- минимальное потребление ресурсов
+## Что получится в результате
 
-!!! info
+После выполнения всех шагов будут настроены:
 
-    Tinyproxy подходит для:
-	
-    - Telegram Desktop
-    - curl
-    - браузеров
-    - API запросов
-    - временного proxy доступа
+- HTTP-прокси;
+- поддержка HTTPS через `CONNECT`;
+- авторизация по логину и паролю;
+- ограничение доступа по IP-адресам;
+- автоматический запуск службы Tinyproxy.
 
-## 00. подготовка сервера
+Tinyproxy подходит для браузеров, `curl` и большинства программ, поддерживающих HTTP-прокси.
 
-Подключаемся:
+Tinyproxy не является SOCKS-прокси и не заменяет VPN.
+
+---
+
+## 1. Подготавливаем сервер
+
+В примерах используется сервер с адресом `123.45.67.89`, замените его на IP-адрес своего сервера.
+
+Подключаемся к серверу под пользователем `root`:
 
 ```bash
 ssh root@123.45.67.89
 ```
 
-Создаем пользователя:
+Создаём отдельного пользователя:
 
 ```bash
 adduser deployuser
 ```
 
-Даем sudo:
+Добавляем его в группу `sudo`:
 
 ```bash
 usermod -aG sudo deployuser
@@ -55,52 +56,81 @@ ssh deployuser@123.45.67.89
 sudo apt update && sudo apt full-upgrade -y
 ```
 
-Перезагружаем:
+Перезагружаем сервер:
 
 ```bash
 sudo reboot
 ```
 
-Запрещаем root login:
+Дальнейшую настройку будем выполнять уже под пользователем `deployuser`.
+
+Чтобы запретить вход по SSH под пользователем `root`, открываем файл:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
-Меняем:
+Изменяем параметр:
 
 ```text
 PermitRootLogin no
 ```
 
-Перезапускаем SSH:
+После сохранения файла перезапускаем SSH:
 
 ```bash
 sudo systemctl restart ssh
 ```
 
-## 01. подключение
+> Перед отключением входа под `root` обязательно убедитесь, что пользователь `deployuser` может выполнять команды через `sudo`.
+
+---
+
+## 2. Устанавливаем Tinyproxy
+
+Подключаемся к серверу:
 
 ```bash
 ssh deployuser@123.45.67.89
+```
+
+Получаем права `root`:
+
+```bash
 sudo -i
 ```
 
-## 02. установка Tinyproxy
+Устанавливаем Tinyproxy:
 
 ```bash
 apt install -y tinyproxy
 ```
 
-## 03. настройка авторизации
+После установки стоит запомнить два пути:
 
-Редактируем:
+```text
+/etc/tinyproxy/tinyproxy.conf
+```
+
+Основной конфигурационный файл.
+
+```text
+/var/log/tinyproxy/
+```
+
+Журналы работы Tinyproxy.
+
+---
+
+## 3. Настраиваем Tinyproxy
+
+Открываем конфигурационный файл:
 
 ```bash
 nano /etc/tinyproxy/tinyproxy.conf
 ```
 
-Минимальный production-friendly пример:
+Минимальная рабочая конфигурация:
 
 ```text
 User tinyproxy
@@ -127,16 +157,24 @@ BasicAuth myuser mypassword
 Allow 1.2.3.4
 ```
 
-Важно:
+Перед сохранением замените:
 
-- `7777` - порт proxy server
-- `Listen 0.0.0.0` - слушать все интерфейсы
-- `myuser` и `mypassword` заменить на свои
-- `Allow` ограничивает доступ по IP
-- `DisableViaHeader Yes` уменьшает disclosure proxy headers
-- `LogLevel Info` включает predictable logging
+```text
+myuser
+mypassword
+1.2.3.4
+```
 
-Пример ограничения по IP:
+на свои значения.
+
+Наиболее важные параметры:
+
+- `Port` — порт, на котором работает прокси;
+- `Listen` — сетевой интерфейс, на котором Tinyproxy принимает подключения;
+- `BasicAuth` — имя пользователя и пароль;
+- `Allow` — список IP-адресов, которым разрешено подключение.
+
+Можно разрешить сразу несколько адресов или подсетей:
 
 ```text
 Allow 1.2.3.4
@@ -144,112 +182,26 @@ Allow 5.6.7.0/24
 Allow 10.0.0.0/8
 ```
 
-Если авторизация не нужна - строку `BasicAuth` можно удалить.
+Если авторизация не требуется, строку `BasicAuth` можно удалить.
 
-!!! warning
+В этом случае обязательно ограничьте доступ по IP-адресам с помощью параметра `Allow`.
 
-    1. Proxy без авторизации рекомендуется использовать только вместе с ограничением доступа через `Allow`.
-	2. Не оставляйте open proxy доступным всему интернету без необходимости.
+> **Не оставляйте прокси открытым всему Интернету. Используйте авторизацию, ограничение по IP-адресам или оба механизма одновременно.**
 
-## 04. запуск
+---
+
+## 4. Запускаем Tinyproxy
+
+Включаем автоматический запуск службы и сразу запускаем её:
 
 ```bash
 systemctl enable --now tinyproxy
 ```
 
-Проверяем:
+Проверяем состояние:
 
 ```bash
 systemctl status tinyproxy
 ```
 
-## 05. firewall
-
-!!! warning
-
-    Перед включением UFW убедитесь, что разрешен OpenSSH, иначе можно потерять SSH доступ.
-
-```bash
-ufw allow OpenSSH
-ufw allow 7777/tcp
-ufw enable
-```
-
-## 06. проверка порта
-
-```bash
-ss -lntp | grep :7777
-```
-
-## 07. проверка proxy
-
-Пример proxy URL:
-
-```text
-http://myuser:mypassword@123.45.67.89:7777
-```
-
-Проверка через curl:
-
-```bash
-curl -x http://myuser:mypassword@127.0.0.1:7777 https://ifconfig.me
-```
-
-## 08. использование в Telegram Desktop
-
-Telegram Desktop поддерживает HTTP proxy.
-
-Настройки:
-
-```text
-Settings → Advanced → Connection type → Use custom proxy
-```
-
-Тип proxy:
-
-```text
-HTTP
-```
-
-Заполняем:
-
-```text
-Server: 123.45.67.89
-Port: 7777
-Username: myuser
-Password: mypassword
-```
-
-## 09. диагностика
-
-```bash
-systemctl status tinyproxy
-journalctl -u tinyproxy -n 50 --no-pager
-tail -f /var/log/tinyproxy/tinyproxy.log
-ss -lntp | grep :7777
-```
-
-## 10. как это работает
-
-- Tinyproxy поднимает HTTP proxy server с поддержкой CONNECT tunneling
-- HTTPS traffic проходит через HTTP CONNECT proxy
-- Telegram Desktop умеет работать через HTTP proxy
-- traffic маршрутизируется через ваш proxy server
-
-Tinyproxy не предоставляет полноценный VPN и не шифрует traffic между client и proxy server.
-
-!!! info
-
-    HTTP proxy видит destination hostnames и может видеть незашифрованный HTTP traffic.
-
-!!! warning
-
-    Не используйте HTTP proxy для передачи чувствительных данных через незашифрованный HTTP.
-
-## полезные ссылки
-
-[Tinyproxy GitHub](https://github.com/tinyproxy/tinyproxy/)  
-https://github.com/tinyproxy/tinyproxy/
-
-[Tinyproxy Documentation](https://tinyproxy.github.io/)  
-https://tinyproxy.github.io/
+Служба должна перейти в состояние `active (running)`. Если этого не произошло, причину обычно можно увидеть в выводе команды `systemctl status` или в журнале Tinyproxy.

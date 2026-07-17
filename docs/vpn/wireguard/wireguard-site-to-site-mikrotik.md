@@ -1,239 +1,287 @@
-# настройка WireGuard site-to-site VPN между MikroTik
+# WireGuard между MikroTik: VPN между филиалами
 
-WireGuard - современный VPN-протокол с простой настройкой и минимальным overhead.
+В этой статье настроим защищённое соединение WireGuard между двумя роутерами MikroTik и объединим локальные сети двух филиалов.
 
-Начиная с RouterOS v7 WireGuard встроен в систему и сейчас это один из самых удобных способов связать филиалы через интернет. WireGuard быстро устанавливает защищенный VPN tunnel между peer-ами, нормально работает за NAT и обычно требует меньше отладки, чем многие классические VPN решения.
-
-WireGuard не требует сертификатов и PKI инфраструктуры.
-
-Безопасность WireGuard строится на современной криптографии: Curve25519, ChaCha20, Poly1305 и Noise Protocol Framework.
-
-WireGuard может автоматически обновлять endpoint удаленного peer-а после успешного handshake. Это удобно при динамических IP, CGNAT и резервных каналах.
-
-!!! info
-
-    При изменении endpoint-address tunnel может продолжать работать до следующего handshake благодаря roaming механизму WireGuard.
-
-WireGuard не использует TCP и работает только поверх UDP.
+WireGuard встроен в RouterOS начиная с версии 7. Он работает через UDP, не требует сертификатов и подходит для постоянного соединения между площадками.
 
 Инструкция проверялась на RouterOS v7.
 
-По итогу получаем:
+## Что получится
 
-- постоянный site-to-site VPN
-- маршрутизацию между филиалами
-- доступ между LAN сетями
-- минимальную нагрузку на роутеры
+После настройки будут работать:
 
-## 00. схема
+- защищённое соединение между двумя MikroTik;
+- маршрутизация между локальными сетями филиалов;
+- доступ к устройствам удалённой сети;
+- автоматическое восстановление соединения после временного обрыва связи.
 
-Пример:
+## 1. Подготавливаем схему
+
+В примере используются две разные локальные сети:
 
 ```text
 MikroTik-1
-LAN: 192.168.10.0/24
+Локальная сеть: 192.168.10.0/24
 
 MikroTik-2
-LAN: 192.168.20.0/24
+Локальная сеть: 192.168.20.0/24
 ```
 
-Tunnel subnet:
+Для адресов WireGuard выделяем отдельную сеть:
 
 ```text
-10.0.0.0/30
+Сеть WireGuard: 10.0.0.0/30
 
-MikroTik-1
-10.0.0.1
-
-MikroTik-2
-10.0.0.2
+MikroTik-1: 10.0.0.1
+MikroTik-2: 10.0.0.2
 ```
 
-Для point-to-point VPN tunnel обычно используют /30 или /31 subnet.
+Для такого соединения обычно достаточно сети `/30`.
 
-## 01. требования
+Перед настройкой необходимо проверить:
 
-Нужно:
-
-- RouterOS v7 на обоих роутерах
-- хотя бы один endpoint должен быть reachable из интернета
-- доступность UDP порта WireGuard
-- разные LAN подсети на филиалах
+- на обоих роутерах установлена RouterOS v7;
+- локальные сети филиалов не пересекаются;
+- хотя бы один роутер доступен из интернета по UDP;
+- выбранный порт WireGuard разрешён на вход;
+- при размещении роутера за другим маршрутизатором настроено перенаправление порта.
 
 !!! warning
 
-    1. Одинаковые LAN сети между филиалами использовать нельзя.
-    2. Если оба peer находятся за CGNAT/NAT и ни один не имеет reachable endpoint, WireGuard tunnel не сможет установить handshake напрямую.
+    Одинаковые локальные сети на двух площадках использовать нельзя. Например, сеть `192.168.1.0/24` не должна одновременно находиться с обеих сторон соединения.
 
-## 02. создание WireGuard интерфейсов
+Если оба роутера находятся за CGNAT и ни один из них нельзя сделать доступным из интернета, прямое соединение WireGuard между ними не установится.
 
-MikroTik-1:
+## 2. Создаём интерфейсы WireGuard
+
+На первом роутере:
 
 ```routeros
 /interface wireguard
 add name=wg-mikrotik-2 listen-port=51820 mtu=1420
 ```
 
-MikroTik-2:
+На втором роутере:
 
 ```routeros
 /interface wireguard
 add name=wg-mikrotik-1 listen-port=51820 mtu=1420
 ```
 
-MTU 1420 обычно нормально работает через NAT, PPPoE и большинство провайдеров, но оптимальное значение зависит от сетевой схемы и провайдера.
+В примере используется порт `51820/udp`.
 
-При проблемах с packet loss, нестабильным traffic или PPPoE может потребоваться уменьшение MTU.
+Значение `mtu=1420` обычно подходит для обычного подключения к интернету, NAT и PPPoE. Если соединение работает нестабильно или часть пакетов теряется, MTU можно уменьшить.
 
-## 03. tunnel IP адреса
+## 3. Назначаем адреса WireGuard
 
-MikroTik-1:
+На первом роутере:
 
 ```routeros
 /ip address
 add address=10.0.0.1/30 interface=wg-mikrotik-2
 ```
 
-MikroTik-2:
+На втором роутере:
 
 ```routeros
 /ip address
 add address=10.0.0.2/30 interface=wg-mikrotik-1
 ```
 
-## 04. public keys
+После этого каждый роутер получает собственный адрес внутри соединения WireGuard.
 
-WireGuard автоматически создает private-key и public-key. Public-key используется для подключения peer-ов друг к другу, а private-key остается только на своем роутере и используется для шифрования VPN tunnel.
+## 4. Получаем открытые ключи
 
-Посмотреть ключи:
+При создании интерфейса WireGuard RouterOS автоматически создаёт закрытый и открытый ключи.
+
+Посмотреть их можно командой:
 
 ```routeros
 /interface wireguard print detail
 ```
 
-Нужен параметр `public-key`.
+Для настройки противоположного роутера нужен параметр:
+
+```text
+public-key
+```
+
+Открытый ключ первого роутера указывается на втором роутере, а открытый ключ второго — на первом.
+
+Закрытый ключ передавать на другой роутер не нужно.
 
 !!! warning
 
-    Не используйте одинаковый private-key на нескольких роутерах.
+    Не используйте один закрытый ключ на нескольких роутерах.
 
-!!! info
+После замены ключей соединение перестанет работать, пока открытый ключ не будет обновлён на противоположной стороне.
 
-    При изменении public-key peer-а tunnel перестанет работать до обновления peer configuration на противоположной стороне.
+## 5. Добавляем удалённые узлы
 
-## 05. peer настройка
+Параметр `allowed-address` определяет, какие адреса находятся за удалённым роутером.
 
-`allowed-address` в WireGuard одновременно определяет допустимые source addresses peer-а и создает маршруты к этим сетям.
+В этой схеме на каждом роутере необходимо указать:
 
-!!! warning
+- адрес WireGuard противоположной стороны;
+- локальную сеть противоположного филиала.
 
-    1. Использование 0.0.0.0/0 в allowed-address изменяет routing behavior и обычно применяется только для full-tunnel VPN.
-
-    2. WireGuard peer идентифицируется по public-key и allowed-address. Неправильные или пересекающиеся allowed-address могут приводить к выбору неправильного peer.
-
-    3. endpoint-address должен быть доступен из интернета по UDP порту WireGuard.
-
-    4. Если IP динамический - лучше использовать DDNS.
-
-    5. allowed-address не должен пересекаться между разными peers.
-
-    endpoint-address поддерживает:
-	
-    - IP адрес
-    - DNS имя
-    - MikroTik DDNS hostname
-
-!!! info
-
-    В RouterOS WireGuard peers обрабатываются сверху вниз. При пересекающихся allowed-address может использоваться первый подходящий peer.
-
-MikroTik-1:
+На первом роутере:
 
 ```routeros
 /interface wireguard peers
 add interface=wg-mikrotik-2 public-key="MIKROTIK_2_PUBLIC_KEY" endpoint-address=MIKROTIK_2_IP endpoint-port=51820 allowed-address=10.0.0.2/32,192.168.20.0/24 persistent-keepalive=25s
 ```
 
-MikroTik-2:
+На втором роутере:
 
 ```routeros
 /interface wireguard peers
 add interface=wg-mikrotik-1 public-key="MIKROTIK_1_PUBLIC_KEY" endpoint-address=MIKROTIK_1_IP endpoint-port=51820 allowed-address=10.0.0.1/32,192.168.10.0/24 persistent-keepalive=25s
 ```
 
-persistent-keepalive=25s обычно используют для NAT traversal при NAT, CGNAT и динамических подключениях.
+Замените:
 
-Для peer-ов с публичным статическим IP без NAT persistent-keepalive обычно не нужен.
+- `MIKROTIK_1_PUBLIC_KEY` — на открытый ключ первого роутера;
+- `MIKROTIK_2_PUBLIC_KEY` — на открытый ключ второго роутера;
+- `MIKROTIK_1_IP` — на внешний адрес первого роутера;
+- `MIKROTIK_2_IP` — на внешний адрес второго роутера.
 
-Для динамических IP на MikroTik можно использовать встроенный DDNS:
+Основные параметры:
+
+- `interface` — интерфейс WireGuard, через который работает удалённый узел;
+- `public-key` — открытый ключ противоположного роутера;
+- `endpoint-address` — внешний IP-адрес или DNS-имя противоположного роутера;
+- `endpoint-port` — порт WireGuard на противоположном роутере;
+- `allowed-address` — адрес WireGuard и сети, находящиеся за противоположным роутером;
+- `persistent-keepalive=25s` — периодическая отправка служебных пакетов для сохранения соединения через NAT.
+
+Если у роутера постоянный внешний IP-адрес и он не находится за NAT, `persistent-keepalive` обычно не требуется.
+
+!!! warning
+
+    Сети в `allowed-address` не должны пересекаться между несколькими удалёнными узлами одного интерфейса WireGuard.
+
+Значение `0.0.0.0/0` в этой схеме использовать не нужно. Оно направляет через удалённый узел весь IPv4-трафик и применяется для других вариантов настройки.
+
+## 6. Используем DNS-имя при динамическом адресе
+
+Если внешний IP-адрес MikroTik меняется, можно включить встроенное DNS-имя MikroTik:
 
 ```routeros
 /ip cloud set ddns-enabled=yes
 ```
 
-Проверить адрес:
+Проверяем выданное имя:
 
 ```routeros
 /ip cloud print
 ```
 
-При использовании dynamic routing (OSPF/BGP) allowed-address обычно ограничивают только tunnel IP адресами.
+Полученное значение `dns-name` можно указать в `endpoint-address` вместо IP-адреса.
 
-## 06. firewall
+Например:
 
-Разрешаем входящий WireGuard:
+```text
+endpoint-address=xxxxxxxxxxxx.sn.mynetname.net
+```
+
+После изменения внешнего адреса RouterOS обновит DNS-запись автоматически.
+
+## 7. Разрешаем WireGuard в межсетевом экране
+
+На роутере, который принимает входящее соединение, необходимо разрешить порт WireGuard.
+
+Добавляем внешний адрес противоположного роутера в список:
 
 ```routeros
 /ip firewall address-list
 add list=WG_PEERS address=X.X.X.X
+```
 
+Разрешаем входящие подключения WireGuard:
+
+```routeros
 /ip firewall filter
 add chain=input action=accept protocol=udp dst-port=51820 src-address-list=WG_PEERS comment="WireGuard"
 ```
 
-Разрешаем трафик между филиалами:
+Замените `X.X.X.X` на внешний IP-адрес противоположного роутера.
+
+Правило должно находиться выше общего запрещающего правила в цепочке `input`.
+
+Если внешний адрес противоположного роутера меняется, ограничение по `src-address-list` применять неудобно. В таком случае можно разрешить порт без ограничения по адресу:
 
 ```routeros
 /ip firewall filter
-add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment="WG site-to-site"
-
-add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment="WG site-to-site"
+add chain=input action=accept protocol=udp dst-port=51820 comment="WireGuard"
 ```
 
-Если используется default masquerade:
+Открывать порт без ограничения по адресу следует только при необходимости.
+
+## 8. Разрешаем обмен между филиалами
+
+Разрешаем передачу пакетов между локальными сетями.
+
+```routeros
+/ip firewall filter
+add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment="WireGuard between sites"
+
+add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment="WireGuard between sites"
+```
+
+Эти правила должны находиться выше запрещающих правил и выше FastTrack.
+
+На каждом роутере достаточно правила для направления, которое проходит через него. В примере приведены оба направления, чтобы команды можно было использовать в общей конфигурации.
+
+## 9. Исключаем сети филиалов из подмены адресов
+
+Если на роутере используется общее правило `masquerade`, соединения между филиалами необходимо исключить из подмены адресов.
 
 ```routeros
 /ip firewall nat
-add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment="WG bypass"
+add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment="WireGuard without NAT"
 
-add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment="WG bypass"
+add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment="WireGuard without NAT"
 ```
 
-Эти правила нужны только если используется srcnat/masquerade.
+Правила должны находиться выше `masquerade`.
 
 !!! info
 
-    Правила NAT bypass должны стоять выше masquerade.
+    Если правила подмены адресов не затрагивают сети филиалов, отдельное исключение не требуется.
 
-RouterOS v7 обычно автоматически создает dynamic routes (динамические маршруты) через `allowed-address`, проверить можно так:
+Проверить порядок правил можно командами:
+
+```routeros
+/ip firewall nat print
+/ip firewall filter print
+```
+
+## 10. Проверяем маршруты
+
+RouterOS использует сети из `allowed-address` для выбора удалённого узла WireGuard.
+
+Проверяем таблицу маршрутизации:
 
 ```routeros
 /ip route print
 ```
 
-При multi-WAN конфигурациях может потребоваться policy routing или routing rules для WireGuard traffic.
+В обычной схеме с двумя филиалами отдельные статические маршруты чаще всего не требуются.
 
-В сложных схемах с VRF, policy routing или multi-WAN может потребоваться ручная маршрутизация.
+При нескольких внешних каналах, отдельных таблицах маршрутизации или VRF может понадобиться дополнительная настройка маршрутов. Такие схемы в этой статье не рассматриваются.
 
-## 07. проверка
+## 11. Проверяем соединение
 
-Проверяем peer:
+Проверяем удалённые узлы:
 
 ```routeros
 /interface wireguard peers print
 ```
 
-Если VPN tunnel поднялся - появится `last-handshake` и начнут увеличиваться `rx/tx counters`, например:
+После успешного обмена ключами появится значение `last-handshake`, а счётчики `rx` и `tx` начнут увеличиваться.
+
+Например:
 
 ```text
 last-handshake: 10s ago
@@ -241,146 +289,80 @@ rx: 12.3 MiB
 tx: 8.5 MiB
 ```
 
-WireGuard peer не имеет отдельного `connected/disconnected` состояния.
+WireGuard не показывает отдельное состояние «подключено». Основные признаки работы:
 
-WireGuard интерфейс не имеет отдельного tunnel state, как IPsec/OpenVPN. Основной индикатор работы - успешный handshake и traffic counters.
+- недавно выполнен обмен ключами;
+- увеличиваются счётчики приёма и передачи;
+- доступен адрес противоположной стороны;
+- доступны устройства удалённой локальной сети.
 
-WireGuard не выполняет постоянную проверку доступности peer-а.
-
-Tunnel считается активным только при успешном обмене traffic между peer-ами.
-
-WireGuard инициирует handshake при наличии traffic или persistent-keepalive traffic. Отсутствие handshake при полном отсутствии traffic не всегда означает проблему.
-
-Проверяем ping между LAN.
-
-MikroTik-1 → MikroTik-2:
-
-```routeros
-ping 192.168.20.1
-```
-
-MikroTik-2 → MikroTik-1:
-
-```routeros
-ping 192.168.10.1
-```
-
-## 08. диагностика
-
-Подробный peer status:
-
-```routeros
-/interface wireguard peers print detail
-```
-
-Мониторинг интерфейса:
-
-```routeros
-/interface wireguard monitor wg-mikrotik-2
-```
-
-`monitor` показывает current endpoint, latest handshake и rx/tx counters.
-
-Статистика peer:
-
-```routeros
-/interface wireguard peers print stats
-```
-
-Счетчики обновляются только при наличии traffic.
-
-Логи:
-
-```routeros
-/log print where topics~"wireguard"
-```
-
-Torch traffic capture:
-
-```routeros
-/tool torch interface=wg-mikrotik-2
-```
-
-Torch может показывать не весь traffic при FastTrack или hardware offload.
-
-Hardware offload также может влиять на диагностику traffic и rx/tx counters.
-
-Альтернативно можно использовать sniffer:
-
-```routeros
-/tool/sniffer quick interface=wg-mikrotik-2
-```
-
-Проверка tunnel IP:
+С первого роутера проверяем адрес WireGuard второго:
 
 ```routeros
 /ping 10.0.0.2 interface=wg-mikrotik-2
 ```
 
-Connections:
+Со второго роутера проверяем адрес WireGuard первого:
+
+```routeros
+/ping 10.0.0.1 interface=wg-mikrotik-1
+```
+
+Затем проверяем адреса роутеров в удалённых локальных сетях.
+
+С первого роутера:
+
+```routeros
+ping 192.168.20.1
+```
+
+Со второго роутера:
+
+```routeros
+ping 192.168.10.1
+```
+
+Если обмен ключами произошёл, но локальные сети недоступны, следует проверить:
+
+- сети в `allowed-address`;
+- правила цепочки `forward`;
+- исключения из `masquerade`;
+- пересечение локальных сетей;
+- таблицу маршрутизации.
+
+## 12. Проверяем журнал и счётчики
+
+Подробные сведения об удалённых узлах:
+
+```routeros
+/interface wireguard peers print detail
+```
+
+Статистика приёма и передачи:
+
+```routeros
+/interface wireguard peers print stats
+```
+
+Журнал WireGuard:
+
+```routeros
+/log print where topics~"wireguard"
+```
+
+Проверка прослушивания и обращений к порту:
 
 ```routeros
 /ip firewall connection print where dst-port=51820
 ```
 
-Routes:
+Счётчики увеличиваются только при передаче данных или при включённом `persistent-keepalive`.
 
-```routeros
-/ip route print
-```
+## 13. Учитываем FastTrack
 
-## 09. типовые проблемы
+FastTrack может обходить часть правил межсетевого экрана и мешать работе сложных схем маршрутизации и учёта трафика.
 
-### handshake есть, но трафик не идет
-
-Причины:
-
-- firewall режет forward
-- отсутствует NAT bypass
-- конфликт подсетей
-- неправильный allowed-address
-- проблемы маршрутизации
-
-### tunnel постоянно reconnect
-
-Причины:
-
-- CGNAT
-- ISP filtering
-- нестабильный интернет
-- отсутствует persistent-keepalive
-
-### пингуется только tunnel IP
-
-Причины:
-
-- LAN сеть не входит в allowed-address
-- firewall режет forward
-- NAT masquerade ломает routing
-- конфликт маршрутов
-
-### не поднимается handshake
-
-Проверить:
-
-- доступность UDP 51820
-- внешний IP
-- endpoint-address
-- NAT/port-forward
-- правильность public-key
-
-## 10. FastTrack и WireGuard
-
-FastTrack обходит часть обработки firewall, connection tracking и queue processing.
-
-FastTrack может вызывать проблемы в VPN схемах, где используются:
-
-- mangle
-- policy routing
-- queue tree
-- traffic accounting
-
-Для диагностики VPN проблем FastTrack лучше временно отключить, либо исключить VPN traffic до FastTrack rules:
+Правила, разрешающие обмен между филиалами, рекомендуется разместить выше правила FastTrack:
 
 ```routeros
 /ip firewall filter
@@ -389,21 +371,94 @@ add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.
 add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 place-before=[find action=fasttrack-connection]
 ```
 
-## 11. итог
+Если соединение не работает или ведёт себя нестабильно, FastTrack можно временно отключить для проверки.
 
-WireGuard в RouterOS v7 - простой и быстрый способ построить site-to-site VPN между филиалами.
+## 14. Типовые неисправности
 
-При правильной настройке VPN tunnel стабильно работает через NAT, динамические IP, резервные каналы и обычных интернет провайдеров.
+### Нет обмена ключами
 
-При этом WireGuard создает минимальную нагрузку на роутер, быстро устанавливает VPN tunnel, просто диагностируется и не требует сложной инфраструктуры.
+Проверьте:
 
-## полезные ссылки
+- внешний адрес в `endpoint-address`;
+- порт в `endpoint-port`;
+- доступность `51820/udp`;
+- перенаправление порта на внешнем маршрутизаторе;
+- открытые ключи;
+- наличие CGNAT у провайдера;
+- правило в цепочке `input`.
+
+### Обмен ключами есть, но локальные сети недоступны
+
+Проверьте:
+
+- локальную сеть противоположной стороны в `allowed-address`;
+- правила в цепочке `forward`;
+- исключения из `masquerade`;
+- маршруты;
+- отсутствие пересечения адресных пространств.
+
+### Доступны только адреса WireGuard
+
+Это означает, что само соединение установлено, но пакеты в локальную сеть не проходят.
+
+Проверьте:
+
+- сеть филиала в `allowed-address`;
+- правила межсетевого экрана;
+- маршрут до удалённой сети;
+- обратный маршрут;
+- межсетевой экран конечного устройства.
+
+### Соединение пропадает после периода бездействия
+
+Добавьте или проверьте:
+
+```text
+persistent-keepalive=25s
+```
+
+Этот параметр особенно важен, если один из роутеров находится за NAT или использует меняющийся внешний адрес.
+
+## 15. Резервная копия
+
+После завершения настройки сохраните резервную копию конфигурации обоих роутеров.
+
+Создаём текстовый экспорт:
+
+```routeros
+/export file=wireguard-config
+```
+
+Создаём двоичную резервную копию:
+
+```routeros
+/system backup save name=wireguard-backup
+```
+
+Скачайте полученные файлы с обоих роутеров и храните их вне самих устройств.
+
+Особенно важно сохранить:
+
+- настройки интерфейсов WireGuard;
+- открытые и закрытые ключи;
+- настройки удалённых узлов;
+- IP-адреса WireGuard;
+- правила межсетевого экрана;
+- правила подмены адресов.
+
+!!! warning
+
+    Текстовый экспорт может не содержать закрытые ключи. Для полного восстановления храните также двоичную резервную копию RouterOS.
+
+При потере закрытого ключа соответствующего интерфейса придётся создать новую пару ключей и заменить открытый ключ на противоположном роутере.
+
+## Полезные ссылки
 
 [WireGuard](https://www.wireguard.com/)  
 https://www.wireguard.com/
 
-[MikroTik WireGuard](https://help.mikrotik.com/docs/display/ROS/WireGuard)  
+[WireGuard в MikroTik RouterOS](https://help.mikrotik.com/docs/display/ROS/WireGuard)  
 https://help.mikrotik.com/docs/display/ROS/WireGuard
 
-[MikroTik Connection Tracking](https://help.mikrotik.com/docs/display/ROS/Connection+tracking)  
+[Отслеживание соединений в MikroTik RouterOS](https://help.mikrotik.com/docs/display/ROS/Connection+tracking)  
 https://help.mikrotik.com/docs/display/ROS/Connection+tracking
