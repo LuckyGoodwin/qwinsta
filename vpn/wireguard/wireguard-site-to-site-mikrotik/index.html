@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#wireguard-site-to-site-vpn-mikrotik" class="md-skip">
+        <a href="#wireguard-mikrotik-vpn" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -557,10 +557,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#00" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        00. схема
+        Что получится
       
     </span>
   </a>
@@ -568,10 +568,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#01" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. требования
+        1. Подготавливаем схему
       
     </span>
   </a>
@@ -579,10 +579,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#02-wireguard" class="md-nav__link">
+  <a href="#2-wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. создание WireGuard интерфейсов
+        2. Создаём интерфейсы WireGuard
       
     </span>
   </a>
@@ -590,10 +590,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#03-tunnel-ip" class="md-nav__link">
+  <a href="#3-wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        03. tunnel IP адреса
+        3. Назначаем адреса WireGuard
       
     </span>
   </a>
@@ -601,10 +601,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#04-public-keys" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        04. public keys
+        4. Получаем открытые ключи
       
     </span>
   </a>
@@ -612,10 +612,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#05-peer" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        05. peer настройка
+        5. Добавляем удалённые узлы
       
     </span>
   </a>
@@ -623,10 +623,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#06-firewall" class="md-nav__link">
+  <a href="#6-dns-" class="md-nav__link">
     <span class="md-ellipsis">
       
-        06. firewall
+        6. Используем DNS-имя при динамическом адресе
       
     </span>
   </a>
@@ -634,10 +634,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#07" class="md-nav__link">
+  <a href="#7-wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. проверка
+        7. Разрешаем WireGuard в межсетевом экране
       
     </span>
   </a>
@@ -645,10 +645,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#08" class="md-nav__link">
+  <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        08. диагностика
+        8. Разрешаем обмен между филиалами
       
     </span>
   </a>
@@ -656,22 +656,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09" class="md-nav__link">
+  <a href="#9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. типовые проблемы
+        9. Исключаем сети филиалов из подмены адресов
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="09. типовые проблемы">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Проверяем маршруты
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Проверяем соединение
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Проверяем журнал и счётчики
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-fasttrack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Учитываем FastTrack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Типовые неисправности
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Типовые неисправности">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#handshake" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        handshake есть, но трафик не идет
+        Нет обмена ключами
       
     </span>
   </a>
@@ -679,10 +734,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tunnel-reconnect" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        tunnel постоянно reconnect
+        Обмен ключами есть, но локальные сети недоступны
       
     </span>
   </a>
@@ -690,10 +745,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tunnel-ip" class="md-nav__link">
+  <a href="#wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        пингуется только tunnel IP
+        Доступны только адреса WireGuard
       
     </span>
   </a>
@@ -701,10 +756,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handshake_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        не поднимается handshake
+        Соединение пропадает после периода бездействия
       
     </span>
   </a>
@@ -717,10 +772,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-fasttrack-wireguard" class="md-nav__link">
+  <a href="#15" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. FastTrack и WireGuard
+        15. Резервная копия
       
     </span>
   </a>
@@ -728,21 +783,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. итог
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        полезные ссылки
+        Полезные ссылки
       
     </span>
   </a>
@@ -1075,10 +1119,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#00" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        00. схема
+        Что получится
       
     </span>
   </a>
@@ -1086,10 +1130,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#01" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. требования
+        1. Подготавливаем схему
       
     </span>
   </a>
@@ -1097,10 +1141,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#02-wireguard" class="md-nav__link">
+  <a href="#2-wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. создание WireGuard интерфейсов
+        2. Создаём интерфейсы WireGuard
       
     </span>
   </a>
@@ -1108,10 +1152,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#03-tunnel-ip" class="md-nav__link">
+  <a href="#3-wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        03. tunnel IP адреса
+        3. Назначаем адреса WireGuard
       
     </span>
   </a>
@@ -1119,10 +1163,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#04-public-keys" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        04. public keys
+        4. Получаем открытые ключи
       
     </span>
   </a>
@@ -1130,10 +1174,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#05-peer" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        05. peer настройка
+        5. Добавляем удалённые узлы
       
     </span>
   </a>
@@ -1141,10 +1185,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#06-firewall" class="md-nav__link">
+  <a href="#6-dns-" class="md-nav__link">
     <span class="md-ellipsis">
       
-        06. firewall
+        6. Используем DNS-имя при динамическом адресе
       
     </span>
   </a>
@@ -1152,10 +1196,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#07" class="md-nav__link">
+  <a href="#7-wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. проверка
+        7. Разрешаем WireGuard в межсетевом экране
       
     </span>
   </a>
@@ -1163,10 +1207,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#08" class="md-nav__link">
+  <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        08. диагностика
+        8. Разрешаем обмен между филиалами
       
     </span>
   </a>
@@ -1174,22 +1218,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09" class="md-nav__link">
+  <a href="#9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. типовые проблемы
+        9. Исключаем сети филиалов из подмены адресов
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="09. типовые проблемы">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Проверяем маршруты
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Проверяем соединение
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Проверяем журнал и счётчики
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-fasttrack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Учитываем FastTrack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Типовые неисправности
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Типовые неисправности">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#handshake" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        handshake есть, но трафик не идет
+        Нет обмена ключами
       
     </span>
   </a>
@@ -1197,10 +1296,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tunnel-reconnect" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        tunnel постоянно reconnect
+        Обмен ключами есть, но локальные сети недоступны
       
     </span>
   </a>
@@ -1208,10 +1307,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tunnel-ip" class="md-nav__link">
+  <a href="#wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        пингуется только tunnel IP
+        Доступны только адреса WireGuard
       
     </span>
   </a>
@@ -1219,10 +1318,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handshake_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        не поднимается handshake
+        Соединение пропадает после периода бездействия
       
     </span>
   </a>
@@ -1235,10 +1334,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-fasttrack-wireguard" class="md-nav__link">
+  <a href="#15" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. FastTrack и WireGuard
+        15. Резервная копия
       
     </span>
   </a>
@@ -1246,21 +1345,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. итог
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        полезные ссылки
+        Полезные ссылки
       
     </span>
   </a>
@@ -1284,284 +1372,306 @@
 
 
 
-<h1 id="wireguard-site-to-site-vpn-mikrotik">настройка WireGuard site-to-site VPN между MikroTik</h1>
-<p>WireGuard - современный VPN-протокол с простой настройкой и минимальным overhead.</p>
-<p>Начиная с RouterOS v7 WireGuard встроен в систему и сейчас это один из самых удобных способов связать филиалы через интернет. WireGuard быстро устанавливает защищенный VPN tunnel между peer-ами, нормально работает за NAT и обычно требует меньше отладки, чем многие классические VPN решения.</p>
-<p>WireGuard не требует сертификатов и PKI инфраструктуры.</p>
-<p>Безопасность WireGuard строится на современной криптографии: Curve25519, ChaCha20, Poly1305 и Noise Protocol Framework.</p>
-<p>WireGuard может автоматически обновлять endpoint удаленного peer-а после успешного handshake. Это удобно при динамических IP, CGNAT и резервных каналах.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>При изменении endpoint-address tunnel может продолжать работать до следующего handshake благодаря roaming механизму WireGuard.</p>
-</div>
-<p>WireGuard не использует TCP и работает только поверх UDP.</p>
+<h1 id="wireguard-mikrotik-vpn">WireGuard между MikroTik: VPN между филиалами</h1>
+<p>В этой статье настроим защищённое соединение WireGuard между двумя роутерами MikroTik и объединим локальные сети двух филиалов.</p>
+<p>WireGuard встроен в RouterOS начиная с версии 7. Он работает через UDP, не требует сертификатов и подходит для постоянного соединения между площадками.</p>
 <p>Инструкция проверялась на RouterOS v7.</p>
-<p>По итогу получаем:</p>
+<h2 id="_1">Что получится</h2>
+<p>После настройки будут работать:</p>
 <ul>
-<li>постоянный site-to-site VPN</li>
-<li>маршрутизацию между филиалами</li>
-<li>доступ между LAN сетями</li>
-<li>минимальную нагрузку на роутеры</li>
+<li>защищённое соединение между двумя MikroTik;</li>
+<li>маршрутизация между локальными сетями филиалов;</li>
+<li>доступ к устройствам удалённой сети;</li>
+<li>автоматическое восстановление соединения после временного обрыва связи.</li>
 </ul>
-<h2 id="00">00. схема</h2>
-<p>Пример:</p>
+<h2 id="1">1. Подготавливаем схему</h2>
+<p>В примере используются две разные локальные сети:</p>
 <div class="highlight"><pre><span></span><code>MikroTik-1
-LAN: 192.168.10.0/24
+Локальная сеть: 192.168.10.0/24
 
 MikroTik-2
-LAN: 192.168.20.0/24
+Локальная сеть: 192.168.20.0/24
 </code></pre></div>
-<p>Tunnel subnet:</p>
-<div class="highlight"><pre><span></span><code>10.0.0.0/30
+<p>Для адресов WireGuard выделяем отдельную сеть:</p>
+<div class="highlight"><pre><span></span><code>Сеть WireGuard: 10.0.0.0/30
 
-MikroTik-1
-10.0.0.1
-
-MikroTik-2
-10.0.0.2
+MikroTik-1: 10.0.0.1
+MikroTik-2: 10.0.0.2
 </code></pre></div>
-<p>Для point-to-point VPN tunnel обычно используют /30 или /31 subnet.</p>
-<h2 id="01">01. требования</h2>
-<p>Нужно:</p>
+<p>Для такого соединения обычно достаточно сети <code>/30</code>.</p>
+<p>Перед настройкой необходимо проверить:</p>
 <ul>
-<li>RouterOS v7 на обоих роутерах</li>
-<li>хотя бы один endpoint должен быть reachable из интернета</li>
-<li>доступность UDP порта WireGuard</li>
-<li>разные LAN подсети на филиалах</li>
+<li>на обоих роутерах установлена RouterOS v7;</li>
+<li>локальные сети филиалов не пересекаются;</li>
+<li>хотя бы один роутер доступен из интернета по UDP;</li>
+<li>выбранный порт WireGuard разрешён на вход;</li>
+<li>при размещении роутера за другим маршрутизатором настроено перенаправление порта.</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<ol>
-<li>Одинаковые LAN сети между филиалами использовать нельзя.</li>
-<li>Если оба peer находятся за CGNAT/NAT и ни один не имеет reachable endpoint, WireGuard tunnel не сможет установить handshake напрямую.</li>
-</ol>
+<p>Одинаковые локальные сети на двух площадках использовать нельзя. Например, сеть <code>192.168.1.0/24</code> не должна одновременно находиться с обеих сторон соединения.</p>
 </div>
-<h2 id="02-wireguard">02. создание WireGuard интерфейсов</h2>
-<p>MikroTik-1:</p>
+<p>Если оба роутера находятся за CGNAT и ни один из них нельзя сделать доступным из интернета, прямое соединение WireGuard между ними не установится.</p>
+<h2 id="2-wireguard">2. Создаём интерфейсы WireGuard</h2>
+<p>На первом роутере:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard
 add name=wg-mikrotik-2 listen-port=51820 mtu=1420
 </code></pre></div>
-<p>MikroTik-2:</p>
+<p>На втором роутере:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard
 add name=wg-mikrotik-1 listen-port=51820 mtu=1420
 </code></pre></div>
-<p>MTU 1420 обычно нормально работает через NAT, PPPoE и большинство провайдеров, но оптимальное значение зависит от сетевой схемы и провайдера.</p>
-<p>При проблемах с packet loss, нестабильным traffic или PPPoE может потребоваться уменьшение MTU.</p>
-<h2 id="03-tunnel-ip">03. tunnel IP адреса</h2>
-<p>MikroTik-1:</p>
+<p>В примере используется порт <code>51820/udp</code>.</p>
+<p>Значение <code>mtu=1420</code> обычно подходит для обычного подключения к интернету, NAT и PPPoE. Если соединение работает нестабильно или часть пакетов теряется, MTU можно уменьшить.</p>
+<h2 id="3-wireguard">3. Назначаем адреса WireGuard</h2>
+<p>На первом роутере:</p>
 <div class="highlight"><pre><span></span><code>/ip address
 add address=10.0.0.1/30 interface=wg-mikrotik-2
 </code></pre></div>
-<p>MikroTik-2:</p>
+<p>На втором роутере:</p>
 <div class="highlight"><pre><span></span><code>/ip address
 add address=10.0.0.2/30 interface=wg-mikrotik-1
 </code></pre></div>
-<h2 id="04-public-keys">04. public keys</h2>
-<p>WireGuard автоматически создает private-key и public-key. Public-key используется для подключения peer-ов друг к другу, а private-key остается только на своем роутере и используется для шифрования VPN tunnel.</p>
-<p>Посмотреть ключи:</p>
+<p>После этого каждый роутер получает собственный адрес внутри соединения WireGuard.</p>
+<h2 id="4">4. Получаем открытые ключи</h2>
+<p>При создании интерфейса WireGuard RouterOS автоматически создаёт закрытый и открытый ключи.</p>
+<p>Посмотреть их можно командой:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard print detail
 </code></pre></div>
-<p>Нужен параметр <code>public-key</code>.</p>
+<p>Для настройки противоположного роутера нужен параметр:</p>
+<div class="highlight"><pre><span></span><code>public-key
+</code></pre></div>
+<p>Открытый ключ первого роутера указывается на втором роутере, а открытый ключ второго — на первом.</p>
+<p>Закрытый ключ передавать на другой роутер не нужно.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Не используйте одинаковый private-key на нескольких роутерах.</p>
+<p>Не используйте один закрытый ключ на нескольких роутерах.</p>
 </div>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>При изменении public-key peer-а tunnel перестанет работать до обновления peer configuration на противоположной стороне.</p>
-</div>
-<h2 id="05-peer">05. peer настройка</h2>
-<p><code>allowed-address</code> в WireGuard одновременно определяет допустимые source addresses peer-а и создает маршруты к этим сетям.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<ol>
-<li>
-<p>Использование 0.0.0.0/0 в allowed-address изменяет routing behavior и обычно применяется только для full-tunnel VPN.</p>
-</li>
-<li>
-<p>WireGuard peer идентифицируется по public-key и allowed-address. Неправильные или пересекающиеся allowed-address могут приводить к выбору неправильного peer.</p>
-</li>
-<li>
-<p>endpoint-address должен быть доступен из интернета по UDP порту WireGuard.</p>
-</li>
-<li>
-<p>Если IP динамический - лучше использовать DDNS.</p>
-</li>
-<li>
-<p>allowed-address не должен пересекаться между разными peers.</p>
-</li>
-</ol>
-<p>endpoint-address поддерживает:</p>
+<p>После замены ключей соединение перестанет работать, пока открытый ключ не будет обновлён на противоположной стороне.</p>
+<h2 id="5">5. Добавляем удалённые узлы</h2>
+<p>Параметр <code>allowed-address</code> определяет, какие адреса находятся за удалённым роутером.</p>
+<p>В этой схеме на каждом роутере необходимо указать:</p>
 <ul>
-<li>IP адрес</li>
-<li>DNS имя</li>
-<li>MikroTik DDNS hostname</li>
+<li>адрес WireGuard противоположной стороны;</li>
+<li>локальную сеть противоположного филиала.</li>
 </ul>
-</div>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>В RouterOS WireGuard peers обрабатываются сверху вниз. При пересекающихся allowed-address может использоваться первый подходящий peer.</p>
-</div>
-<p>MikroTik-1:</p>
+<p>На первом роутере:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard peers
 add interface=wg-mikrotik-2 public-key=&quot;MIKROTIK_2_PUBLIC_KEY&quot; endpoint-address=MIKROTIK_2_IP endpoint-port=51820 allowed-address=10.0.0.2/32,192.168.20.0/24 persistent-keepalive=25s
 </code></pre></div>
-<p>MikroTik-2:</p>
+<p>На втором роутере:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard peers
 add interface=wg-mikrotik-1 public-key=&quot;MIKROTIK_1_PUBLIC_KEY&quot; endpoint-address=MIKROTIK_1_IP endpoint-port=51820 allowed-address=10.0.0.1/32,192.168.10.0/24 persistent-keepalive=25s
 </code></pre></div>
-<p>persistent-keepalive=25s обычно используют для NAT traversal при NAT, CGNAT и динамических подключениях.</p>
-<p>Для peer-ов с публичным статическим IP без NAT persistent-keepalive обычно не нужен.</p>
-<p>Для динамических IP на MikroTik можно использовать встроенный DDNS:</p>
+<p>Замените:</p>
+<ul>
+<li><code>MIKROTIK_1_PUBLIC_KEY</code> — на открытый ключ первого роутера;</li>
+<li><code>MIKROTIK_2_PUBLIC_KEY</code> — на открытый ключ второго роутера;</li>
+<li><code>MIKROTIK_1_IP</code> — на внешний адрес первого роутера;</li>
+<li><code>MIKROTIK_2_IP</code> — на внешний адрес второго роутера.</li>
+</ul>
+<p>Основные параметры:</p>
+<ul>
+<li><code>interface</code> — интерфейс WireGuard, через который работает удалённый узел;</li>
+<li><code>public-key</code> — открытый ключ противоположного роутера;</li>
+<li><code>endpoint-address</code> — внешний IP-адрес или DNS-имя противоположного роутера;</li>
+<li><code>endpoint-port</code> — порт WireGuard на противоположном роутере;</li>
+<li><code>allowed-address</code> — адрес WireGuard и сети, находящиеся за противоположным роутером;</li>
+<li><code>persistent-keepalive=25s</code> — периодическая отправка служебных пакетов для сохранения соединения через NAT.</li>
+</ul>
+<p>Если у роутера постоянный внешний IP-адрес и он не находится за NAT, <code>persistent-keepalive</code> обычно не требуется.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Сети в <code>allowed-address</code> не должны пересекаться между несколькими удалёнными узлами одного интерфейса WireGuard.</p>
+</div>
+<p>Значение <code>0.0.0.0/0</code> в этой схеме использовать не нужно. Оно направляет через удалённый узел весь IPv4-трафик и применяется для других вариантов настройки.</p>
+<h2 id="6-dns-">6. Используем DNS-имя при динамическом адресе</h2>
+<p>Если внешний IP-адрес MikroTik меняется, можно включить встроенное DNS-имя MikroTik:</p>
 <div class="highlight"><pre><span></span><code>/ip cloud set ddns-enabled=yes
 </code></pre></div>
-<p>Проверить адрес:</p>
+<p>Проверяем выданное имя:</p>
 <div class="highlight"><pre><span></span><code>/ip cloud print
 </code></pre></div>
-<p>При использовании dynamic routing (OSPF/BGP) allowed-address обычно ограничивают только tunnel IP адресами.</p>
-<h2 id="06-firewall">06. firewall</h2>
-<p>Разрешаем входящий WireGuard:</p>
+<p>Полученное значение <code>dns-name</code> можно указать в <code>endpoint-address</code> вместо IP-адреса.</p>
+<p>Например:</p>
+<div class="highlight"><pre><span></span><code>endpoint-address=xxxxxxxxxxxx.sn.mynetname.net
+</code></pre></div>
+<p>После изменения внешнего адреса RouterOS обновит DNS-запись автоматически.</p>
+<h2 id="7-wireguard">7. Разрешаем WireGuard в межсетевом экране</h2>
+<p>На роутере, который принимает входящее соединение, необходимо разрешить порт WireGuard.</p>
+<p>Добавляем внешний адрес противоположного роутера в список:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall address-list
 add list=WG_PEERS address=X.X.X.X
-
-/ip firewall filter
+</code></pre></div>
+<p>Разрешаем входящие подключения WireGuard:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall filter
 add chain=input action=accept protocol=udp dst-port=51820 src-address-list=WG_PEERS comment=&quot;WireGuard&quot;
 </code></pre></div>
-<p>Разрешаем трафик между филиалами:</p>
+<p>Замените <code>X.X.X.X</code> на внешний IP-адрес противоположного роутера.</p>
+<p>Правило должно находиться выше общего запрещающего правила в цепочке <code>input</code>.</p>
+<p>Если внешний адрес противоположного роутера меняется, ограничение по <code>src-address-list</code> применять неудобно. В таком случае можно разрешить порт без ограничения по адресу:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall filter
-add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WG site-to-site&quot;
-
-add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WG site-to-site&quot;
+add chain=input action=accept protocol=udp dst-port=51820 comment=&quot;WireGuard&quot;
 </code></pre></div>
-<p>Если используется default masquerade:</p>
+<p>Открывать порт без ограничения по адресу следует только при необходимости.</p>
+<h2 id="8">8. Разрешаем обмен между филиалами</h2>
+<p>Разрешаем передачу пакетов между локальными сетями.</p>
+<div class="highlight"><pre><span></span><code>/ip firewall filter
+add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WireGuard between sites&quot;
+
+add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WireGuard between sites&quot;
+</code></pre></div>
+<p>Эти правила должны находиться выше запрещающих правил и выше FastTrack.</p>
+<p>На каждом роутере достаточно правила для направления, которое проходит через него. В примере приведены оба направления, чтобы команды можно было использовать в общей конфигурации.</p>
+<h2 id="9">9. Исключаем сети филиалов из подмены адресов</h2>
+<p>Если на роутере используется общее правило <code>masquerade</code>, соединения между филиалами необходимо исключить из подмены адресов.</p>
 <div class="highlight"><pre><span></span><code>/ip firewall nat
-add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WG bypass&quot;
+add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WireGuard without NAT&quot;
 
-add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WG bypass&quot;
+add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WireGuard without NAT&quot;
 </code></pre></div>
-<p>Эти правила нужны только если используется srcnat/masquerade.</p>
+<p>Правила должны находиться выше <code>masquerade</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Правила NAT bypass должны стоять выше masquerade.</p>
+<p>Если правила подмены адресов не затрагивают сети филиалов, отдельное исключение не требуется.</p>
 </div>
-<p>RouterOS v7 обычно автоматически создает dynamic routes (динамические маршруты) через <code>allowed-address</code>, проверить можно так:</p>
+<p>Проверить порядок правил можно командами:</p>
+<div class="highlight"><pre><span></span><code>/ip firewall nat print
+/ip firewall filter print
+</code></pre></div>
+<h2 id="10">10. Проверяем маршруты</h2>
+<p>RouterOS использует сети из <code>allowed-address</code> для выбора удалённого узла WireGuard.</p>
+<p>Проверяем таблицу маршрутизации:</p>
 <div class="highlight"><pre><span></span><code>/ip route print
 </code></pre></div>
-<p>При multi-WAN конфигурациях может потребоваться policy routing или routing rules для WireGuard traffic.</p>
-<p>В сложных схемах с VRF, policy routing или multi-WAN может потребоваться ручная маршрутизация.</p>
-<h2 id="07">07. проверка</h2>
-<p>Проверяем peer:</p>
+<p>В обычной схеме с двумя филиалами отдельные статические маршруты чаще всего не требуются.</p>
+<p>При нескольких внешних каналах, отдельных таблицах маршрутизации или VRF может понадобиться дополнительная настройка маршрутов. Такие схемы в этой статье не рассматриваются.</p>
+<h2 id="11">11. Проверяем соединение</h2>
+<p>Проверяем удалённые узлы:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard peers print
 </code></pre></div>
-<p>Если VPN tunnel поднялся - появится <code>last-handshake</code> и начнут увеличиваться <code>rx/tx counters</code>, например:</p>
+<p>После успешного обмена ключами появится значение <code>last-handshake</code>, а счётчики <code>rx</code> и <code>tx</code> начнут увеличиваться.</p>
+<p>Например:</p>
 <div class="highlight"><pre><span></span><code>last-handshake: 10s ago
 rx: 12.3 MiB
 tx: 8.5 MiB
 </code></pre></div>
-<p>WireGuard peer не имеет отдельного <code>connected/disconnected</code> состояния.</p>
-<p>WireGuard интерфейс не имеет отдельного tunnel state, как IPsec/OpenVPN. Основной индикатор работы - успешный handshake и traffic counters.</p>
-<p>WireGuard не выполняет постоянную проверку доступности peer-а.</p>
-<p>Tunnel считается активным только при успешном обмене traffic между peer-ами.</p>
-<p>WireGuard инициирует handshake при наличии traffic или persistent-keepalive traffic. Отсутствие handshake при полном отсутствии traffic не всегда означает проблему.</p>
-<p>Проверяем ping между LAN.</p>
-<p>MikroTik-1 → MikroTik-2:</p>
-<div class="highlight"><pre><span></span><code>ping 192.168.20.1
-</code></pre></div>
-<p>MikroTik-2 → MikroTik-1:</p>
-<div class="highlight"><pre><span></span><code>ping 192.168.10.1
-</code></pre></div>
-<h2 id="08">08. диагностика</h2>
-<p>Подробный peer status:</p>
-<div class="highlight"><pre><span></span><code>/interface wireguard peers print detail
-</code></pre></div>
-<p>Мониторинг интерфейса:</p>
-<div class="highlight"><pre><span></span><code>/interface wireguard monitor wg-mikrotik-2
-</code></pre></div>
-<p><code>monitor</code> показывает current endpoint, latest handshake и rx/tx counters.</p>
-<p>Статистика peer:</p>
-<div class="highlight"><pre><span></span><code>/interface wireguard peers print stats
-</code></pre></div>
-<p>Счетчики обновляются только при наличии traffic.</p>
-<p>Логи:</p>
-<div class="highlight"><pre><span></span><code>/log print where topics~&quot;wireguard&quot;
-</code></pre></div>
-<p>Torch traffic capture:</p>
-<div class="highlight"><pre><span></span><code>/tool torch interface=wg-mikrotik-2
-</code></pre></div>
-<p>Torch может показывать не весь traffic при FastTrack или hardware offload.</p>
-<p>Hardware offload также может влиять на диагностику traffic и rx/tx counters.</p>
-<p>Альтернативно можно использовать sniffer:</p>
-<div class="highlight"><pre><span></span><code>/tool/sniffer quick interface=wg-mikrotik-2
-</code></pre></div>
-<p>Проверка tunnel IP:</p>
+<p>WireGuard не показывает отдельное состояние «подключено». Основные признаки работы:</p>
+<ul>
+<li>недавно выполнен обмен ключами;</li>
+<li>увеличиваются счётчики приёма и передачи;</li>
+<li>доступен адрес противоположной стороны;</li>
+<li>доступны устройства удалённой локальной сети.</li>
+</ul>
+<p>С первого роутера проверяем адрес WireGuard второго:</p>
 <div class="highlight"><pre><span></span><code>/ping 10.0.0.2 interface=wg-mikrotik-2
 </code></pre></div>
-<p>Connections:</p>
+<p>Со второго роутера проверяем адрес WireGuard первого:</p>
+<div class="highlight"><pre><span></span><code>/ping 10.0.0.1 interface=wg-mikrotik-1
+</code></pre></div>
+<p>Затем проверяем адреса роутеров в удалённых локальных сетях.</p>
+<p>С первого роутера:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.20.1
+</code></pre></div>
+<p>Со второго роутера:</p>
+<div class="highlight"><pre><span></span><code>ping 192.168.10.1
+</code></pre></div>
+<p>Если обмен ключами произошёл, но локальные сети недоступны, следует проверить:</p>
+<ul>
+<li>сети в <code>allowed-address</code>;</li>
+<li>правила цепочки <code>forward</code>;</li>
+<li>исключения из <code>masquerade</code>;</li>
+<li>пересечение локальных сетей;</li>
+<li>таблицу маршрутизации.</li>
+</ul>
+<h2 id="12">12. Проверяем журнал и счётчики</h2>
+<p>Подробные сведения об удалённых узлах:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers print detail
+</code></pre></div>
+<p>Статистика приёма и передачи:</p>
+<div class="highlight"><pre><span></span><code>/interface wireguard peers print stats
+</code></pre></div>
+<p>Журнал WireGuard:</p>
+<div class="highlight"><pre><span></span><code>/log print where topics~&quot;wireguard&quot;
+</code></pre></div>
+<p>Проверка прослушивания и обращений к порту:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall connection print where dst-port=51820
 </code></pre></div>
-<p>Routes:</p>
-<div class="highlight"><pre><span></span><code>/ip route print
-</code></pre></div>
-<h2 id="09">09. типовые проблемы</h2>
-<h3 id="handshake">handshake есть, но трафик не идет</h3>
-<p>Причины:</p>
-<ul>
-<li>firewall режет forward</li>
-<li>отсутствует NAT bypass</li>
-<li>конфликт подсетей</li>
-<li>неправильный allowed-address</li>
-<li>проблемы маршрутизации</li>
-</ul>
-<h3 id="tunnel-reconnect">tunnel постоянно reconnect</h3>
-<p>Причины:</p>
-<ul>
-<li>CGNAT</li>
-<li>ISP filtering</li>
-<li>нестабильный интернет</li>
-<li>отсутствует persistent-keepalive</li>
-</ul>
-<h3 id="tunnel-ip">пингуется только tunnel IP</h3>
-<p>Причины:</p>
-<ul>
-<li>LAN сеть не входит в allowed-address</li>
-<li>firewall режет forward</li>
-<li>NAT masquerade ломает routing</li>
-<li>конфликт маршрутов</li>
-</ul>
-<h3 id="handshake_1">не поднимается handshake</h3>
-<p>Проверить:</p>
-<ul>
-<li>доступность UDP 51820</li>
-<li>внешний IP</li>
-<li>endpoint-address</li>
-<li>NAT/port-forward</li>
-<li>правильность public-key</li>
-</ul>
-<h2 id="10-fasttrack-wireguard">10. FastTrack и WireGuard</h2>
-<p>FastTrack обходит часть обработки firewall, connection tracking и queue processing.</p>
-<p>FastTrack может вызывать проблемы в VPN схемах, где используются:</p>
-<ul>
-<li>mangle</li>
-<li>policy routing</li>
-<li>queue tree</li>
-<li>traffic accounting</li>
-</ul>
-<p>Для диагностики VPN проблем FastTrack лучше временно отключить, либо исключить VPN traffic до FastTrack rules:</p>
+<p>Счётчики увеличиваются только при передаче данных или при включённом <code>persistent-keepalive</code>.</p>
+<h2 id="13-fasttrack">13. Учитываем FastTrack</h2>
+<p>FastTrack может обходить часть правил межсетевого экрана и мешать работе сложных схем маршрутизации и учёта трафика.</p>
+<p>Правила, разрешающие обмен между филиалами, рекомендуется разместить выше правила FastTrack:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall filter
 add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 place-before=[find action=fasttrack-connection]
 
 add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 place-before=[find action=fasttrack-connection]
 </code></pre></div>
-<h2 id="11">11. итог</h2>
-<p>WireGuard в RouterOS v7 - простой и быстрый способ построить site-to-site VPN между филиалами.</p>
-<p>При правильной настройке VPN tunnel стабильно работает через NAT, динамические IP, резервные каналы и обычных интернет провайдеров.</p>
-<p>При этом WireGuard создает минимальную нагрузку на роутер, быстро устанавливает VPN tunnel, просто диагностируется и не требует сложной инфраструктуры.</p>
-<h2 id="_1">полезные ссылки</h2>
+<p>Если соединение не работает или ведёт себя нестабильно, FastTrack можно временно отключить для проверки.</p>
+<h2 id="14">14. Типовые неисправности</h2>
+<h3 id="_2">Нет обмена ключами</h3>
+<p>Проверьте:</p>
+<ul>
+<li>внешний адрес в <code>endpoint-address</code>;</li>
+<li>порт в <code>endpoint-port</code>;</li>
+<li>доступность <code>51820/udp</code>;</li>
+<li>перенаправление порта на внешнем маршрутизаторе;</li>
+<li>открытые ключи;</li>
+<li>наличие CGNAT у провайдера;</li>
+<li>правило в цепочке <code>input</code>.</li>
+</ul>
+<h3 id="_3">Обмен ключами есть, но локальные сети недоступны</h3>
+<p>Проверьте:</p>
+<ul>
+<li>локальную сеть противоположной стороны в <code>allowed-address</code>;</li>
+<li>правила в цепочке <code>forward</code>;</li>
+<li>исключения из <code>masquerade</code>;</li>
+<li>маршруты;</li>
+<li>отсутствие пересечения адресных пространств.</li>
+</ul>
+<h3 id="wireguard">Доступны только адреса WireGuard</h3>
+<p>Это означает, что само соединение установлено, но пакеты в локальную сеть не проходят.</p>
+<p>Проверьте:</p>
+<ul>
+<li>сеть филиала в <code>allowed-address</code>;</li>
+<li>правила межсетевого экрана;</li>
+<li>маршрут до удалённой сети;</li>
+<li>обратный маршрут;</li>
+<li>межсетевой экран конечного устройства.</li>
+</ul>
+<h3 id="_4">Соединение пропадает после периода бездействия</h3>
+<p>Добавьте или проверьте:</p>
+<div class="highlight"><pre><span></span><code>persistent-keepalive=25s
+</code></pre></div>
+<p>Этот параметр особенно важен, если один из роутеров находится за NAT или использует меняющийся внешний адрес.</p>
+<h2 id="15">15. Резервная копия</h2>
+<p>После завершения настройки сохраните резервную копию конфигурации обоих роутеров.</p>
+<p>Создаём текстовый экспорт:</p>
+<div class="highlight"><pre><span></span><code>/export file=wireguard-config
+</code></pre></div>
+<p>Создаём двоичную резервную копию:</p>
+<div class="highlight"><pre><span></span><code>/system backup save name=wireguard-backup
+</code></pre></div>
+<p>Скачайте полученные файлы с обоих роутеров и храните их вне самих устройств.</p>
+<p>Особенно важно сохранить:</p>
+<ul>
+<li>настройки интерфейсов WireGuard;</li>
+<li>открытые и закрытые ключи;</li>
+<li>настройки удалённых узлов;</li>
+<li>IP-адреса WireGuard;</li>
+<li>правила межсетевого экрана;</li>
+<li>правила подмены адресов.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Текстовый экспорт может не содержать закрытые ключи. Для полного восстановления храните также двоичную резервную копию RouterOS.</p>
+</div>
+<p>При потере закрытого ключа соответствующего интерфейса придётся создать новую пару ключей и заменить открытый ключ на противоположном роутере.</p>
+<h2 id="_5">Полезные ссылки</h2>
 <p><a href="https://www.wireguard.com/">WireGuard</a><br />
 https://www.wireguard.com/</p>
-<p><a href="https://help.mikrotik.com/docs/display/ROS/WireGuard">MikroTik WireGuard</a><br />
+<p><a href="https://help.mikrotik.com/docs/display/ROS/WireGuard">WireGuard в MikroTik RouterOS</a><br />
 https://help.mikrotik.com/docs/display/ROS/WireGuard</p>
-<p><a href="https://help.mikrotik.com/docs/display/ROS/Connection+tracking">MikroTik Connection Tracking</a><br />
+<p><a href="https://help.mikrotik.com/docs/display/ROS/Connection+tracking">Отслеживание соединений в MikroTik RouterOS</a><br />
 https://help.mikrotik.com/docs/display/ROS/Connection+tracking</p>
 
 
