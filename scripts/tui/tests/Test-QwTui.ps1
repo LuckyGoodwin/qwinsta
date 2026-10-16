@@ -181,7 +181,7 @@ Test-Case 'Confirmation defaults to No and requires explicit Yes' {
 }
 Test-Case 'Message wraps and scrolls without emitting results' {
     $s = New-TestSession @((New-Key End), (New-Key Enter)) -Width 60 -Height 20
-    $result = @(Show-QwMessage $s 'Сообщение' -Message @('x' * 200, 'LAST-LINE'))
+    $result = @(Show-QwMessage $s 'Сообщение' -Message @(('x' * 200), 'LAST-LINE'))
     Assert-True ($result.Count -eq 0) 'Message leaked output.'
     $last = $s.TestState.Frames[$s.TestState.Frames.Count - 1]
     Assert-True (($last.Lines.Text -join '') -match 'LAST-LINE') 'Message End did not show last line.'
