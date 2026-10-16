@@ -1,0 +1,43 @@
+name: TUI prototype checks
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/tui/**'
+      - 'docs/tui/**'
+      - '.github/workflows/tui-checks.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/tui/**'
+      - 'docs/tui/**'
+      - '.github/workflows/tui-checks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-powershell-51:
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check API and scripted interactions in Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          & .\scripts\tui\tests\Test-QwTui.ps1 -SnapshotPath "$env:RUNNER_TEMP\tui-main-menu.json"
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: tui-main-menu-frame
+          path: ${{ runner.temp }}/tui-main-menu.json
+      - name: Package local demo
+        shell: powershell
+        run: |
+          Compress-Archive -Path .\scripts\tui\* -DestinationPath "$env:RUNNER_TEMP\Qwinsta.TUI-0.1.0-demo.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Qwinsta.TUI-0.1.0-demo
+          path: ${{ runner.temp }}/Qwinsta.TUI-0.1.0-demo.zip
