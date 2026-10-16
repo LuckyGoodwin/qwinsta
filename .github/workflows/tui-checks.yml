@@ -8,7 +8,7 @@ on:
       - '.github/workflows/tui-checks.yml'
   push:
     branches:
-      - 'codex/tui-prototype-*'
+      - main
     paths:
       - 'scripts/tui/**'
       - 'docs/tui/**'
@@ -29,6 +29,7 @@ jobs:
         run: |
           & .\scripts\tui\tests\Test-QwTui.ps1 -SnapshotPath "$env:RUNNER_TEMP\tui-main-menu.json"
       - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         with:
           name: tui-main-menu-frame
           path: ${{ runner.temp }}/tui-main-menu.json

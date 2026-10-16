@@ -11,6 +11,7 @@ $root = Split-Path -Parent $PSScriptRoot
 $modulePath = Join-Path $root 'Qwinsta.TUI.psd1'
 Import-Module $modulePath -Force
 $script:Passed = 0
+$script:Failed = New-Object 'System.Collections.Generic.List[string]'
 
 function Assert-True {
     param([bool]$Condition, [string]$Message)
@@ -24,7 +25,9 @@ function Test-Case {
         Write-Host ('PASS ' + $Name) -ForegroundColor Green
     } catch {
         Write-Host ('FAIL ' + $Name) -ForegroundColor Red
-        throw
+        Write-Host $_.Exception.Message
+        Write-Host $_.ScriptStackTrace
+        $script:Failed.Add($Name + ': ' + $_.Exception.Message)
     }
 }
 function New-Key {
@@ -87,7 +90,10 @@ Test-Case 'Every public function has help, parameter descriptions and an example
         Assert-True (-not [string]::IsNullOrWhiteSpace([string]$help.Synopsis)) ("Missing synopsis: $($command.Name)")
         Assert-True ($null -ne $help.examples) ("Missing example: $($command.Name)")
         $documented = @()
-        if ($null -ne $help.PSObject.Properties['parameters']) { $documented = @($help.parameters.parameter | ForEach-Object { $_.name }) }
+        if ($null -ne $help.PSObject.Properties['parameters'] -and
+            $null -ne $help.parameters.PSObject.Properties['parameter']) {
+            $documented = @($help.parameters.parameter | ForEach-Object { $_.name })
+        }
         foreach ($name in $command.Parameters.Keys) {
             if ($name -notin $common) { Assert-True ($name -in $documented) ("Undocumented parameter: $($command.Name) / $name") }
         }
@@ -221,3 +227,4 @@ if ($SnapshotPath) {
     $s.TestState.Frames[0] | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $SnapshotPath -Encoding UTF8
 }
 Write-Host ('Passed {0} test groups in {1} / {2}' -f $script:Passed, $PSVersionTable.PSVersion, $PSVersionTable.PSEdition)
+if ($script:Failed.Count -gt 0) { throw ($script:Failed.ToArray() -join [Environment]::NewLine) }
