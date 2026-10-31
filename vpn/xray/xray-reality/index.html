@@ -21,18 +21,18 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
-        <title>XRay + Reality + 3x-ui - Q:\>qwinsta_</title>
+        <title>Xray: VLESS + REALITY + 3x-ui и сайт на Caddy - Q:\>qwinsta_</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#xray-vless-reality-3x-ui" class="md-skip">
+        <a href="#xray-vless-reality-3x-ui-caddy" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              XRay + Reality + 3x-ui
+              Xray: VLESS + REALITY + 3x-ui и сайт на Caddy
             
           </span>
         </div>
@@ -541,7 +541,7 @@
   <span class="md-ellipsis">
     
   
-    XRay + Reality + 3x-ui
+    Xray: VLESS + REALITY + 3x-ui и сайт на Caddy
   
 
     
@@ -559,7 +559,7 @@
   <span class="md-ellipsis">
     
   
-    XRay + Reality + 3x-ui
+    Xray: VLESS + REALITY + 3x-ui и сайт на Caddy
   
 
     
@@ -588,7 +588,7 @@
   <a href="#00" class="md-nav__link">
     <span class="md-ellipsis">
       
-        00. подготовка сервера
+        00. перед началом
       
     </span>
   </a>
@@ -599,7 +599,7 @@
   <a href="#01" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. обновление системы
+        01. подключиться к серверу
       
     </span>
   </a>
@@ -607,10 +607,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#02-root-login" class="md-nav__link">
+  <a href="#02" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. отключение root login
+        02. установить нужные программы
       
     </span>
   </a>
@@ -621,7 +621,7 @@
   <a href="#03" class="md-nav__link">
     <span class="md-ellipsis">
       
-        03. подключение
+        03. открыть нужные порты
       
     </span>
   </a>
@@ -632,10 +632,27 @@
   <a href="#04-3x-ui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        04. установка 3x-ui
+        04. установить панель 3x-ui
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="04. установить панель 3x-ui">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Если логин и пароль не показали
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -643,7 +660,7 @@
   <a href="#05" class="md-nav__link">
     <span class="md-ellipsis">
       
-        05. настройка при установке
+        05. зайти в панель
       
     </span>
   </a>
@@ -651,10 +668,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#06" class="md-nav__link">
+  <a href="#06-caddy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        06. данные панели
+        06. установить Caddy для сайта
       
     </span>
   </a>
@@ -665,7 +682,7 @@
   <a href="#07" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. вход в панель
+        07. создать страницу сайта
       
     </span>
   </a>
@@ -673,10 +690,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#08-inbound" class="md-nav__link">
+  <a href="#08-caddy-https" class="md-nav__link">
     <span class="md-ellipsis">
       
-        08. создание inbound
+        08. настроить Caddy и HTTPS
       
     </span>
   </a>
@@ -684,76 +701,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09" class="md-nav__link">
+  <a href="#09-vpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. добавление клиента
+        09. настроить VPN в панели
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-transport-security" class="md-nav__link">
+    <nav class="md-nav" aria-label="09. настроить VPN в панели">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. transport и security
+        «Основное»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#11-reality-target-sni" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Reality: target и SNI
+        «Протокол»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#12-reality" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. генерация ключей Reality
+        «Поток»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#13-short-id" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13. Short ID
+        «Безопасность»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#14-inbound" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        14. сохранение inbound
+        Проверить сайт
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#15" class="md-nav__link">
+  <a href="#10-vpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        15. новые пользователи
+        10. добавить пользователя VPN
       
     </span>
   </a>
@@ -761,10 +784,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#16-qr-" class="md-nav__link">
+  <a href="#11-android" class="md-nav__link">
     <span class="md-ellipsis">
       
-        16. ссылка и QR-код
+        11. подключить Android
       
     </span>
   </a>
@@ -772,10 +795,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#17" class="md-nav__link">
+  <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        17. клиенты
+        12. проверить запуск после перезагрузки
       
     </span>
   </a>
@@ -783,10 +806,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#18-firewall" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        18. firewall
+        Продление сертификата
       
     </span>
   </a>
@@ -794,10 +817,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#19" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        19. проверка сервисов
+        Если возникла ошибка
       
     </span>
   </a>
@@ -805,10 +828,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#20" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        20. проверка подключения
+        Необязательно: заменить страницу случайным сайтом
       
     </span>
   </a>
@@ -816,18 +839,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        21. как это работает
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         ссылки
@@ -1138,7 +1150,7 @@
   <a href="#00" class="md-nav__link">
     <span class="md-ellipsis">
       
-        00. подготовка сервера
+        00. перед началом
       
     </span>
   </a>
@@ -1149,7 +1161,7 @@
   <a href="#01" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01. обновление системы
+        01. подключиться к серверу
       
     </span>
   </a>
@@ -1157,10 +1169,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#02-root-login" class="md-nav__link">
+  <a href="#02" class="md-nav__link">
     <span class="md-ellipsis">
       
-        02. отключение root login
+        02. установить нужные программы
       
     </span>
   </a>
@@ -1171,7 +1183,7 @@
   <a href="#03" class="md-nav__link">
     <span class="md-ellipsis">
       
-        03. подключение
+        03. открыть нужные порты
       
     </span>
   </a>
@@ -1182,10 +1194,27 @@
   <a href="#04-3x-ui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        04. установка 3x-ui
+        04. установить панель 3x-ui
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="04. установить панель 3x-ui">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Если логин и пароль не показали
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1193,7 +1222,7 @@
   <a href="#05" class="md-nav__link">
     <span class="md-ellipsis">
       
-        05. настройка при установке
+        05. зайти в панель
       
     </span>
   </a>
@@ -1201,10 +1230,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#06" class="md-nav__link">
+  <a href="#06-caddy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        06. данные панели
+        06. установить Caddy для сайта
       
     </span>
   </a>
@@ -1215,7 +1244,7 @@
   <a href="#07" class="md-nav__link">
     <span class="md-ellipsis">
       
-        07. вход в панель
+        07. создать страницу сайта
       
     </span>
   </a>
@@ -1223,10 +1252,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#08-inbound" class="md-nav__link">
+  <a href="#08-caddy-https" class="md-nav__link">
     <span class="md-ellipsis">
       
-        08. создание inbound
+        08. настроить Caddy и HTTPS
       
     </span>
   </a>
@@ -1234,76 +1263,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#09" class="md-nav__link">
+  <a href="#09-vpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        09. добавление клиента
+        09. настроить VPN в панели
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-transport-security" class="md-nav__link">
+    <nav class="md-nav" aria-label="09. настроить VPN в панели">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. transport и security
+        «Основное»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#11-reality-target-sni" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Reality: target и SNI
+        «Протокол»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#12-reality" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. генерация ключей Reality
+        «Поток»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#13-short-id" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13. Short ID
+        «Безопасность»
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#14-inbound" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        14. сохранение inbound
+        Проверить сайт
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#15" class="md-nav__link">
+  <a href="#10-vpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        15. новые пользователи
+        10. добавить пользователя VPN
       
     </span>
   </a>
@@ -1311,10 +1346,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#16-qr-" class="md-nav__link">
+  <a href="#11-android" class="md-nav__link">
     <span class="md-ellipsis">
       
-        16. ссылка и QR-код
+        11. подключить Android
       
     </span>
   </a>
@@ -1322,10 +1357,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#17" class="md-nav__link">
+  <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        17. клиенты
+        12. проверить запуск после перезагрузки
       
     </span>
   </a>
@@ -1333,10 +1368,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#18-firewall" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        18. firewall
+        Продление сертификата
       
     </span>
   </a>
@@ -1344,10 +1379,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#19" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        19. проверка сервисов
+        Если возникла ошибка
       
     </span>
   </a>
@@ -1355,10 +1390,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#20" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        20. проверка подключения
+        Необязательно: заменить страницу случайным сайтом
       
     </span>
   </a>
@@ -1366,18 +1401,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        21. как это работает
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         ссылки
@@ -1404,170 +1428,454 @@
 
 
 
-<h1 id="xray-vless-reality-3x-ui">XRay: VLESS + Reality + 3x-ui</h1>
-<p>3x-ui — веб-панель для управления XRay core.</p>
-<p>XRay поддерживает VLESS, Reality, Trojan, Shadowsocks и VMess. Reality прячет трафик за TLS camouflage — DPI его не распознаёт.</p>
-<p>Инструкция проверена на Ubuntu 24.04.</p>
-<p>После настройки получишь:</p>
-<ul>
-<li>XRay core</li>
-<li>VLESS + Reality</li>
-<li>3x-ui panel</li>
-<li>один inbound для всех клиентов</li>
-<li>TLS camouflage</li>
-<li>QR-коды и ссылки для клиентов</li>
-<li>systemd-сервис</li>
-<li>вход через <code>443/tcp</code></li>
-</ul>
-<h2 id="00">00. подготовка сервера</h2>
-<p>Подключаемся:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>root@123.45.67.89
+<h1 id="xray-vless-reality-3x-ui-caddy">Xray: VLESS + REALITY + 3x-ui и сайт на Caddy</h1>
+<p>На одном сервере настроим сайт с HTTPS и VPN. Для управления VPN установим панель 3x-ui, для сайта и сертификата - Caddy. Подключаться к VPN будем с Android через v2raytun.</p>
+<p>Xray будет принимать подключения на порту 443: пользователей VPN обслуживать сам, а обычных посетителей сайта передавать Caddy. В настройках REALITY укажем собственный домен, на котором работает этот сайт.</p>
+<p>Понадобится чистая Ubuntu 24.04 x64. В инструкции используется 3x-ui 3.11.0; в других версиях названия пунктов могут отличаться.</p>
+<h2 id="00">00. перед началом</h2>
+<p>Нужны VDS с Ubuntu 24.04, доступ по SSH и домен, направленный на IP сервера.</p>
+<p>В командах и настройках ниже используются примеры:</p>
+<table>
+<thead>
+<tr>
+<th>Что</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP сервера</td>
+<td><code>203.0.113.10</code></td>
+</tr>
+<tr>
+<td>Домен</td>
+<td><code>vpn.example.com</code></td>
+</tr>
+</tbody>
+</table>
+<p>Замените <code>203.0.113.10</code> на IP своего сервера, а <code>vpn.example.com</code> - на свой домен во всех командах и полях ниже. Эти примеры не подходят для подключения.</p>
+<p>Порт панели в примере - <code>2053</code>. Логин, пароль и путь страницы входа у каждого будут свои.</p>
+<p>В настройках DNS создайте A-запись: укажите в ней IPv4-адрес своего VDS. Если для домена включено проксирование через CDN, выключите его.</p>
+<p>В этой инструкции используем IPv4. Для выбранного имени домена не добавляйте AAAA-запись, а существующую удалите: браузеры и сервис выдачи сертификатов должны подключаться по IPv4.</p>
+<p>Команды рассчитаны на чистый VDS, где SSH работает на порту 22. Выполняйте шаги по порядку. Если команда закончилась ошибкой, сначала разберитесь с ней, затем продолжайте.</p>
+<h2 id="01">01. подключиться к серверу</h2>
+<p>На компьютере с Windows откройте «Пуск», напишите <code>cmd</code> и нажмите Enter.</p>
+<p>Введите:</p>
+<div class="highlight"><pre><span></span><code>ssh root@203.0.113.10
 </code></pre></div>
-<p>Создаём пользователя:</p>
-<div class="highlight"><pre><span></span><code>adduser<span class="w"> </span>deployuser
+<p>При первом подключении проверьте отпечаток ключа через кабинет или консоль провайдера, затем подтвердите его словом <code>yes</code>. Введите пароль VDS.</p>
+<p>При вводе пароля символы не показываются. Введите его и нажмите Enter.</p>
+<p>После подключения появится строка вида <code>root@...:~#</code>. Теперь команды из этого окна будут выполняться на сервере с Ubuntu. Когда потребуется вернуться к Windows, об этом будет сказано отдельно.</p>
+<h2 id="02">02. установить нужные программы</h2>
+<p>В окне с Ubuntu выполните:</p>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>update
+apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>ca-certificates<span class="w"> </span>ufw<span class="w"> </span>nano
 </code></pre></div>
-<p>Даём sudo:</p>
-<div class="highlight"><pre><span></span><code>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>deployuser
-</code></pre></div>
-<p>Проверяем вход:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>deployuser@123.45.67.89
-</code></pre></div>
-<h2 id="01">01. обновление системы</h2>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>full-upgrade<span class="w"> </span>-y
-</code></pre></div>
-<p>Перезагружаем:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>reboot
-</code></pre></div>
-<h2 id="02-root-login">02. отключение root login</h2>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/ssh/sshd_config
-</code></pre></div>
-<p>Меняем:</p>
-<div class="highlight"><pre><span></span><code>PermitRootLogin no
-</code></pre></div>
-<p>Перезапускаем SSH:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
-</code></pre></div>
-<h2 id="03">03. подключение</h2>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>deployuser@123.45.67.89
-sudo<span class="w"> </span>-i
-</code></pre></div>
-<h2 id="04-3x-ui">04. установка 3x-ui</h2>
-<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>-Ls<span class="w"> </span>https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh<span class="o">)</span>
-</code></pre></div>
-<blockquote>
-<p><strong>Внимание.</strong> Скрипт выполняется напрямую с GitHub. Прочитай <code>install.sh</code> перед запуском.</p>
-</blockquote>
-<h2 id="05">05. настройка при установке</h2>
-<div class="highlight"><pre><span></span><code>Do you want to customize the Panel Port? → y
-Port → 2053
-
-Choose SSL certificate:
-2 (Let&#39;s Encrypt for IP Address)
-
-IPv6 → Enter
-
-Port for ACME → 80
-</code></pre></div>
-<blockquote>
-<p><strong>Внимание.</strong> Пункты скрипта меняются между версиями 3x-ui.</p>
-</blockquote>
-<p>Ставь нестандартный порт для панели — стандартный сканируют.</p>
-<h2 id="06">06. данные панели</h2>
-<p>После установки скрипт выведет:</p>
-<div class="highlight"><pre><span></span><code>Username: XXXXX
-Password: XXXXX
-Port: 2053
-WebBasePath: XXXXX
-</code></pre></div>
-<h2 id="07">07. вход в панель</h2>
-<div class="highlight"><pre><span></span><code>https://IP:2053/WEBBASEPATH
-</code></pre></div>
-<blockquote>
-<p><strong>Внимание.</strong> Боты постоянно сканируют 3x-ui: брутфорсят пароли, перебирают стандартные пути, пробуют утёкшие credentials.</p>
-<p>Защита минимум:
-- нестандартный порт
-- сложный пароль
-- ограничение по IP через firewall
-- reverse proxy или WAF при публичном доступе</p>
-</blockquote>
-<h2 id="08-inbound">08. создание inbound</h2>
-<p>Inbound создаёшь один раз. Все пользователи идут через него.</p>
-<div class="highlight"><pre><span></span><code>Подключения → Создать подключение
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>Протокол: VLESS
-Порт: 443
-Примечание: vpn
-</code></pre></div>
-<h2 id="09">09. добавление клиента</h2>
-<div class="highlight"><pre><span></span><code>Добавить клиента
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>Email → имя устройства
-ID → Generate
-Flow → оставить пустым
-</code></pre></div>
-<h2 id="10-transport-security">10. transport и security</h2>
-<div class="highlight"><pre><span></span><code>Network → TCP
-Security → Reality
-</code></pre></div>
-<h2 id="11-reality-target-sni">11. Reality: target и SNI</h2>
-<div class="highlight"><pre><span></span><code>Target:
-example.com:443
-
-SNI:
-example.com
-</code></pre></div>
-<blockquote>
-<p><strong>Внимание.</strong> Target должен работать по HTTPS, отвечать по TLS и совпадать с SNI. Выбирай домен, который выглядит правдоподобно — именно его трафик будет имитировать Reality.</p>
-</blockquote>
-<h2 id="12-reality">12. генерация ключей Reality</h2>
-<div class="highlight"><pre><span></span><code>Get New Keys
-</code></pre></div>
-<p>Reality работает на паре public/private key. Генерируй прямо в панели.</p>
-<h2 id="13-short-id">13. Short ID</h2>
-<p>Short ID — 8–16 hex-символов. Оставь автоматический или задай свой:</p>
-<div class="highlight"><pre><span></span><code>abc123
-</code></pre></div>
-<h2 id="14-inbound">14. сохранение inbound</h2>
-<div class="highlight"><pre><span></span><code>Создать подключение
-</code></pre></div>
-<h2 id="15">15. новые пользователи</h2>
-<p>Добавляй пользователей внутрь существующего inbound — новый создавать не нужно:</p>
-<div class="highlight"><pre><span></span><code>Подключения → inbound → Клиенты → Добавить
-</code></pre></div>
-<h2 id="16-qr-">16. ссылка и QR-код</h2>
-<div class="highlight"><pre><span></span><code>Клиенты → QR / ссылка
-</code></pre></div>
-<p>Импортируй через Import URL или сканирование QR.</p>
-<h2 id="17">17. клиенты</h2>
-<p>Windows — v2rayN<br />
-Android — v2rayNG<br />
-iPhone — Shadowrocket или Streisand</p>
-<h2 id="18-firewall">18. firewall</h2>
-<blockquote>
-<p><strong>Внимание.</strong> Сначала разреши OpenSSH — иначе после включения UFW потеряешь SSH.</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code>ufw<span class="w"> </span>allow<span class="w"> </span>OpenSSH
+<p>Первая команда обновляет список пакетов. Вторая устанавливает curl для скачивания файлов, сертификаты для проверки HTTPS-соединений, фаервол UFW и текстовый редактор nano.</p>
+<p>Команды выполняйте по очереди. Следующую вводите, когда предыдущая закончила работу и снова появилась строка <code>root@...:~#</code>.</p>
+<h2 id="03">03. открыть нужные порты</h2>
+<p>Фаервол определяет, какие подключения сервер принимает из интернета. Разрешим вход по SSH, работу сайта и VPN. Остальные входящие подключения закроем.</p>
+<p>В окне с Ubuntu выполните:</p>
+<div class="highlight"><pre><span></span><code>ufw<span class="w"> </span>default<span class="w"> </span>deny<span class="w"> </span>incoming
+ufw<span class="w"> </span>default<span class="w"> </span>allow<span class="w"> </span>outgoing
+ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">22</span>/tcp
+ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">80</span>/tcp
 ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">443</span>/tcp
-ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">2053</span>/tcp
 ufw<span class="w"> </span><span class="nb">enable</span>
 </code></pre></div>
-<h2 id="19">19. проверка сервисов</h2>
-<div class="highlight"><pre><span></span><code>ss<span class="w"> </span>-tulpen<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:443
-ss<span class="w"> </span>-tulpen<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:2053
+<p>На вопрос о включении ответьте <code>y</code> и нажмите Enter.</p>
+<table>
+<thead>
+<tr>
+<th>Порт</th>
+<th>Зачем он нужен</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>Ваш вход по SSH и доступ к панели</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Получение и продление сертификата сайта</td>
+</tr>
+<tr>
+<td>443</td>
+<td>Сайт и VPN</td>
+</tr>
+</tbody>
+</table>
+<p>Если у провайдера есть отдельный сетевой фаервол, разрешите эти три TCP-порта и в нём. Порт панели управления наружу не открываем.</p>
+<h2 id="04-3x-ui">04. установить панель 3x-ui</h2>
+<p>В окне с Ubuntu скачайте официальный установщик 3x-ui и запустите его:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fL<span class="w"> </span>https://raw.githubusercontent.com/MHSanaei/3x-ui/v3.11.0/install.sh<span class="w"> </span>-o<span class="w"> </span>/tmp/install-3x-ui.sh
+bash<span class="w"> </span>/tmp/install-3x-ui.sh<span class="w"> </span>v3.11.0
+</code></pre></div>
+<p>На вопросы установщика отвечайте так:</p>
+<table>
+<thead>
+<tr>
+<th>Вопрос</th>
+<th>Ответ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database Selection</td>
+<td><code>1</code> - SQLite</td>
+</tr>
+<tr>
+<td>Customize the Panel Port</td>
+<td><code>y</code></td>
+</tr>
+<tr>
+<td>Please set up the panel port</td>
+<td><code>2053</code></td>
+</tr>
+<tr>
+<td>SSL certificate setup method</td>
+<td><code>4</code> - Skip SSL</td>
+</tr>
+<tr>
+<td>Bind the panel to 127.0.0.1 only?</td>
+<td><code>y</code></td>
+</tr>
+</tbody>
+</table>
+<p>Сертификат панели здесь не нужен: к ней будем подключаться по защищённому SSH-туннелю. Сертификат для самого сайта получим ниже.</p>
+<p>Сохраните логин, пароль, порт и WebBasePath, которые покажет установщик. WebBasePath - путь страницы входа в панель; он понадобится для адреса в браузере.</p>
+<p>Если установщик сам выбрал другой порт, используйте его вместо <code>2053</code> в следующем шаге.</p>
+<h3 id="_1">Если логин и пароль не показали</h3>
+<p>Введите в Ubuntu:</p>
+<div class="highlight"><pre><span></span><code>x-ui
+</code></pre></div>
+<p>Выберите <code>7</code> - Reset Username &amp; Password. Подтвердите действие буквой <code>y</code> и задайте свой логин и пароль.</p>
+<p>На новой установке ответьте <code>n</code> на вопрос об отключении двухфакторной авторизации. Согласитесь на перезапуск панели. Затем нажмите Enter, чтобы вернуться в меню, и введите <code>0</code>, чтобы выйти.</p>
+<p>Панель продолжит работать: <code>0</code> закрывает только консольное меню.</p>
+<p>Порт и путь панели можно посмотреть командой:</p>
+<div class="highlight"><pre><span></span><code>x-ui<span class="w"> </span>settings
+</code></pre></div>
+<p>Нужны строки <code>port</code> и <code>webBasePath</code>. На предложение создать SSL-сертификат для IP ответьте <code>n</code>.</p>
+<h2 id="05">05. зайти в панель</h2>
+<p>На Windows откройте второе окно cmd. Первое окно с Ubuntu оставьте открытым, в нём продолжим настройку сервера.</p>
+<p>Во втором окне выполните:</p>
+<div class="highlight"><pre><span></span><code>ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:18080:127.0.0.1:2053 root@203.0.113.10
+</code></pre></div>
+<p>Введите пароль сервера. После подключения приглашение вводить команды не появится. Оставьте это окно открытым: в нём работает туннель.</p>
+<p>Эта команда создаёт SSH-туннель: защищённое соединение между вашим компьютером и панелью на сервере. Через него панель откроется в вашем браузере, хотя прямой доступ к ней из интернета закрыт.</p>
+<p>В браузере введите:</p>
+<p><code>http://127.0.0.1:18080/ВАШ_ПУТЬ_ПАНЕЛИ/</code></p>
+<p>Вместо <code>/ВАШ_ПУТЬ_ПАНЕЛИ/</code> вставьте значение <code>webBasePath</code> из предыдущего шага. Например, если сервер показал <code>/abc123/</code>, адрес будет <code>http://127.0.0.1:18080/abc123/</code>.</p>
+<p>Войдите со своим логином и паролем панели.</p>
+<p>Окно с туннелем не закрывайте, пока работаете в панели. Его закрытие прекращает доступ к панели, но не останавливает VPN. После перезагрузки VDS эту команду потребуется запустить заново.</p>
+<h2 id="06-caddy">06. установить Caddy для сайта</h2>
+<p>Caddy показывает сайт посетителям и автоматически получает для него HTTPS-сертификат.</p>
+<p>Вернитесь в первое окно с Ubuntu. Добавьте официальный источник пакетов Caddy:</p>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>debian-keyring<span class="w"> </span>debian-archive-keyring<span class="w"> </span>apt-transport-https<span class="w"> </span>gnupg
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://dl.cloudsmith.io/public/caddy/stable/gpg.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>--yes<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt<span class="w"> </span>-o<span class="w"> </span>/etc/apt/sources.list.d/caddy-stable.list
+chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>/usr/share/keyrings/caddy-stable-archive-keyring.gpg<span class="w"> </span>/etc/apt/sources.list.d/caddy-stable.list
+</code></pre></div>
+<p>Теперь установите Caddy из добавленного источника:</p>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>update
+apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>caddy
+</code></pre></div>
+<p>Caddy запустится автоматически.</p>
+<h2 id="07">07. создать страницу сайта</h2>
+<p>В первом окне с Ubuntu создайте папку сайта:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/www
+</code></pre></div>
+<p>Откройте файл будущей страницы в редакторе:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/srv/www/index.html
+</code></pre></div>
+<p>Вместо командной строки появится редактор nano. Вставьте в него этот текст:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"ru"</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"utf-8"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Мой сайт<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Мой сайт<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Добро пожаловать на мой сайт!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Сохраните файл: нажмите Ctrl+O, затем Enter. Закройте редактор сочетанием Ctrl+X. Знак <code>+</code> означает, что клавиши нужно нажать вместе.</p>
+<p>Когда снова появится командная строка, разрешите Caddy читать страницу:</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/srv/www
+chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>/srv/www/index.html
+</code></pre></div>
+<p>Это простая страница для проверки. Позже её можно заменить своим сайтом или случайным шаблоном из последнего раздела.</p>
+<h2 id="08-caddy-https">08. настроить Caddy и HTTPS</h2>
+<p>В окне с Ubuntu откройте файл настроек:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/etc/caddy/Caddyfile
+</code></pre></div>
+<p>Удалите прежнее содержимое: нажимайте Ctrl+K, чтобы убирать строки, пока файл не станет пустым. Затем вставьте конфигурацию ниже. В трёх местах замените <code>vpn.example.com</code> своим доменом.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span>https_port<span class="w"> </span><span class="m">8444</span>
+<span class="w">    </span>auto_https<span class="w"> </span>disable_redirects
+<span class="w">    </span>servers<span class="w"> </span><span class="p">{</span>
+<span class="w">        </span>protocols<span class="w"> </span>h1<span class="w"> </span>h2
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-systemctl<span class="w"> </span>status<span class="w"> </span>x-ui
-journalctl<span class="w"> </span>-u<span class="w"> </span>x-ui<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+http://vpn.example.com<span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">bind</span><span class="w"> </span>0.0.0.0
+<span class="w">    </span><span class="k">redir</span><span class="w"> </span>https://vpn.example.com<span class="nv">{uri}</span><span class="w"> </span>permanent
+<span class="p">}</span>
+
+https://vpn.example.com<span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">bind</span><span class="w"> </span>127.0.0.1
+<span class="w">    </span><span class="k">root</span><span class="w"> </span>*<span class="w"> </span>/srv/www
+<span class="w">    </span><span class="k">file_server</span>
+<span class="w">    </span><span class="k">tls</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span>issuer<span class="w"> </span>acme<span class="w"> </span><span class="p">{</span>
+<span class="w">            </span>dir<span class="w"> </span>https://acme-v02.api.letsencrypt.org/directory
+<span class="w">            </span>disable_tlsalpn_challenge
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<h2 id="20">20. проверка подключения</h2>
-<div class="highlight"><pre><span></span><code>https://ipinfo.io
+<p>Сохраните файл: Ctrl+O, Enter. Выйдите из редактора: Ctrl+X.</p>
+<p>Caddy будет показывать файлы из <code>/srv/www</code> и получать сертификат через порт 80. HTTPS будет работать внутри сервера на порту 8444. Подключения посетителей из интернета к нему передаст Xray, который настроим в следующем шаге.</p>
+<p>Проверьте конфигурацию:</p>
+<div class="highlight"><pre><span></span><code>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
 </code></pre></div>
-<h2 id="21">21. как это работает</h2>
-<p>Один inbound на <code>443/tcp</code>, сколько угодно клиентов. Каждый получает свой UUID. Reality имитирует TLS-трафик легитимного сайта — DPI видит обычный HTTPS.</p>
-<p>3x-ui — не VPN и не proxy. Это интерфейс управления XRay core.</p>
-<h2 id="_1">ссылки</h2>
-<p><a href="https://github.com/MHSanaei/3x-ui/">3x-ui GitHub</a><br />
-<a href="https://xtls.github.io/">XRay Documentation</a><br />
-<a href="https://github.com/2dust/v2rayN/">v2rayN</a></p>
+<p>Если написано <code>Valid configuration</code>, примените настройки:</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>caddy
+</code></pre></div>
+<p>Подождите примерно минуту: Caddy начнёт получать сертификат Let’s Encrypt. Успех зависит от правильного DNS и доступности порта 80. Сообщение <code>Valid configuration</code> выше подтверждает только правильность настроек, а не получение сертификата.</p>
+<p>Сайт пока может не открываться из интернета. Сначала настройте Xray в следующем шаге.</p>
+<h2 id="09-vpn">09. настроить VPN в панели</h2>
+<p>В панели 3x-ui откройте слева «Входящие» и нажмите «Создать подключение».</p>
+<h3 id="_2">«Основное»</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Примечание</td>
+<td><code>VLESS REALITY</code></td>
+</tr>
+<tr>
+<td>Протокол</td>
+<td><code>vless</code></td>
+</tr>
+<tr>
+<td>Адрес</td>
+<td>Оставить пустым</td>
+</tr>
+<tr>
+<td>Стратегия адреса для ссылок</td>
+<td><code>Пользовательская</code></td>
+</tr>
+<tr>
+<td>Пользовательский адрес для ссылок</td>
+<td><code>vpn.example.com</code></td>
+</tr>
+<tr>
+<td>Порт</td>
+<td><code>443</code></td>
+</tr>
+</tbody>
+</table>
+<p>Остальное оставьте как было. «Отключить поток XTLS» должно остаться выключенным.</p>
+<p>Пользовательский адрес будет попадать в ссылки подключения. Так в них окажется ваш домен вместо <code>localhost</code>.</p>
+<h3 id="_3">«Протокол»</h3>
+<p>Ничего не меняйте: «Расшифрование» и «Шифрование» - <code>none</code>. Fallback’и не добавляйте, ключи на этой вкладке не генерируйте.</p>
+<h3 id="_4">«Поток»</h3>
+<p>Транспорт - <code>RAW</code>. Остальные переключатели оставьте выключенными, TCP Masks не добавляйте.</p>
+<h3 id="_5">«Безопасность»</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Безопасность</td>
+<td><code>Reality</code></td>
+</tr>
+<tr>
+<td>Xver</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>uTLS</td>
+<td><code>chrome</code></td>
+</tr>
+<tr>
+<td>Цель</td>
+<td><code>127.0.0.1:8444</code></td>
+</tr>
+<tr>
+<td>SNI</td>
+<td><code>vpn.example.com</code></td>
+</tr>
+<tr>
+<td>SpiderX</td>
+<td><code>/</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ключи и Short IDs оставьте сгенерированными. Если поля ключей пустые, нажмите «Получить новый сертификат». Несмотря на название, эта кнопка создаёт ключи REALITY. Сертификатом сайта занимается Caddy.</p>
+<p>Остальные поля не меняйте. Ограничения fallback оставьте пустыми. «Сниффинг» и «Расширенный шаблон» не меняйте.</p>
+<p>Нажмите «Создать».</p>
+<h3 id="_6">Проверить сайт</h3>
+<p>Откройте в браузере <code>https://vpn.example.com</code>.</p>
+<p>Должна открыться страница «Мой сайт» без ошибки сертификата. Если она не открылась, сначала проверьте адрес домена, доступность порта 80 и журнал Caddy. Команда для просмотра журнала есть в разделе «Если возникла ошибка». К подключению телефона переходите, когда сайт заработает.</p>
+<h2 id="10-vpn">10. добавить пользователя VPN</h2>
+<p>В панели 3x-ui откройте слева «Клиенты» и нажмите «Добавить клиентов».</p>
+<p>На вкладке «Основные» заполните поля:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Email</td>
+<td><code>client1</code> - имя профиля, настоящий почтовый ящик не требуется</td>
+</tr>
+<tr>
+<td>Привязанные входящие</td>
+<td>Выберите <code>VLESS REALITY</code></td>
+</tr>
+<tr>
+<td>Лимит трафика, IP, HWID</td>
+<td><code>0</code> - без ограничений</td>
+</tr>
+<tr>
+<td>Срок действия</td>
+<td>Пусто</td>
+</tr>
+<tr>
+<td>Включить</td>
+<td>Включено</td>
+</tr>
+</tbody>
+</table>
+<p>Остальное не меняйте.</p>
+<p>На вкладке «Учетные данные» в поле Flow выберите <code>xtls-rprx-vision</code>. UUID и другие поля оставьте сгенерированными.</p>
+<p>Вкладку «Ссылки» оставьте пустой. Она нужна для добавления внешних подписок, в этой настройке они не используются. Нажмите «Создать».</p>
+<h2 id="11-android">11. подключить Android</h2>
+<p>В панели у клиента <code>client1</code> откройте QR-код или скопируйте его VLESS-ссылку.</p>
+<p>В ссылке после <code>@</code> должен быть ваш домен с портом <code>443</code>, например <code>vpn.example.com:443</code>. Сам пример <code>vpn.example.com</code> в рабочей ссылке оставаться не должен. Если указан <code>localhost</code>, вернитесь к пользовательскому адресу для ссылок в шаге 9 и скопируйте ссылку заново.</p>
+<p>На телефоне:</p>
+<ul>
+<li>Откройте v2raytun</li>
+<li>Добавьте профиль через QR-код или импорт из буфера обмена</li>
+<li>Выберите добавленный профиль и включите подключение</li>
+<li>Разрешите создание VPN, если Android спросит</li>
+<li>Откройте несколько сайтов</li>
+</ul>
+<p>В панели у <code>client1</code> должен расти счётчик трафика. Проверьте работу через Wi-Fi и мобильный интернет. Названия кнопок импорта зависят от версии v2raytun.</p>
+<p>Если сайты открываются и счётчик трафика растёт, подключение работает. Это не гарантирует работу во всех сетях: отдельно проверьте Wi-Fi и мобильного оператора, которыми пользуетесь.</p>
+<h2 id="12">12. проверить запуск после перезагрузки</h2>
+<p>В окне с Ubuntu выполните:</p>
+<div class="highlight"><pre><span></span><code>reboot
+</code></pre></div>
+<p>SSH отключится. Подождите около минуты. Переподключите v2raytun и проверьте сайты. Затем отключите VPN и откройте свой сайт обычным браузером.</p>
+<p>Чтобы снова попасть в панель, запустите SSH-туннель из шага 5.</p>
+<p>Чтобы продолжить работу с командами на сервере, снова подключитесь из cmd:</p>
+<div class="highlight"><pre><span></span><code>ssh root@203.0.113.10
+</code></pre></div>
+<p>Не забудьте заменить IP из примера своим.</p>
+<h2 id="_7">Продление сертификата</h2>
+<p>Caddy автоматически продлевает сертификат до истечения срока. Для этого сервер должен работать, домен - указывать на VDS, а порт 80 - оставаться доступным из интернета.</p>
+<p>Не удаляйте папку <code>/var/lib/caddy</code>: в ней хранятся сертификаты и данные их получения.</p>
+<h2 id="_8">Если возникла ошибка</h2>
+<p>Эти команды не нужны для обычной установки. Используйте их только для поиска причины.</p>
+<table>
+<thead>
+<tr>
+<th>Что не работает</th>
+<th>Что проверить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Не удаётся подключиться по SSH</td>
+<td>IP и пароль VDS, доступность TCP 22 у провайдера</td>
+</tr>
+<tr>
+<td>Панель не открывается</td>
+<td>Работает ли окно SSH-туннеля, правильны ли порт и путь панели</td>
+</tr>
+<tr>
+<td>Сайт не открывается</td>
+<td>DNS домена, порты 80 и 443, журнал Caddy</td>
+</tr>
+<tr>
+<td>Сайт работает, VPN нет</td>
+<td>Привязку клиента к входящему, Flow, SNI и параметры импортированного профиля</td>
+</tr>
+</tbody>
+</table>
+<p>Журнал Caddy на Ubuntu:</p>
+<div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>-u<span class="w"> </span>caddy<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+</code></pre></div>
+<p>Журнал панели на Ubuntu:</p>
+<div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>-u<span class="w"> </span>x-ui<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+</code></pre></div>
+<p>Если SSH не установлен, через консоль провайдера установите <code>openssh-server</code> и запустите службу <code>ssh</code>. Если предупреждение SSH говорит о смене ключа сервера, сначала сверьте новый ключ через консоль провайдера; не отключайте проверку ключей.</p>
+<h2 id="_9">Необязательно: заменить страницу случайным сайтом</h2>
+<p>Вместо стартовой страницы можно поставить случайный шаблон из GFW4Fun/randomfakehtml. Caddy умеет показывать готовые HTML/CSS/JS-файлы.</p>
+<p>Для выбора шаблона сохраним небольшой скрипт. После этого менять сайт можно будет одной командой.</p>
+<p>Скрипт заменяет текущий сайт без резервной копии. Настройки VPN и Caddy, ключи и сертификаты останутся прежними.</p>
+<p>В окне с Ubuntu установите программы для скачивания и копирования файлов:</p>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>rsync
+</code></pre></div>
+<p>Откройте новый файл:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/opt/change-site.sh
+</code></pre></div>
+<p>Вставьте в редактор скрипт целиком. Его строки не нужно выполнять вручную:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<span class="nb">umask</span><span class="w"> </span><span class="m">022</span>
+<span class="nv">repo</span><span class="o">=</span>/opt/randomfakehtml
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$repo</span><span class="s2">/.git"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>--filter<span class="o">=</span>blob:none<span class="w"> </span>--sparse<span class="w"> </span>https://github.com/GFW4Fun/randomfakehtml.git<span class="w"> </span><span class="s2">"</span><span class="nv">$repo</span><span class="s2">"</span>
+<span class="k">fi</span>
+<span class="nv">template</span><span class="o">=</span><span class="k">$(</span>
+<span class="w">    </span>git<span class="w"> </span>-C<span class="w"> </span><span class="s2">"</span><span class="nv">$repo</span><span class="s2">"</span><span class="w"> </span>ls-tree<span class="w"> </span>-r<span class="w"> </span>--name-only<span class="w"> </span>HEAD<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F/<span class="w"> </span><span class="s1">'NF == 2 &amp;&amp; $2 == "index.html" {print $1}'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w"> </span>shuf<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+<span class="k">)</span>
+<span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$template</span><span class="s2">"</span>
+git<span class="w"> </span>-C<span class="w"> </span><span class="s2">"</span><span class="nv">$repo</span><span class="s2">"</span><span class="w"> </span>sparse-checkout<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="nv">$template</span><span class="s2">"</span>
+<span class="nb">test</span><span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="nv">$repo</span><span class="s2">/</span><span class="nv">$template</span><span class="s2">/index.html"</span>
+rsync<span class="w"> </span>-a<span class="w"> </span>--delete<span class="w"> </span>--chmod<span class="o">=</span>D755,F644<span class="w"> </span><span class="s2">"</span><span class="nv">$repo</span><span class="s2">/</span><span class="nv">$template</span><span class="s2">/"</span><span class="w"> </span>/srv/www/
+<span class="nb">printf</span><span class="w"> </span><span class="s1">'Выбран сайт: %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$template</span><span class="s2">"</span>
+</code></pre></div>
+<p>Сохраните файл: Ctrl+O, Enter. Выйдите: Ctrl+X.</p>
+<p>Теперь запустите скрипт:</p>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>/opt/change-site.sh
+</code></pre></div>
+<p>Он скачает выбранный шаблон, проверит наличие <code>index.html</code> и скопирует его файлы в <code>/srv/www</code>. После завершения появится строка <code>Выбран сайт:</code> с названием шаблона.</p>
+<p>Откройте сайт и нажмите Ctrl+F5 на компьютере. Caddy перезапускать не нужно. Чтобы выбрать другой шаблон, снова выполните <code>bash /opt/change-site.sh</code>. Случайный выбор может повторить прежний шаблон.</p>
+<p><code>--delete</code> удаляет из папки сайта файлы, которых нет в новом шаблоне: файлы разных сайтов не смешиваются. При повторном запуске шаблон выбирается из уже скачанной версии репозитория.</p>
+<p>Это демонстрационные шаблоны. Тексты, ссылки, формы и внешние ресурсы могут потребовать правки. В этой настройке Caddy не исполняет PHP и не отправляет сообщения из контактных форм.</p>
+<p>Перед публикацией проверьте лицензию выбранного шаблона, соблюдайте её условия и сохраните указание авторства, если она этого требует.</p>
+<h2 id="_10">ссылки</h2>
+<ul>
+<li><a href="https://github.com/MHSanaei/3x-ui">3x-ui</a></li>
+<li><a href="https://caddyserver.com/docs/install">Официальная установка Caddy</a></li>
+<li><a href="https://caddyserver.com/docs/automatic-https">Автоматическое продление сертификатов Caddy</a></li>
+<li><a href="https://xtls.github.io/en/config/transports/reality.html">REALITY</a></li>
+<li><a href="https://github.com/GFW4Fun/randomfakehtml">Шаблоны сайтов</a></li>
+</ul>
 
 
 
@@ -1618,10 +1926,10 @@ journalctl<span class="w"> </span>-u<span class="w"> </span>x-ui<span class="w">
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -816,7 +816,7 @@
   <span class="md-ellipsis">
     
   
-    XRay + Reality + 3x-ui
+    Xray: VLESS + REALITY + 3x-ui и сайт на Caddy
   
 
     
@@ -1457,11 +1457,11 @@ add address=10.0.0.2/30 interface=wg-mikrotik-1
 </ul>
 <p>На первом роутере:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard peers
-add interface=wg-mikrotik-2 public-key=&quot;MIKROTIK_2_PUBLIC_KEY&quot; endpoint-address=MIKROTIK_2_IP endpoint-port=51820 allowed-address=10.0.0.2/32,192.168.20.0/24 persistent-keepalive=25s
+add interface=wg-mikrotik-2 public-key="MIKROTIK_2_PUBLIC_KEY" endpoint-address=MIKROTIK_2_IP endpoint-port=51820 allowed-address=10.0.0.2/32,192.168.20.0/24 persistent-keepalive=25s
 </code></pre></div>
 <p>На втором роутере:</p>
 <div class="highlight"><pre><span></span><code>/interface wireguard peers
-add interface=wg-mikrotik-1 public-key=&quot;MIKROTIK_1_PUBLIC_KEY&quot; endpoint-address=MIKROTIK_1_IP endpoint-port=51820 allowed-address=10.0.0.1/32,192.168.10.0/24 persistent-keepalive=25s
+add interface=wg-mikrotik-1 public-key="MIKROTIK_1_PUBLIC_KEY" endpoint-address=MIKROTIK_1_IP endpoint-port=51820 allowed-address=10.0.0.1/32,192.168.10.0/24 persistent-keepalive=25s
 </code></pre></div>
 <p>Замените:</p>
 <ul>
@@ -1505,30 +1505,30 @@ add list=WG_PEERS address=X.X.X.X
 </code></pre></div>
 <p>Разрешаем входящие подключения WireGuard:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall filter
-add chain=input action=accept protocol=udp dst-port=51820 src-address-list=WG_PEERS comment=&quot;WireGuard&quot;
+add chain=input action=accept protocol=udp dst-port=51820 src-address-list=WG_PEERS comment="WireGuard"
 </code></pre></div>
 <p>Замените <code>X.X.X.X</code> на внешний IP-адрес противоположного роутера.</p>
 <p>Правило должно находиться выше общего запрещающего правила в цепочке <code>input</code>.</p>
 <p>Если внешний адрес противоположного роутера меняется, ограничение по <code>src-address-list</code> применять неудобно. В таком случае можно разрешить порт без ограничения по адресу:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall filter
-add chain=input action=accept protocol=udp dst-port=51820 comment=&quot;WireGuard&quot;
+add chain=input action=accept protocol=udp dst-port=51820 comment="WireGuard"
 </code></pre></div>
 <p>Открывать порт без ограничения по адресу следует только при необходимости.</p>
 <h2 id="8">8. Разрешаем обмен между филиалами</h2>
 <p>Разрешаем передачу пакетов между локальными сетями.</p>
 <div class="highlight"><pre><span></span><code>/ip firewall filter
-add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WireGuard between sites&quot;
+add chain=forward action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment="WireGuard between sites"
 
-add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WireGuard between sites&quot;
+add chain=forward action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment="WireGuard between sites"
 </code></pre></div>
 <p>Эти правила должны находиться выше запрещающих правил и выше FastTrack.</p>
 <p>На каждом роутере достаточно правила для направления, которое проходит через него. В примере приведены оба направления, чтобы команды можно было использовать в общей конфигурации.</p>
 <h2 id="9">9. Исключаем сети филиалов из подмены адресов</h2>
 <p>Если на роутере используется общее правило <code>masquerade</code>, соединения между филиалами необходимо исключить из подмены адресов.</p>
 <div class="highlight"><pre><span></span><code>/ip firewall nat
-add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment=&quot;WireGuard without NAT&quot;
+add chain=srcnat action=accept src-address=192.168.10.0/24 dst-address=192.168.20.0/24 comment="WireGuard without NAT"
 
-add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment=&quot;WireGuard without NAT&quot;
+add chain=srcnat action=accept src-address=192.168.20.0/24 dst-address=192.168.10.0/24 comment="WireGuard without NAT"
 </code></pre></div>
 <p>Правила должны находиться выше <code>masquerade</code>.</p>
 <div class="admonition info">
@@ -1592,7 +1592,7 @@ tx: 8.5 MiB
 <div class="highlight"><pre><span></span><code>/interface wireguard peers print stats
 </code></pre></div>
 <p>Журнал WireGuard:</p>
-<div class="highlight"><pre><span></span><code>/log print where topics~&quot;wireguard&quot;
+<div class="highlight"><pre><span></span><code>/log print where topics~"wireguard"
 </code></pre></div>
 <p>Проверка прослушивания и обращений к порту:</p>
 <div class="highlight"><pre><span></span><code>/ip firewall connection print where dst-port=51820
@@ -1723,10 +1723,10 @@ https://help.mikrotik.com/docs/display/ROS/Connection+tracking</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>
