@@ -9,7 +9,7 @@ windows / mikrotik / vpn / terminal services / powershell
 
 - [Windows]
 - [MikroTik]
-- [VPN](vpn/mtproxy-fake-tls.md)
+- [VPN](vpn/mtproxy/fake-tls.md)
 - [Toolkit]
 
 ## QWINSTA Toolkit
@@ -25,6 +25,7 @@ irm https://get.qwinsta.ru | iex
     `irm | iex` означает выполнение удаленного PowerShell кода с правами текущего пользователя.
 
     Перед запуском рекомендуется:
+
     - прочитать содержимое script
     - проверить URL
     - запускать только из доверенного source
@@ -32,11 +33,13 @@ irm https://get.qwinsta.ru | iex
 ## последние статьи
 
 <!-- latest:start -->
+- [RDP ошибка 0x4 при рабочем порте 3389. Диагностика Schannel 36870 и Event ID 1057](windows/rdp/event-id-4625.md)
+- [MTProxy на Ubuntu 24.04: установка и настройка](vpn/mtproxy/fake-tls.md)
+- [Tinyproxy на Ubuntu 24.04: установка и настройка HTTP-прокси](vpn/tinyproxy/install.md)
+- [WireGuard между MikroTik: VPN между филиалами](vpn/wireguard/wireguard-site-to-site-mikrotik.md)
+- [OpenVPN на Windows Server 2022: ручная установка и настройка с нуля](vpn/openvpn/install-windows-server.md)
+- [Xray: VLESS + REALITY + 3x-ui и сайт на Caddy](vpn/xray/xray-reality.md)
 - [как бесплатно поднять документацию на GitHub Pages через MkDocs](github-pages-mkdocs.md)
-- [настройка WireGuard site-to-site VPN между MikroTik](mikrotik/wireguard-site-to-site.md)
-- [установка и настройка XRay (VLESS + Reality) + 3x-ui](vpn/xray-reality.md)
-- [установка и настройка MTProxy на Ubuntu 24.04](vpn/mtproxy-fake-tls.md)
-- [установка и настройка Tinyproxy на Ubuntu 24.04](vpn/tinyproxy.md)
 <!-- latest:end -->
 
 ## about

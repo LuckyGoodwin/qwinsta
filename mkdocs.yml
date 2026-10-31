@@ -46,7 +46,7 @@ nav:
   - "VPN":
       - "OpenVPN на Windows Server 2022": vpn/openvpn/install-windows-server.md
       - "WireGuard Site-to-Site (MikroTik)": vpn/wireguard/wireguard-site-to-site-mikrotik.md
-      - "XRay + Reality + 3x-ui": vpn/xray/xray-reality.md
+      - "Xray: VLESS + REALITY + 3x-ui и сайт на Caddy": vpn/xray/xray-reality.md
       - "MTProxy + Fake TLS + Sponsor Bot": vpn/mtproxy/fake-tls.md
       - "Tinyproxy HTTP Proxy": vpn/tinyproxy/install.md
 
