@@ -1,55 +1,419 @@
-/* убрать содержание справа */
-.md-sidebar--secondary {
-  display: none !important;
+/* A quiet, readable technical notebook. Keep Material's responsive layout. */
+:root {
+  --md-text-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --md-code-font: "Cascadia Code", Consolas, "Liberation Mono", monospace;
 }
 
-/* расширить контент */
-.md-content {
-  max-width: none;
+/* Graphite & Ice: semantic roles shared with future QWINSTA app menus.
+   This site currently exposes only the dark (slate) scheme. */
+[data-md-color-scheme="slate"][data-md-color-primary] {
+  --qw-bg: #242933;
+  --qw-panel: #2E3440;
+  --qw-selected: #35445A;
+  --qw-text: #D8DEE9;
+  --qw-text-secondary: #A7B0BF;
+  --qw-accent: #88C0D0;
+  --qw-hover: #A3D3DF;
+  --qw-border: #4C566A;
+  --qw-success: #A3BE8C;
+  --qw-warning: #EBCB8B;
+  --qw-error: #E3A0A5;
+
+  /* Material 9.7.x: opaque text roles also apply to nested components. */
+  --md-default-bg-color: var(--qw-bg);
+  --md-default-bg-color--light: var(--qw-panel);
+  --md-default-bg-color--lighter: var(--qw-panel);
+  --md-default-bg-color--lightest: var(--qw-panel);
+  --md-default-fg-color: var(--qw-text);
+  --md-default-fg-color--light: var(--qw-text-secondary);
+  --md-default-fg-color--lighter: var(--qw-text-secondary);
+  --md-default-fg-color--lightest: var(--qw-border);
+  --md-primary-fg-color: var(--qw-panel);
+  --md-primary-fg-color--light: var(--qw-panel);
+  --md-primary-fg-color--dark: var(--qw-panel);
+  --md-primary-bg-color: var(--qw-text);
+  --md-primary-bg-color--light: var(--qw-text-secondary);
+  --md-accent-fg-color: var(--qw-accent);
+  --md-accent-fg-color--transparent: var(--qw-selected);
+  --md-accent-bg-color: var(--qw-bg);
+  --md-accent-bg-color--light: var(--qw-bg);
+  --md-typeset-color: var(--qw-text);
+  --md-typeset-a-color: var(--qw-accent);
+  --md-typeset-mark-color: var(--qw-selected);
+  --md-typeset-table-color: var(--qw-border);
+  --md-typeset-table-color--light: var(--qw-panel);
+  --md-typeset-kbd-color: var(--qw-panel);
+  --md-typeset-kbd-accent-color: var(--qw-selected);
+  --md-typeset-kbd-border-color: var(--qw-border);
+  --md-code-bg-color: var(--qw-panel);
+  --md-code-bg-color--light: var(--qw-panel);
+  --md-code-bg-color--lighter: var(--qw-panel);
+  --md-code-fg-color: var(--qw-text);
+  --md-code-hl-color: var(--qw-accent);
+  --md-code-hl-color--light: var(--qw-selected);
+  --md-code-hl-number-color: var(--qw-warning);
+  --md-code-hl-special-color: var(--qw-error);
+  --md-code-hl-function-color: var(--qw-hover);
+  --md-code-hl-constant-color: var(--qw-accent);
+  --md-code-hl-keyword-color: var(--qw-accent);
+  --md-code-hl-string-color: var(--qw-success);
+  --md-code-hl-name-color: var(--qw-text);
+  --md-code-hl-operator-color: var(--qw-text);
+  --md-code-hl-punctuation-color: var(--qw-text-secondary);
+  --md-code-hl-comment-color: var(--qw-text-secondary);
+  --md-code-hl-generic-color: var(--qw-text);
+  --md-code-hl-variable-color: var(--qw-text);
+  --md-admonition-fg-color: var(--qw-text);
+  --md-admonition-bg-color: var(--qw-panel);
+  --md-footer-bg-color: var(--qw-panel);
+  --md-footer-bg-color--dark: var(--qw-panel);
+  --md-footer-fg-color: var(--qw-text);
+  --md-footer-fg-color--light: var(--qw-text-secondary);
+  --md-footer-fg-color--lighter: var(--qw-text-secondary);
 }
 
-/* списки через дефис */
-.md-typeset ul {
-  list-style: none;
-  padding-left: 1.2em;
+.md-header {
+  box-shadow: 0 1px 0 var(--md-default-fg-color--lightest);
 }
 
-.md-typeset ul li {
-  margin: 0.08em 0;
-  line-height: 1.25;
+.md-typeset {
+  font-size: 0.8rem;
+  line-height: 1.7;
 }
 
-.md-typeset ul li::marker {
-  content: "";
+.md-typeset h1 {
+  margin: 0 0 1em;
+  color: var(--md-default-fg-color);
+  font-size: 1.85em;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
 }
 
-.md-typeset ul li::before {
-  content: "- ";
-  color: var(--md-default-fg-color--light);
-  margin-left: -1.2em;
-  position: absolute;
+.md-typeset h2,
+.md-typeset h1:not(:first-child) {
+  margin: 1.8em 0 0.7em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  font-size: 1.35em;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-/* отступы между верхними разделами меню */
-.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item {
-  margin-top: 0.7rem;
+.md-typeset h3 {
+  margin: 1.4em 0 0.6em;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-/* подпункты меню */
-.md-sidebar--primary .md-nav__item .md-nav__item {
-  margin-top: 0.15rem;
-  padding-left: 0.4rem;
+.md-typeset p,
+.md-typeset ul,
+.md-typeset ol {
+  margin-block: 0.8em;
 }
 
-/* активный пункт меню */
-.md-sidebar--primary .md-nav__link--active {
-  border-left: 2px solid var(--md-accent-fg-color);
-  padding-left: 0.5rem;
+.md-typeset ul li,
+.md-typeset ol li {
+  margin-bottom: 0.35em;
 }
 
-/* заголовки разделов меню */
-.md-sidebar--primary .md-nav__title {
+.md-typeset pre > code {
+  padding: 1em;
   font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  opacity: 0.75;
+  line-height: 1.65;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+}
+
+.md-typeset :not(pre) > code {
+  padding: 0.12em 0.3em;
+  overflow-wrap: anywhere;
+}
+
+.md-typeset table:not([class]) {
+  font-size: 0.75rem;
+  line-height: 1.55;
+  border-color: var(--md-default-fg-color--lightest);
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--md-code-bg-color);
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) :is(th, td) {
+  padding: 0.75em 1em;
+}
+
+.md-nav {
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.md-nav__link {
+  margin-top: 0.5em;
+}
+
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+.md-sidebar--secondary .md-nav__link {
+  padding-block: 0.1em;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-main__inner {
+    margin-top: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 44.984375em) {
+  .md-typeset h1 {
+    font-size: 1.6em;
+  }
+
+  .md-typeset pre > code {
+    font-size: 0.68rem;
+  }
+}
+
+/* Component states are scoped to slate; typography and layout above are unchanged. */
+body[data-md-color-scheme="slate"] :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--qw-text);
+}
+
+body[data-md-color-scheme="slate"] :is(.md-header, .md-footer, .md-footer-meta,
+  .md-search__form, .md-search__output, .md-search-result, .md-search-result__meta,
+  .md-nav--primary, .md-tooltip, .md-tooltip2__inner, .md-dialog, .md-top) {
+  background-color: var(--qw-panel);
+  color: var(--qw-text);
+  background-image: none;
+}
+
+/* Desktop sidebars remain on the page background; the mobile drawer is a panel. */
+@media screen and (min-width: 76.25em) {
+  body[data-md-color-scheme="slate"] .md-nav--primary {
+    background-color: var(--qw-bg);
+  }
+}
+
+body[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title[for="__drawer"],
+body[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title[for="__toc"],
+body[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title[for^="__nav_"] {
+  background-color: var(--qw-panel);
+  color: var(--qw-text);
+}
+
+body[data-md-color-scheme="slate"] :is(.md-nav__title, .md-search-result__meta,
+  .md-search-result__teaser, .md-search-result__more, .md-search-result__icon,
+  .md-copyright, .md-footer__direction, .md-source__facts,
+  .md-tooltip2__inner, .md-typeset .linenodiv, .md-typeset .linenos) {
+  color: var(--qw-text-secondary);
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-search__input {
+  color: var(--qw-text);
+}
+
+body[data-md-color-scheme="slate"] .md-search__input::placeholder {
+  color: var(--qw-text-secondary);
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-search__form {
+  border: 1px solid var(--qw-text-secondary);
+  box-shadow: none;
+}
+
+body[data-md-color-scheme="slate"] .md-search__form:focus-within {
+  border-color: var(--qw-accent);
+  outline: 2px solid var(--qw-accent);
+  outline-offset: 2px;
+}
+
+body[data-md-color-scheme="slate"] :is(.md-nav__link, .md-header__button,
+  .md-search__options .md-icon, .md-search-result__link, .md-top) {
+  color: var(--qw-text);
+}
+
+body[data-md-color-scheme="slate"] :is(.md-nav__link:hover, .md-header__button:hover,
+  .md-search__options .md-icon:hover, .md-top:hover) {
+  color: var(--qw-hover);
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-nav__link--active,
+body[data-md-color-scheme="slate"] .md-search-result__link:is(:hover, :focus, :focus-visible) {
+  background-color: var(--qw-selected);
+  color: var(--qw-text);
+  box-shadow: inset 3px 0 0 var(--qw-accent);
+}
+
+body[data-md-color-scheme="slate"] .md-nav__link--passed {
+  color: var(--qw-text-secondary);
+}
+
+body[data-md-color-scheme="slate"] .md-nav__link--active.md-nav__link--passed {
+  color: var(--qw-text);
+}
+
+/* Underline prose links, never navigation, copy controls or button links. */
+body[data-md-color-scheme="slate"] .md-typeset a:not(.md-button):not(.headerlink) {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset a:not(.md-button):hover {
+  color: var(--qw-hover);
+}
+
+body[data-md-color-scheme="slate"] :is(a, button, input, select, textarea, summary,
+  [tabindex]):is(:focus-visible, .focus-visible) {
+  outline: 2px solid var(--qw-accent);
+  outline-offset: 3px;
+}
+
+body[data-md-color-scheme="slate"] :is(input:not([type="checkbox"]):not([type="radio"]),
+  select, textarea):not(.md-search__input) {
+  background: var(--qw-panel);
+  color: var(--qw-text);
+  border: 1px solid var(--qw-text-secondary);
+}
+
+body[data-md-color-scheme="slate"] .md-button {
+  color: var(--qw-accent);
+  border-color: var(--qw-accent);
+}
+
+body[data-md-color-scheme="slate"] .md-button--primary,
+body[data-md-color-scheme="slate"] .md-button:is(:hover, :focus-visible) {
+  background-color: var(--qw-accent);
+  border-color: var(--qw-accent);
+  color: var(--qw-bg);
+}
+
+body[data-md-color-scheme="slate"] .md-button--primary:hover {
+  background-color: var(--qw-hover);
+  border-color: var(--qw-hover);
+  color: var(--qw-bg);
+}
+
+body[data-md-color-scheme="slate"] :is(mark, .md-search-result mark) {
+  background-color: var(--qw-selected);
+  color: var(--qw-accent);
+}
+
+body[data-md-color-scheme="slate"] .md-search-result__article--document:before {
+  color: var(--qw-text-secondary);
+}
+
+/* Copy remains visible without hover, including touch-only screens. */
+body[data-md-color-scheme="slate"] .md-code__button {
+  background-color: var(--qw-panel);
+  color: var(--qw-accent);
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-code__button:is(:hover, :focus-visible) {
+  color: var(--qw-hover);
+}
+
+body[data-md-color-scheme="slate"] .highlight :is(.linenos, .linenodiv, .linenodiv a),
+body[data-md-color-scheme="slate"] .highlight .linenos:before {
+  background-color: var(--qw-panel);
+  color: var(--qw-text-secondary);
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .highlight .hll {
+  background-color: var(--qw-selected);
+  box-shadow: 2px 0 0 var(--qw-accent) inset;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset table:not([class]) :is(th, td) {
+  border-color: var(--qw-border);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:hover {
+  background-color: var(--qw-panel);
+}
+
+/* Preserve Material's labels, icons and expand/collapse behavior. */
+body[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details) {
+  --qw-notice: var(--qw-accent);
+  background-color: var(--qw-panel);
+  color: var(--qw-text);
+  border-color: var(--qw-notice);
+  box-shadow: none;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :is(.success, .check, .done, .tip, .hint) {
+  --qw-notice: var(--qw-success);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :is(.warning, .caution, .attention, .question, .help, .faq) {
+  --qw-notice: var(--qw-warning);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :is(.failure, .fail, .missing, .danger, .error, .bug) {
+  --qw-notice: var(--qw-error);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :is(.admonition-title, summary) {
+  background-color: var(--qw-panel);
+  color: var(--qw-notice, var(--qw-accent));
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :is(.admonition-title, summary):before {
+  background-color: var(--qw-notice, var(--qw-accent));
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :is(.admonition-title, summary):after {
+  color: var(--qw-notice, var(--qw-accent));
+}
+
+body[data-md-color-scheme="slate"] .md-typeset blockquote {
+  color: var(--qw-text-secondary);
+  border-color: var(--qw-border);
+}
+
+body[data-md-color-scheme="slate"] :is(.md-tooltip, .md-tooltip2__inner, .md-dialog) {
+  border: 1px solid var(--qw-border);
+  box-shadow: none;
+}
+
+body[data-md-color-scheme="slate"] .md-tooltip2__inner:before,
+body[data-md-color-scheme="slate"] .md-tooltip2__inner:after {
+  background: var(--qw-panel);
+}
+
+/* Do not override opacity used by Material to hide menus, tooltips and controls. */
+body[data-md-color-scheme="slate"] :is(.md-nav__link, .md-header__button, .md-search-result__link) {
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-tooltip {
+  color: var(--qw-text-secondary);
+}
+
+body[data-md-color-scheme="slate"] .md-search__icon {
+  color: var(--qw-text-secondary);
+}
+
+body[data-md-color-scheme="slate"] :is(input, textarea)::placeholder {
+  color: var(--qw-text-secondary);
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-nav__link--active {
+  padding-inline-start: 0.45em;
+}
+
+@media screen and (max-width: 76.234375em) {
+  body[data-md-color-scheme="slate"] .md-nav--primary :is(.md-nav, .md-nav__list) {
+    background-color: var(--qw-panel);
+  }
 }
