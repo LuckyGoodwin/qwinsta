@@ -4,6 +4,7 @@ site_url: https://qwinsta.ru/
 theme:
   name: material
   language: ru
+  font: false
 
   icon:
     logo: material/console
@@ -14,8 +15,8 @@ theme:
     accent: green
 
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
+    - navigation.sections
+    - toc.follow
     - navigation.top
     - search.suggest
     - search.highlight
@@ -39,19 +40,13 @@ extra_css:
 
 nav:
   - "Главная": index.md
-
-  - "Docs":
-      - "GitHub Pages + MkDocs": github-pages-mkdocs.md
-
-  - "VPN":
+  - "VPN и прокси":
       - "OpenVPN на Windows Server 2022": vpn/openvpn/install-windows-server.md
-      - "WireGuard Site-to-Site (MikroTik)": vpn/wireguard/wireguard-site-to-site-mikrotik.md
-      - "Xray: VLESS + REALITY + 3x-ui и сайт на Caddy": vpn/xray/xray-reality.md
-      - "MTProxy + Fake TLS + Sponsor Bot": vpn/mtproxy/fake-tls.md
-      - "Tinyproxy HTTP Proxy": vpn/tinyproxy/install.md
-
+      - "WireGuard между MikroTik": vpn/wireguard/wireguard-site-to-site-mikrotik.md
+      - "Xray, REALITY и Caddy": vpn/xray/xray-reality.md
+      - "MTProxy для Telegram": vpn/mtproxy/fake-tls.md
+      - "Tinyproxy HTTP-прокси": vpn/tinyproxy/install.md
   - "Windows":
-      - "Обзор": windows/index.md
-      - "RDP":
-          - "Обзор": windows/rdp/index.md
-          - "Event ID 4625": windows/rdp/event-id-4625.md
+      - "RDP: ошибка 0x4 и сертификат TLS": windows/rdp/event-id-4625.md
+  - "Документация":
+      - "GitHub Pages и MkDocs": github-pages-mkdocs.md
