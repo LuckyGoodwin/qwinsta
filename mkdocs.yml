@@ -43,6 +43,11 @@ nav:
   - "Docs":
       - "GitHub Pages + MkDocs": github-pages-mkdocs.md
 
+  - "TUI":
+      - "Обзор и запуск": tui/index.md
+      - "Справочник функций": tui/api.md
+      - "Проверка прототипа": tui/testing.md
+
   - "VPN":
       - "OpenVPN на Windows Server 2022": vpn/openvpn/install-windows-server.md
       - "WireGuard Site-to-Site (MikroTik)": vpn/wireguard/wireguard-site-to-site-mikrotik.md
